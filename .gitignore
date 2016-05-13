@@ -554,7 +554,6 @@
 /language/
 /phpunit.xml.dist
 /images/
-/components/
 /templates/
 /plugins/content/
 /plugins/finder/
