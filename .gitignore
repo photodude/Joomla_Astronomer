@@ -564,3 +564,8 @@
 /plugins/system/
 /plugins/quickicon/
 /plugins/captcha/
+/components/com_modules/
+/administrator/templates/
+/administrator/logs/
+/language/
+/administrator/modules/
