@@ -112,9 +112,6 @@ class ModAstronomerHelper
 		case 'entry':
 		$result = $field_value;
 		break;
-		case 'fulltext':
-		$result = $field_value;
-		break;
 		case 'created_by':
 		$user = JFactory::getUser($field_value);
 		$result = $user->name;

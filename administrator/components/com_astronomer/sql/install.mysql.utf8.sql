@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS `#__joomla_astronomer` (
 `mag` CHAR(4)  NOT NULL ,
 `observatory` CHAR(3)  NOT NULL ,
 `entry` CHAR(80)  NOT NULL ,
-`fulltext` VARCHAR(255)  NOT NULL ,
 `ordering` INT(11)  NOT NULL ,
 `state` TINYINT(1)  NOT NULL ,
 `checked_out` INT(11)  NOT NULL ,

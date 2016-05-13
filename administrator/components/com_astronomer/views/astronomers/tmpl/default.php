@@ -205,9 +205,6 @@ if (!empty($this->extra_sidebar))
 				<?php echo JHtml::_('grid.sort',  'COM_ASTRONOMER_ASTRONOMERS_ENTRY', 'a.`entry`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_ASTRONOMER_ASTRONOMERS_FULLTEXT', 'a.`fulltext`', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_ASTRONOMER_ASTRONOMERS_CREATED_BY', 'a.`created_by`', $listDirn, $listOrder); ?>
 				</th>
 
@@ -298,9 +295,6 @@ if (!empty($this->extra_sidebar))
 				</td>				<td>
 
 					<?php echo $item->entry; ?>
-				</td>				<td>
-
-					<?php echo $item->fulltext; ?>
 				</td>				<td>
 
 					<?php echo $item->created_by; ?>

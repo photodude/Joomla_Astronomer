@@ -63,7 +63,6 @@ $document->addStyleSheet(JUri::root() . 'media/com_astronomer/css/form.css');
 				<?php echo $this->form->renderField('mag'); ?>
 				<?php echo $this->form->renderField('observatory'); ?>
 				<?php echo $this->form->renderField('entry'); ?>
-				<?php echo $this->form->renderField('fulltext'); ?>
 				<?php echo $this->form->renderField('state'); ?>
 				<?php echo $this->form->renderField('created_by'); ?>
 

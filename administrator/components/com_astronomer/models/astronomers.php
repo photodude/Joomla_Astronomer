@@ -40,7 +40,6 @@ class AstronomerModelAstronomers extends JModelList
 				'mag', 'a.`mag`',
 				'observatory', 'a.`observatory`',
 				'entry', 'a.`entry`',
-				'fulltext', 'a.`fulltext`',
 				'ordering', 'a.`ordering`',
 				'state', 'a.`state`',
 				'created_by', 'a.`created_by`',

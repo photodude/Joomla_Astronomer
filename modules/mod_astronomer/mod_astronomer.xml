@@ -71,7 +71,6 @@
 		<option value="mag">mag</option>
 		<option value="observatory">observatory</option>
 		<option value="entry">entry</option>
-		<option value="fulltext">fulltext</option>
 		<option value="created_by">created_by</option>
 	</group>
                 </field>

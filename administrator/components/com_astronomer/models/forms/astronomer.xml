@@ -90,14 +90,6 @@
 		/> 
 
  
-		<field name="fulltext"
-			type="text"
-			label="COM_ASTRONOMER_FORM_LBL_ASTRONOMER_FULLTEXT"
-			description="COM_ASTRONOMER_FORM_DESC_ASTRONOMER_FULLTEXT" 
-			hint="COM_ASTRONOMER_FORM_LBL_ASTRONOMER_FULLTEXT"
-		/> 
-
- 
 		<field name="created_by"
 			type="createdby"
 			default=""

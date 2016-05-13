@@ -152,7 +152,6 @@ class AstronomerViewLists extends JViewLegacy
 			'a.`mag`' => JText::_('COM_ASTRONOMER_ASTRONOMERS_MAG'),
 			'a.`observatory`' => JText::_('COM_ASTRONOMER_ASTRONOMERS_OBSERVATORY'),
 			'a.`entry`' => JText::_('COM_ASTRONOMER_ASTRONOMERS_ENTRY'),
-			'a.`fulltext`' => JText::_('COM_ASTRONOMER_ASTRONOMERS_FULLTEXT'),
 			'a.`ordering`' => JText::_('JGRID_HEADING_ORDERING'),
 			'a.`state`' => JText::_('JSTATUS'),
 			'a.`created_by`' => JText::_('COM_ASTRONOMER_ASTRONOMERS_CREATED_BY'),
