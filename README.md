@@ -113,7 +113,7 @@ for example...
 so when they go to enter a image for comet *104P Kowal* it would automatically put the image in the */images/observations/comets/104P-Kowal* folder.
 This forced location of images is not mandatory but would be helpful.  Possibility for duplicate image names does exist but is remote.
 
-##entry## field is a **RAW** text field that contains the observation.  **It's format is vital!**
+**Entry** field is a **RAW** text field that contains the observation.  **It's format is vital!**
 All spaces MUST be retained and displayed.
 
 ##Official Site##
