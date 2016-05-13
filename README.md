@@ -1,5 +1,7 @@
-# Joomla Astronomer
+# Joomla Astronomer ![Logo](https://github.com/N6REJ/Joomla_Astronomer/blob/master/joomla_astronomer_logo_200x200.png)
 Joomla Astronomer will be a extension / group of extensions for Astronomy research and observation.
+
+
 It consists of several parts...<br>
 +1) astrometry forms, & views..<br>
 +2) Comet forms & views<br>
