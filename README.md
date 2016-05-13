@@ -1,12 +1,12 @@
 # Joomla Astronomer
 Joomla Astronomer will be a extension / group of extensions for Astronomy research and observation.
 It consists of several parts...
-#1) astrometry forms, & views..
-#2) Comet forms & views
-#3) mod_julian_clock
-#4) use profile plugin to add observer specific info to the joomla user profiles.
-#5) light curve graphs.
-#6) plugin for performing searchs on the entries.
++1) astrometry forms, & views..
++2) Comet forms & views
++3) mod_julian_clock
++4) use profile plugin to add observer specific info to the joomla user profiles.
++5) light curve graphs.
++6) plugin for performing searchs on the entries.
 
 The main component com_joomla_astronomer forms the heart of the system.  It will supply all the views and form handling.
 It will be supported by several plugins and modules.  That will work together as a system.
