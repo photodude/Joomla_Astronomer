@@ -101,17 +101,6 @@ There will be at least 2 search systems.<br>
 *2 - Search Comet Data<br>
 
 
-##Project Screenshots##
-Astrometry search form...
-
-
-
-##Downloads##
-[[download_button]]
-
-##Members##
-[[members]]
-
 
 ### CRITICAL ITEMS###.
 anyone can view the entries, but only specified users can enter data.  To simplify matters the image folder used should be restricted to ONLY the one allowed...
