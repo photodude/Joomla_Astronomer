@@ -78,14 +78,14 @@ This saves time on form entry and is used for the entry form defaults.
 *UserScope **REQUIRED** - This is the default scope used for observations.  This saves time on form entry and is used for the entry form default.
 
 #5 - Light Curve Graph
-The light curve graph will take astrometry data from 2 fields...
+The light curve graph will take astrometry data from 3 fields...
 **Mag**
 **Designation**
 **HumanDate**
 
-The **Mag field is a measurement of the objects magnitude and is in nn.n . It is always 2 digits and a decimal.  It is derived from the entry itself.
-The **Designation field contains the actual objects MPC designation.  And is the title of the curve.
-The **HumanDate** field contains a EXACT date/time of the observation entry, accurate to .00001 .
++The **Mag** field is a measurement of the objects magnitude and is in nn.n . It is always 2 digits and a decimal.  It is derived from the entry itself.
++The **Designation** field contains the actual objects MPC designation.  And is the title of the curve.
++The **HumanDate** field contains a EXACT date/time of the observation entry, accurate to .00001 .
 This time field will be used to give the timing for the graph.  It only needs to be to the minute.
 
 The light curve graph will graph the Brightness change over time in a graph plotted from all the exact data points for any particular object.
@@ -112,7 +112,7 @@ There will be at least 2 search systems.
 [[members]]
 
 
-### CRITICAL ITEMS.
+### CRITICAL ITEMS###.
 anyone can view the entries, but only specified users can enter data.  To simplify matters the image folder used should be restricted to ONLY the one allowed...
 for example... 
 */images/observations/comets* would be the root and then each comet would be a sub-folder using the name of the comet I guess...
@@ -123,7 +123,7 @@ The ##entry## field is a **RAW** text field that contains the observation.  **It
 All spaces MUST be retained and displayed.
 
 ##Official Site##
-[ArkSky.org](http://arksky.org)
+[ArkSky.org](http://arksky.org)<br>
 [Facebook Page](https://www.facebook.com/groups/421163751426836/)
 
 Volunteers to develop this system will be embraced :D
