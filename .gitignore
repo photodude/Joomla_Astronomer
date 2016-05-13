@@ -551,7 +551,6 @@
 /layouts/
 /build/
 /libraries/
-/language/
 /phpunit.xml.dist
 /images/
 /templates/
