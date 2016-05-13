@@ -96,13 +96,14 @@ The *X* axis denotes Time ( HumanDate )<br>
 The format for the graph is "light curve"
 
 #6 - Search plugins...
-There will be at least 2 search systems.
+There will be at least 2 search systems.<br>
 *1 - Search astrometry data<br>
 *2 - Search Comet Data<br>
 
 
 ##Project Screenshots##
-[[project_screenshots]]
+Astrometry search form...
+
 
 
 ##Downloads##
