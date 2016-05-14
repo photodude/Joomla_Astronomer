@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="user" method="upgrade">
+	<name>plg_user_astronomer_profile</name>
+	<author>JowWow</author>
+	<creationDate>May 2016</creationDate>
+	<copyright>(C)2016 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>troy@jowwow.net</authorEmail>
+	<authorUrl>www.jowwow.net</authorUrl>
+	<version>0.1</version>
+	<description>PLG_USER_ASTRONOMER_PROFILE_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="astronomer_profile">astronomer_profile.php</filename>
+		<folder>profiles</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB.plg_user_astronomer_profile.ini</language>
+		<language tag="en-GB">en-GB.plg_user_astronomer_profile.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic" addfieldpath="/administrator/components/com_content/models/fields">
+				<field name="register-require-user"
+					type="spacer"
+					class="text"
+					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_NAME_REGISTER_REQUIRE_USER"
+				/>
+
+				<field name="register-require_observername"
+					type="list"
+					description="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERNAME_DESC"
+					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERNAME_LABEL"
+				>
+					<option value="2">JOPTION_REQUIRED</option>
+					<option value="1">JOPTION_OPTIONAL</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<field name="register-require_observeratory"
+					type="list"
+					description="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERATORY_DESC"
+					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERATORY_LABEL"
+				>
+					<option value="2">JOPTION_REQUIRED</option>
+					<option value="1">JOPTION_OPTIONAL</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<field name="register-require_header"
+					type="list"
+					description="PLG_USER_ASTRONOMER_PROFILE_FIELD_HEADER_DESC"
+					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_HEADER_LABEL"
+				>
+					<option value="2">JOPTION_REQUIRED</option>
+					<option value="1">JOPTION_OPTIONAL</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<field name="register-require_scope"
+					type="list"
+					description="PLG_USER_ASTRONOMER_PROFILE_FIELD_SCOPE_DESC"
+					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_SCOPE_LABEL"
+				>
+					<option value="2">JOPTION_REQUIRED</option>
+					<option value="1">JOPTION_OPTIONAL</option>
+					<option value="0">JDISABLED</option>
+				</field>
+				<field name="spacer1" type="spacer"
+					hr="true"
+				/>
+				<field name="profile-require-user" type="spacer" class="text"
+					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_ASTRONOMER_PROFILE_REQUIRE_USER"
+				/>
+
+				<field name="profile-require_observername" type="list"
+
+					description="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERNAME_DESC"
+					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERNAME_LABEL"
+				>
+					<option value="2">JOPTION_REQUIRED</option>
+					<option value="1">JOPTION_OPTIONAL</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<field name="profile-require_observeratory" type="list"
+
+					description="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERATORY_DESC"
+					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERATORY_LABEL"
+				>
+					<option value="2">JOPTION_REQUIRED</option>
+					<option value="1">JOPTION_OPTIONAL</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<field name="profile-require_header" type="list"
+
+					description="PLG_USER_ASTRONOMER_PROFILE_FIELD_HEADER_DESC"
+					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_HEADER_LABEL"
+				>
+					<option value="2">JOPTION_REQUIRED</option>
+					<option value="1">JOPTION_OPTIONAL</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+				<field name="profile-require_scope" type="list"
+
+					description="PLG_USER_ASTRONOMER_PROFILE_FIELD_SCOPE_DESC"
+					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_SCOPE_LABEL"
+				>
+					<option value="2">JOPTION_REQUIRED</option>
+					<option value="1">JOPTION_OPTIONAL</option>
+					<option value="0">JDISABLED</option>
+				</field>
+
+			</fieldset>
+
+		</fields>
+	</config>
+</extension>

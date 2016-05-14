@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Joomla.Plugin
- * @subpackage  User.profile
+ * @subpackage  User.AstronomerProfile
  *
  * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -16,7 +16,7 @@ use Joomla\Utilities\ArrayHelper;
  *
  * @since  1.6
  */
-class PlgUserProfile extends JPlugin
+class PlgUserProfileAstronomerProfile extends JPlugin
 {
 	/**
 	 * Date of birth.
@@ -104,26 +104,6 @@ class PlgUserProfile extends JPlugin
 						$data->profile[$k] = $v[1];
 					}
 				}
-			}
-
-			if (!JHtml::isRegistered('users.url'))
-			{
-				JHtml::register('users.url', array(__CLASS__, 'url'));
-			}
-
-			if (!JHtml::isRegistered('users.calendar'))
-			{
-				JHtml::register('users.calendar', array(__CLASS__, 'calendar'));
-			}
-
-			if (!JHtml::isRegistered('users.tos'))
-			{
-				JHtml::register('users.tos', array(__CLASS__, 'tos'));
-			}
-
-			if (!JHtml::isRegistered('users.dob'))
-			{
-				JHtml::register('users.dob', array(__CLASS__, 'dob'));
 			}
 		}
 
@@ -246,18 +226,16 @@ class PlgUserProfile extends JPlugin
 		$form->loadFile('profile', false);
 
 		$fields = array(
-			'address1',
-			'address2',
-			'city',
-			'region',
+			'observername',
+			'observeratory',
+			'header',
+			'scope',
 			'country',
 			'postal_code',
 			'phone',
 			'website',
 			'favoritebook',
 			'aboutme',
-			'dob',
-			'tos',
 		);
 
 		// Change fields description when displayed in front-end or back-end profile editing
@@ -265,10 +243,10 @@ class PlgUserProfile extends JPlugin
 
 		if ($app->isSite() || $name == 'com_users.user' || $name == 'com_admin.profile')
 		{
-			$form->setFieldAttribute('address1', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
-			$form->setFieldAttribute('address2', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
-			$form->setFieldAttribute('city', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
-			$form->setFieldAttribute('region', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
+			$form->setFieldAttribute('observername', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
+			$form->setFieldAttribute('observeratory', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
+			$form->setFieldAttribute('header', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
+			$form->setFieldAttribute('scope', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
 			$form->setFieldAttribute('country', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
 			$form->setFieldAttribute('postal_code', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
 			$form->setFieldAttribute('phone', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
@@ -277,21 +255,6 @@ class PlgUserProfile extends JPlugin
 			$form->setFieldAttribute('aboutme', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
 			$form->setFieldAttribute('dob', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
 			$form->setFieldAttribute('tos', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FIELD_TOS_DESC_SITE', 'profile');
-		}
-
-		$tosarticle = $this->params->get('register_tos_article');
-		$tosenabled = $this->params->get('register-require_tos', 0);
-
-		// We need to be in the registration form, field needs to be enabled and we need an article ID
-		if ($name != 'com_users.registration' || !$tosenabled || !$tosarticle)
-		{
-			// We only want the TOS in the registration form
-			$form->removeField('tos', 'profile');
-		}
-		else
-		{
-			// Push the TOS article ID into the TOS field.
-			$form->setFieldAttribute('tos', 'article', $tosarticle, 'profile');
 		}
 
 		foreach ($fields as $field)
@@ -351,39 +314,11 @@ class PlgUserProfile extends JPlugin
 	 */
 	public function onUserBeforeSave($user, $isnew, $data)
 	{
-		// Check that the date is valid.
-		if (!empty($data['profile']['dob']))
-		{
-			try
-			{
-				$date = new JDate($data['profile']['dob']);
-				$this->date = $date->format('Y-m-d H:i:s');
-			}
-			catch (Exception $e)
-			{
-				// Throw an exception if date is not valid.
-				throw new InvalidArgumentException(JText::_('PLG_USER_ASTRONOMER_PROFILE_ERROR_INVALID_DOB'));
-			}
-			if (JDate::getInstance('now') < $date)
-			{
-				// Throw an exception if dob is greather than now.
-				throw new InvalidArgumentException(JText::_('PLG_USER_ASTRONOMER_PROFILE_ERROR_INVALID_DOB'));
-			}
-		}
+		
 		// Check that the tos is checked if required ie only in registration from frontend.
 		$task       = JFactory::getApplication()->input->getCmd('task');
 		$option     = JFactory::getApplication()->input->getCmd('option');
-		$tosarticle = $this->params->get('register_tos_article');
-		$tosenabled = ($this->params->get('register-require_tos', 0) == 2) ? true : false;
-		if (($task == 'register') && ($tosenabled) && ($tosarticle) && ($option == 'com_users'))
-		{
-			// Check that the tos is checked.
-			if ((!($data['profile']['tos'])))
-			{
-				throw new InvalidArgumentException(JText::_('PLG_USER_ASTRONOMER_PROFILE_FIELD_TOS_DESC_SITE'));
-			}
-		}
-
+		
 		return true;
 	}
 
