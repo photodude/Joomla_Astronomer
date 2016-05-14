@@ -544,7 +544,6 @@
 /robots.txt.dist
 /travisci-phpunit.xml
 /composer.lock
-/media/
 /composer.json
 /layouts/
 /build/

@@ -1,4 +1,4 @@
-# Joomla Astronomer ![Logo](https://github.com/N6REJ/Joomla_Astronomer/blob/master/joomla_astronomer_logo_200x200.png)
+# Joomla Astronomer ![Logo](https://github.com/N6REJ/Joomla_Astronomer/blob/master/media/com_astronomer/joomla_astronomer_logo_200x200.png)
 Joomla Astronomer will be a extension / group of extensions for Astronomy research and observation.
 
 
