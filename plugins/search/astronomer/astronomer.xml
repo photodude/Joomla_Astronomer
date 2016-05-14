@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="search">
+	<name>plg_search_astronomer</name>
+	<author>Troy Hall</author>
+	<creationDate>2016-05-13</creationDate>
+	<copyright>2016 Troy Hall</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>troy@jowwow.net</authorEmail>
+	<authorUrl>http://jowwow.net</authorUrl>
+	<version>CVS: 1.0.0</version>
+	<description>PLG_SEARCH_COM_ASTRONOMER_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="astronomer">astronomer.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<languages folder="../../../languages/site/search/astronomer">
+        
+		<language tag="en-GB">../../../languages/plugins/search/astronomer/en-GB/en-GB.plg_search_astronomer.ini</language>
+		<language tag="en-GB">../../../languages/plugins/search/astronomer/en-GB/en-GB.plg_search_astronomer.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+
+			<fieldset name="basic">
+				<field name="search_limit" type="text" default="50" size="5"
+					   description="PLG_SEARCH_COM_ASTRONOMER_FIELD_SEARCHLIMIT_DESC"
+					   label="PLG_SEARCH_COM_ASTRONOMER_FIELD_SEARCHLIMIT_LABEL" />
+			</fieldset>
+
+		</fields>
+	</config>
+</extension>

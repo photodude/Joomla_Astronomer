@@ -1,91 +1,123 @@
-Joomla! CMS™ [![Analytics](https://ga-beacon.appspot.com/UA-544070-3/joomla-cms/readme)](https://github.com/igrigorik/ga-beacon)
-====================
+# Joomla Astronomer ![Logo](https://github.com/N6REJ/Joomla_Astronomer/blob/master/media/com_astronomer/joomla_astronomer_logo_200x200.png)
+Joomla Astronomer will be a extension / group of extensions for Astronomy research and observation.
 
-Build Status
----------------------
-Travis-CI: [![Build Status](https://travis-ci.org/joomla/joomla-cms.svg?branch=staging)](https://travis-ci.org/joomla/joomla-cms)
-Jenkins: [![Build Status](http://build.joomla.org/job/cms/badge/icon)](http://build.joomla.org/job/cms/)
 
-What is this?
----------------------
-* This is a Joomla! 3.x installation/upgrade package.
-* Joomla's [Official website](https://www.joomla.org).
-* Joomla! 3.6 [version history](https://docs.joomla.org/Joomla_3.6_version_history).
-* Detailed changes are in the [changelog](https://github.com/joomla/joomla-cms/commits/master).
+It consists of several parts...<br>
++1) astrometry forms, & views..<br>
++2) Comet forms & views<br>
++3) mod_julian_clock<br>
++4) use profile plugin to add observer specific info to the joomla user profiles.<br>
++5) light curve graphs.<br>
++6) plugin for performing searchs on the entries.<br>
 
-What is Joomla?
----------------------
-* Joomla is a **Content Management System** (CMS) which enables you to build websites and powerful online applications.
-* It is a simple and powerful web server application which requires a server with PHP and either MySQL, PostgreSQL or SQL Server to run. You can find more [details here](https://www.joomla.org/about-joomla.html).
-* Joomla is **free and OpenSource software** distributed under the GNU General Public License version 2 or later.
+The main component com_joomla_astronomer forms the heart of the system.  It will supply all the views and form handling.
+It will be supported by several plugins and modules.  That will work together as a system.
 
-Is Joomla! for you?
----------------------
-* Joomla is [the right solution for most content web projects](https://docs.joomla.org/Joomla_Is_it_for_me%3F).
-* View Joomla's core [features here](https://www.joomla.org/core-features.html).
-* Try it out for yourself in our [online demo](https://demo.joomla.org).
+### Reason for this Package.
+[Arkansas Sky Observatory](http://arksky.org) has been donating their services to the astronomy world for decades.  They get zero funding from any source
+other then Doc Clays personal retirement.  Their original site was designed in perl back in 2001 and most of the code used
+is either obsolete already, or will soon be with the advent of php 7.  They suffered a major data loss a few years ago and have
+not been able to rebuild due to the numerous issues.  Everything up to now has either been in flat files, or in a 
+mixture of formats.
+ASO provides a lot of important data back to major centers like Harvard and Minor Planet so I would like to help
+them be strong once again.
 
-How to find a Joomla! translation?
----------------------
-* Repository of [accredited language packs](http://community.joomla.org/translations.html).
-* You can also add languages directly to your website via your Joomla! administration panel.
+#1 - Astrometry section information
+I've created a conversion system to take ASO's old data and turn it into a useable csv to preserve their 12yrs of observations.
+This will be in the astrometry branch.
 
-Learn Joomla!
----------------------
-* Read ['Getting Started with Joomla!'](https://docs.joomla.org/J3.x:Getting_Started_with_Joomla!) to learn the basics.
-* Before installing, read the ['Beginners' Guide'](https://docs.joomla.org/Beginners).
+#2 - Comets section information...
+The comets branch will be "comets" it will contain the conversion system for the comets data.
 
-What are the benefits of Joomla?
----------------------
-* The functionality of a Joomla website can be extended by installing extensions that you can create (or download) to suit your needs.
-* There are many ready-made extensions that you can download and install.
-* Check out the [Joomla! Extensions Directory (JED)](http://extensions.joomla.org).
+### Files...
+the file "comets-seen.csv" is the original csv from which we are starting.  It has several problems.
+"observations-date.php" is a converter that takes the "comets-seen.csv" and turns it into a more useable .csv with correct headers and data.
+"rebuilt-observations.csv" is the generated output.  I believe the double quotes created by line
+84 of "observations-date.php" can be bypassed but in using the .csv to sql converter online It's had to 
+be there to get a valid readout.
 
-Is it easy to change the layout display?
----------------------
-* The layout is controlled by templates that you can edit.
-* There are a lot of ready-made professional templates that you can download.
-* Template management information is [available here](https://docs.joomla.org/Portal:Administrators#Template_Management).
+### Field notes...
+The *image* field should be a media manager image.
+*Observer* field should be users "name" as known in astrological world.  ( probably not the same as real name or user name ) ( perhaps a automatic alias?)
+the *location* should be from a specified list of observatories.
+*Comments* should probably be a editor field.
+*timestamp* should be a automatic time of the data entered in ( Astronomy format is YYYYMMDD HH )
+*date* should be a calendar field ( we might be able to remove it later - but its inference is the actual date of the observation )
+I'm not sure of the validation of other fields at this time, nor their max length but I will try to gather that info.
 
-Ready to install Joomla?
----------------------
-* Check the [minimum requirements](https://www.joomla.org/technical-requirements.html). 
-* How do you [install Joomla](https://docs.joomla.org/Installing_Joomla!)?
-* You could start your Joomla! experience by [building your site on a local test server](https://docs.joomla.org/Installing_Joomla_locally).
-When ready, it can be moved to an on-line hosting account of your choice.
 
-Updates are free!
----------------------
-* Always use the [latest version](https://www.joomla.org/download.html).
+### Usage
+The component needs to generate at least 3 views.
 
-Where can you get support and help?
----------------------
-* [The Joomla! Documentation](https://docs.joomla.org/Main_Page);
-* [Frequently Asked Questions](https://docs.joomla.org/Category:FAQ) (FAQ);
-* Find the [information you need](https://docs.joomla.org/Start_here);
-* Find [help and other users](https://www.joomla.org/about-joomla/create-and-share.html);
-* Post questions at [our forums](http://forum.joomla.org);
-* [Joomla Resources Directory](http://resources.joomla.org/) (JRD).
++1) a *last Observed* listing of every comet observed and should be filterable.  Sortable by date or comet is important.  Might be nice to have a *total* column for the count of all observations of that comet
+![last observed](https://cloud.githubusercontent.com/assets/1850089/14944082/3776b03c-0faf-11e6-8c4f-285ee5bb141c.JPG)
 
-Do you already have a Joomla site that isn't built with Joomla 3.x?
----------------------
-* What's [new in Joomla! 3.x](https://www.joomla.org/3)?
-* What are the [main differences between 2.5 and 3.x](https://docs.joomla.org/What_are_the_major_differences_between_Joomla!_2.5_and_3.x%3F)?
-* How to [migrate from 2.5.x to 3.x](https://docs.joomla.org/Joomla_2.5_to_3.x_Step_by_Step_Migration).
-* How to [migrate from 1.5.x to 3.x](https://docs.joomla.org/Joomla_1.5_to_3.x_Step_by_Step_Migration).
-* How to [convert an existing website to Joomla](https://docs.joomla.org/How_to_Convert_an_existing_Web_site_to_a_Joomla!_Web_site).
++2) a listing of each observation by comet.
+![single comet observations list](https://cloud.githubusercontent.com/assets/1850089/14944083/3779a0c6-0faf-11e6-8af2-bcdb3c76fb0d.JPG)
 
-Do you want to improve Joomla?
---------------------
-* How do you [request a feature](https://docs.joomla.org/How_do_you_request_a_feature%3F)?
-* How do you [report a bug](https://docs.joomla.org/Filing_bugs_and_issues)?
-* Get Involved: Joomla! is community developed software. [Join the community](https://volunteers.joomla.org/).
-* Documentation for [Developers](https://docs.joomla.org/Developers).
-* Documentation for [Web designers](https://docs.joomla.org/Web_designers).
++3) Single entry view with full size image.
+- no current ability - 
 
-Copyright
----------------------
-* Copyright (C) 2005 - 2016 Open Source Matters. All rights reserved.
-* [Special Thanks](https://docs.joomla.org/Joomla!_Credits_and_Thanks)
-* Distributed under the GNU General Public License version 2 or later
-* See [License details](https://docs.joomla.org/Joomla_Licenses)
+ability to have a gallery of observation images might be nice with link back or modal to the entry.
+
+
+#3 - mod_julian_clock
+The julian clock is already completed and is located [here](https://github.com/N6REJ/mod_julianclock)
+
+#4 - Profile plugin
+This will be derived from the existing joomla profile plugin.  It will consist of just a few fields.
+
+*UserID* - Derived from the Joomla users tables.  And will be the user filling out the form, ALWAYS!
+This is to link the profile to the Joomla user table.
+
+*UserObserverName* **REQUIRED** - This is the Name that the user is known by and is used as the entry form default.
+
+*UserObservatory* **REQUIRED** - This is a official 3 character designator for their particular observatory.
+This saves time on form entry and is used for the entry form defaults.
+
+*UserHeader* **REQUIRED** - This is the official header required for astrometry listings.
+
+*UserScope* **REQUIRED** - This is the default scope used for observations.  This saves time on form entry and is used for the entry form default.
+
+#5 - Light Curve Graph
+The light curve graph will take astrometry data from 3 fields...<br>
+**Mag**<br>
+**Designation**<br>
+**HumanDate**<br>
+
++The **Mag** field is a measurement of the objects magnitude and is in nn.n . It is always 2 digits and a decimal.  It is derived from the entry itself.
++The **Designation** field contains the actual objects MPC designation.  And is the title of the curve.
++The **HumanDate** field contains a EXACT date/time of the observation entry, accurate to .00001 .
+This time field will be used to give the timing for the graph.  It only needs to be to the minute.
+
+The light curve graph will graph the Brightness change over time in a graph plotted from all the exact data points for any particular object.
+This will require searching the designation column for matching designator.
+& also getting the Magnitude & time from that same entry.<br>
+The *Y* axis denotes Brightness ( Mag )<br>
+The *X* axis denotes Time ( HumanDate )<br>
+The format for the graph is "light curve"
+
+#6 - Search plugins...
+There will be at least 2 search systems.<br>
+*1 - Search astrometry data<br>
+*2 - Search Comet Data<br>
+
+
+### Sample Layouts###
+<img src="https://cloud.githubusercontent.com/assets/1850089/15264497/37d8c400-1939-11e6-8467-72c7d1bee0b7.JPG" width="23%"></img> <img src="https://cloud.githubusercontent.com/assets/1850089/15264556/e524b5f6-1939-11e6-8cc6-d525cff37497.JPG" width="23%"></img> <img src="https://cloud.githubusercontent.com/assets/1850089/15264557/e525be10-1939-11e6-8d05-1bf31adb199a.JPG" width="23%"></img> <img src="https://cloud.githubusercontent.com/assets/1850089/15264554/e522e348-1939-11e6-8f22-7f36bd88679e.JPG" width="23%"></img> <img src="https://cloud.githubusercontent.com/assets/1850089/15264558/e5262990-1939-11e6-8706-cf64d0f050f8.JPG" width="23%"></img> <img src="https://cloud.githubusercontent.com/assets/1850089/15264555/e524a728-1939-11e6-899e-bc9bcb926081.JPG" width="23%"></img> 
+
+###CRITICAL ITEMS###.
+anyone can view the entries, but only specified users can enter data.  To simplify matters the image folder used should be restricted to ONLY the one allowed...
+for example... 
+*/images/observations/comets* would be the root and then each comet would be a sub-folder using the name of the comet I guess...
+so when they go to enter a image for comet *104P Kowal* it would automatically put the image in the */images/observations/comets/104P-Kowal* folder.
+This forced location of images is not mandatory but would be helpful.  Possibility for duplicate image names does exist but is remote.
+
+**Entry** field is a **RAW** text field that contains the observation.  **It's format is vital!**
+All spaces MUST be retained and displayed.
+
+##Official Site##
+[ArkSky.org](http://arksky.org)<br>
+[Facebook Page](https://www.facebook.com/groups/421163751426836/)
+
+Volunteers to develop this system will be embraced :D
