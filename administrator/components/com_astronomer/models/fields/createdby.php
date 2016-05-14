@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @version    CVS: 1.0.0
  * @package    Com_Astronomer
@@ -6,7 +7,6 @@
  * @copyright  2016 Troy Hall
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
-
 defined('JPATH_BASE') or die;
 
 jimport('joomla.form.formfield');
@@ -16,8 +16,8 @@ jimport('joomla.form.formfield');
  *
  * @since  1.6
  */
-class JFormFieldCreatedby extends JFormField
-{
+class JFormFieldCreatedby extends JFormField {
+
 	/**
 	 * The form field type.
 	 *
@@ -33,21 +33,17 @@ class JFormFieldCreatedby extends JFormField
 	 *
 	 * @since    1.6
 	 */
-	protected function getInput()
-	{
+	protected function getInput() {
 		// Initialize variables.
 		$html = array();
 
 		// Load user
 		$user_id = $this->value;
 
-		if ($user_id)
-		{
+		if ($user_id) {
 			$user = JFactory::getUser($user_id);
-		}
-		else
-		{
-			$user   = JFactory::getUser();
+		} else {
+			$user = JFactory::getUser();
 			$html[] = '<input type="hidden" name="' . $this->name . '" value="' . $user->id . '" />';
 		}
 
@@ -55,4 +51,5 @@ class JFormFieldCreatedby extends JFormField
 
 		return implode($html);
 	}
+
 }

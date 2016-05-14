@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @version    CVS: 1.0.0
  * @package    Com_Astronomer
@@ -6,7 +7,6 @@
  * @copyright  2016 Troy Hall
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
-
 // No direct access.
 defined('_JEXEC') or die;
 
@@ -19,25 +19,22 @@ use Joomla\Utilities\ArrayHelper;
  *
  * @since  1.6
  */
-class AstronomerControllerLists extends JControllerAdmin
-{
+class AstronomerControllerLists extends JControllerAdmin {
+
 	/**
 	 * Method to clone existing Lists
 	 *
 	 * @return void
 	 */
-	public function duplicate()
-	{
+	public function duplicate() {
 		// Check for request forgeries
 		Jsession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Get id(s)
 		$pks = $this->input->post->get('cid', array(), 'array');
 
-		try
-		{
-			if (empty($pks))
-			{
+		try {
+			if (empty($pks)) {
 				throw new Exception(JText::_('COM_ASTRONOMER_NO_ELEMENT_SELECTED'));
 			}
 
@@ -45,9 +42,7 @@ class AstronomerControllerLists extends JControllerAdmin
 			$model = $this->getModel();
 			$model->duplicate($pks);
 			$this->setMessage(Jtext::_('COM_ASTRONOMER_ITEMS_SUCCESS_DUPLICATED'));
-		}
-		catch (Exception $e)
-		{
+		} catch (Exception $e) {
 			JFactory::getApplication()->enqueueMessage($e->getMessage(), 'warning');
 		}
 
@@ -65,8 +60,7 @@ class AstronomerControllerLists extends JControllerAdmin
 	 *
 	 * @since    1.6
 	 */
-	public function getModel($name = 'list', $prefix = 'AstronomerModel', $config = array())
-	{
+	public function getModel($name = 'list', $prefix = 'AstronomerModel', $config = array()) {
 		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
 
 		return $model;
@@ -79,11 +73,10 @@ class AstronomerControllerLists extends JControllerAdmin
 	 *
 	 * @since   3.0
 	 */
-	public function saveOrderAjax()
-	{
+	public function saveOrderAjax() {
 		// Get the input
 		$input = JFactory::getApplication()->input;
-		$pks   = $input->post->get('cid', array(), 'array');
+		$pks = $input->post->get('cid', array(), 'array');
 		$order = $input->post->get('order', array(), 'array');
 
 		// Sanitize the input
@@ -96,12 +89,12 @@ class AstronomerControllerLists extends JControllerAdmin
 		// Save the ordering
 		$return = $model->saveorder($pks, $order);
 
-		if ($return)
-		{
+		if ($return) {
 			echo "1";
 		}
 
 		// Close the application
 		JFactory::getApplication()->close();
 	}
+
 }

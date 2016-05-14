@@ -15,8 +15,8 @@ defined('_JEXEC') or die;
  *
  * @since  1.6
  */
-class AstronomerController extends JControllerLegacy
-{
+class AstronomerController extends JControllerLegacy {
+
 	/**
 	 * Method to display a view.
 	 *
@@ -27,8 +27,7 @@ class AstronomerController extends JControllerLegacy
 	 *
 	 * @since    1.5
 	 */
-	public function display($cachable = false, $urlparams = false)
-	{
+	public function display($cachable = false, $urlparams = false) {
 		$view = JFactory::getApplication()->input->getCmd('view', 'astronomers');
 		JFactory::getApplication()->input->set('view', $view);
 
@@ -36,4 +35,5 @@ class AstronomerController extends JControllerLegacy
 
 		return $this;
 	}
+
 }

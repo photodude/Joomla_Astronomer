@@ -22,20 +22,18 @@ $document->addStyleSheet(JUri::root() . 'media/com_astronomer/css/form.css');
 <script type="text/javascript">
 	js = jQuery.noConflict();
 	js(document).ready(function () {
-		
+
 	});
 
 	Joomla.submitbutton = function (task) {
 		if (task == 'list.cancel') {
 			Joomla.submitform(task, document.getElementById('list-form'));
-		}
-		else {
-			
+		} else {
+
 			if (task != 'list.cancel' && document.formvalidator.isValid(document.id('list-form'))) {
-				
+
 				Joomla.submitform(task, document.getElementById('list-form'));
-			}
-			else {
+			} else {
 				alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED')); ?>');
 			}
 		}
@@ -54,20 +52,20 @@ $document->addStyleSheet(JUri::root() . 'media/com_astronomer/css/form.css');
 			<div class="span10 form-horizontal">
 				<fieldset class="adminform">
 
-					
+
 
 					<?php if ($this->state->params->get('save_history', 1)) : ?>
-					<div class="control-group">
-						<div class="control-label"><?php echo $this->form->getLabel('version_note'); ?></div>
-						<div class="controls"><?php echo $this->form->getInput('version_note'); ?></div>
-					</div>
+						<div class="control-group">
+							<div class="control-label"><?php echo $this->form->getLabel('version_note'); ?></div>
+							<div class="controls"><?php echo $this->form->getInput('version_note'); ?></div>
+						</div>
 					<?php endif; ?>
 				</fieldset>
 			</div>
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 
-		
+
 
 		<?php echo JHtml::_('bootstrap.endTabSet'); ?>
 

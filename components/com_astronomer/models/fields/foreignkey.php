@@ -16,8 +16,8 @@ jimport('joomla.form.formfield');
  *
  * @since  1.6
  */
-class JFormFieldForeignKey extends JFormField
-{
+class JFormFieldForeignKey extends JFormField {
+
 	/**
 	 * The form field type.
 	 *
@@ -25,13 +25,9 @@ class JFormFieldForeignKey extends JFormField
 	 * @since    1.6
 	 */
 	protected $type = 'foreignkey';
-
 	private $input_type;
-
 	private $table;
-
 	private $key_field;
-
 	private $value_field;
 
 	/**
@@ -41,8 +37,7 @@ class JFormFieldForeignKey extends JFormField
 	 *
 	 * @since    1.6
 	 */
-	protected function getInput()
-	{
+	protected function getInput() {
 		// Assign field properties.
 		// Type of input the field shows
 		$this->input_type = $this->getAttribute('input_type');
@@ -60,43 +55,39 @@ class JFormFieldForeignKey extends JFormField
 		$this->value_multiple = (int) $this->getAttribute('value_multiple', 0);
 
 		// Initialize variables.
-		$html     = '';
+		$html = '';
 		$fk_value = '';
 
 		// Load all the field options
-		$db    = JFactory::getDbo();
+		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 
 		// Support for multiple fields on fk_values
-		if ($this->value_multiple == 1)
-		{
+		if ($this->value_multiple == 1) {
 			// Get the fields for multiple value
 			$this->value_fields = (string) $this->getAttribute('value_field_multiple');
 			$this->value_fields = explode(',', $this->value_fields);
 
 			$fk_value = ' CONCAT (';
 
-			foreach ($this->value_fields as $field)
-			{
+			foreach ($this->value_fields as $field) {
 				$fk_value .= $db->quoteName($field) . ', \' \', ';
 			}
 
 			$fk_value = substr($fk_value, 0, -7);
 			$fk_value .= ') AS ' . $db->quoteName($this->value_field);
-		}
-		else
-		{
+		} else {
 			$fk_value = $db->quoteName($this->value_field);
 		}
 
 		$query
-			->select(
-				array(
-					$db->quoteName($this->key_field),
-					$fk_value
-				)
-			)
-			->from($this->table);
+		->select(
+		array(
+			$db->quoteName($this->key_field),
+			$fk_value
+		)
+		)
+		->from($this->table);
 
 		$db->setQuery($query);
 		$results = $db->loadObjectList();
@@ -104,38 +95,30 @@ class JFormFieldForeignKey extends JFormField
 		$input_options = 'class="' . $this->getAttribute('class') . '"';
 
 		// Depends of the type of input, the field will show a type or another
-		switch ($this->input_type)
-		{
+		switch ($this->input_type) {
 			case 'list':
 			default:
 				$options = array();
 
 				// Iterate through all the results
-				foreach ($results as $result)
-				{
+				foreach ($results as $result) {
 					$options[] = JHtml::_('select.option', $result->{$this->key_field}, $result->{$this->value_field});
 				}
 
 				$value = $this->value;
 
 				// If the value is a string -> Only one result
-				if (is_string($value))
-				{
+				if (is_string($value)) {
 					$value = array($value);
-				}
-				elseif (is_object($value))
-				{
+				} elseif (is_object($value)) {
 					// If the value is an object, let's get its properties.
 					$value = get_object_vars($value);
 				}
 
 				// If the select is multiple
-				if ($this->multiple)
-				{
+				if ($this->multiple) {
 					$input_options .= 'multiple="multiple"';
-				}
-				else
-				{
+				} else {
 					array_unshift($options, JHtml::_('select.option', '', ''));
 				}
 
@@ -154,15 +137,12 @@ class JFormFieldForeignKey extends JFormField
 	 *
 	 * @return mixed The value of the attribute if it exists, null otherwise
 	 */
-	public function getAttribute($attr_name, $default = null)
-	{
-		if (!empty($this->element[$attr_name]))
-		{
+	public function getAttribute($attr_name, $default = null) {
+		if (!empty($this->element[$attr_name])) {
 			return $this->element[$attr_name];
-		}
-		else
-		{
+		} else {
 			return $default;
 		}
 	}
+
 }

@@ -16,8 +16,8 @@ jimport('joomla.application.component.modellist');
  *
  * @since  1.6
  */
-class AstronomerModelLists extends JModelList
-{
+class AstronomerModelLists extends JModelList {
+
 	/**
 	 * Method to auto-populate the model state.
 	 *
@@ -30,8 +30,7 @@ class AstronomerModelLists extends JModelList
 	 *
 	 * @throws Exception
 	 */
-	protected function populateState($ordering = null, $direction = null)
-	{
+	protected function populateState($ordering = null, $direction = null) {
 		// Initialise variables.
 		$app = JFactory::getApplication('administrator');
 
@@ -63,8 +62,7 @@ class AstronomerModelLists extends JModelList
 	 *
 	 * @since    1.6
 	 */
-	protected function getStoreId($id = '')
-	{
+	protected function getStoreId($id = '') {
 		// Compile the store id.
 		$id .= ':' . $this->getState('filter.search');
 		$id .= ':' . $this->getState('filter.state');
@@ -79,10 +77,9 @@ class AstronomerModelLists extends JModelList
 	 *
 	 * @since    1.6
 	 */
-	protected function getListQuery()
-	{
-		$db	= $this->getDbo();
-		$query	= $db->getQuery(true);
+	protected function getListQuery() {
+		$db = $this->getDbo();
+		$query = $db->getQuery(true);
 
 		return $query;
 	}
@@ -92,10 +89,10 @@ class AstronomerModelLists extends JModelList
 	 *
 	 * @return mixed Array of data items on success, false on failure.
 	 */
-	public function getItems()
-	{
+	public function getItems() {
 		$items = parent::getItems();
 
 		return $items;
 	}
+
 }

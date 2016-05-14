@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package     Joomla.Plugin
  * @subpackage  User.AstronomerProfile
@@ -6,7 +7,6 @@
  * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
-
 defined('_JEXEC') or die;
 
 use Joomla\Utilities\ArrayHelper;
@@ -16,8 +16,8 @@ use Joomla\Utilities\ArrayHelper;
  *
  * @since  1.6
  */
-class PlgUserProfileAstronomerProfile extends JPlugin
-{
+class PlgUserProfileAstronomerProfile extends JPlugin {
+
 	/**
 	 * Date of birth.
 	 *
@@ -42,8 +42,7 @@ class PlgUserProfileAstronomerProfile extends JPlugin
 	 *
 	 * @since   1.5
 	 */
-	public function __construct(& $subject, $config)
-	{
+	public function __construct(& $subject, $config) {
 		parent::__construct($subject, $config);
 		JFormHelper::addFieldPath(__DIR__ . '/fields');
 	}
@@ -58,34 +57,27 @@ class PlgUserProfileAstronomerProfile extends JPlugin
 	 *
 	 * @since   1.6
 	 */
-	public function onContentPrepareData($context, $data)
-	{
+	public function onContentPrepareData($context, $data) {
 		// Check we are manipulating a valid form.
-		if (!in_array($context, array('com_users.profile', 'com_users.user', 'com_users.registration', 'com_admin.profile')))
-		{
+		if (!in_array($context, array('com_users.profile', 'com_users.user', 'com_users.registration', 'com_admin.profile'))) {
 			return true;
 		}
 
-		if (is_object($data))
-		{
+		if (is_object($data)) {
 			$userId = isset($data->id) ? $data->id : 0;
 
-			if (!isset($data->profile) and $userId > 0)
-			{
+			if (!isset($data->profile) and $userId > 0) {
 				// Load the profile data from the database.
 				$db = JFactory::getDbo();
 				$db->setQuery(
-					'SELECT profile_key, profile_value FROM #__user_astronomer_profiles' .
-						' WHERE user_id = ' . (int) $userId . " AND profile_key LIKE 'profile.%'" .
-						' ORDER BY ordering'
+				'SELECT profile_key, profile_value FROM #__user_astronomer_profiles' .
+				' WHERE user_id = ' . (int) $userId . " AND profile_key LIKE 'profile.%'" .
+				' ORDER BY ordering'
 				);
 
-				try
-				{
+				try {
 					$results = $db->loadRowList();
-				}
-				catch (RuntimeException $e)
-				{
+				} catch (RuntimeException $e) {
 					$this->_subject->setError($e->getMessage());
 
 					return false;
@@ -94,13 +86,11 @@ class PlgUserProfileAstronomerProfile extends JPlugin
 				// Merge the profile data.
 				$data->profile = array();
 
-				foreach ($results as $v)
-				{
+				foreach ($results as $v) {
 					$k = str_replace('profile.', '', $v[0]);
 					$data->profile[$k] = json_decode($v[1], true);
 
-					if ($data->profile[$k] === null)
-					{
+					if ($data->profile[$k] === null) {
 						$data->profile[$k] = $v[1];
 					}
 				}
@@ -117,23 +107,16 @@ class PlgUserProfileAstronomerProfile extends JPlugin
 	 *
 	 * @return mixed|string
 	 */
-	public static function url($value)
-	{
-		if (empty($value))
-		{
+	public static function url($value) {
+		if (empty($value)) {
 			return JHtml::_('users.value', $value);
-		}
-		else
-		{
+		} else {
 			// Convert website url to utf8 for display
 			$value = JStringPunycode::urlToUTF8(htmlspecialchars($value));
 
-			if (substr($value, 0, 4) == "http")
-			{
+			if (substr($value, 0, 4) == "http") {
 				return '<a href="' . $value . '">' . $value . '</a>';
-			}
-			else
-			{
+			} else {
 				return '<a href="http://' . $value . '">' . $value . '</a>';
 			}
 		}
@@ -146,14 +129,10 @@ class PlgUserProfileAstronomerProfile extends JPlugin
 	 *
 	 * @return  mixed
 	 */
-	public static function calendar($value)
-	{
-		if (empty($value))
-		{
+	public static function calendar($value) {
+		if (empty($value)) {
 			return JHtml::_('users.value', $value);
-		}
-		else
-		{
+		} else {
 			return JHtml::_('date', $value, null, null);
 		}
 	}
@@ -165,10 +144,8 @@ class PlgUserProfileAstronomerProfile extends JPlugin
 	 *
 	 * @return  mixed
 	 */
-	public static function dob($value)
-	{
-		if (!$value)
-		{
+	public static function dob($value) {
+		if (!$value) {
 			return '';
 		}
 
@@ -182,14 +159,10 @@ class PlgUserProfileAstronomerProfile extends JPlugin
 	 *
 	 * @return string
 	 */
-	public static function tos($value)
-	{
-		if ($value)
-		{
+	public static function tos($value) {
+		if ($value) {
 			return JText::_('JYES');
-		}
-		else
-		{
+		} else {
 			return JText::_('JNO');
 		}
 	}
@@ -204,10 +177,8 @@ class PlgUserProfileAstronomerProfile extends JPlugin
 	 *
 	 * @since   1.6
 	 */
-	public function onContentPrepareForm($form, $data)
-	{
-		if (!($form instanceof JForm))
-		{
+	public function onContentPrepareForm($form, $data) {
+		if (!($form instanceof JForm)) {
 			$this->_subject->setError('JERROR_NOT_A_FORM');
 
 			return false;
@@ -216,8 +187,7 @@ class PlgUserProfileAstronomerProfile extends JPlugin
 		// Check we are manipulating a valid form.
 		$name = $form->getName();
 
-		if (!in_array($name, array('com_admin.profile', 'com_users.user', 'com_users.profile', 'com_users.registration')))
-		{
+		if (!in_array($name, array('com_admin.profile', 'com_users.user', 'com_users.profile', 'com_users.registration'))) {
 			return true;
 		}
 
@@ -241,8 +211,7 @@ class PlgUserProfileAstronomerProfile extends JPlugin
 		// Change fields description when displayed in front-end or back-end profile editing
 		$app = JFactory::getApplication();
 
-		if ($app->isSite() || $name == 'com_users.user' || $name == 'com_admin.profile')
-		{
+		if ($app->isSite() || $name == 'com_users.user' || $name == 'com_admin.profile') {
 			$form->setFieldAttribute('observername', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
 			$form->setFieldAttribute('observeratory', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
 			$form->setFieldAttribute('header', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
@@ -257,41 +226,29 @@ class PlgUserProfileAstronomerProfile extends JPlugin
 			$form->setFieldAttribute('tos', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FIELD_TOS_DESC_SITE', 'profile');
 		}
 
-		foreach ($fields as $field)
-		{
+		foreach ($fields as $field) {
 			// Case using the users manager in admin
-			if ($name == 'com_users.user')
-			{
+			if ($name == 'com_users.user') {
 				// Remove the field if it is disabled in registration and profile
-				if ($this->params->get('register-require_' . $field, 1) == 0
-					&& $this->params->get('profile-require_' . $field, 1) == 0)
-				{
+				if ($this->params->get('register-require_' . $field, 1) == 0 && $this->params->get('profile-require_' . $field, 1) == 0) {
 					$form->removeField($field, 'profile');
 				}
 			}
 			// Case registration
-			elseif ($name == 'com_users.registration')
-			{
+			elseif ($name == 'com_users.registration') {
 				// Toggle whether the field is required.
-				if ($this->params->get('register-require_' . $field, 1) > 0)
-				{
+				if ($this->params->get('register-require_' . $field, 1) > 0) {
 					$form->setFieldAttribute($field, 'required', ($this->params->get('register-require_' . $field) == 2) ? 'required' : '', 'profile');
-				}
-				else
-				{
+				} else {
 					$form->removeField($field, 'profile');
 				}
 			}
 			// Case profile in site or admin
-			elseif ($name == 'com_users.profile' || $name == 'com_admin.profile')
-			{
+			elseif ($name == 'com_users.profile' || $name == 'com_admin.profile') {
 				// Toggle whether the field is required.
-				if ($this->params->get('profile-require_' . $field, 1) > 0)
-				{
+				if ($this->params->get('profile-require_' . $field, 1) > 0) {
 					$form->setFieldAttribute($field, 'required', ($this->params->get('profile-require_' . $field) == 2) ? 'required' : '', 'profile');
-				}
-				else
-				{
+				} else {
 					$form->removeField($field, 'profile');
 				}
 			}
@@ -312,13 +269,12 @@ class PlgUserProfileAstronomerProfile extends JPlugin
 	 * @since   3.1
 	 * @throws    InvalidArgumentException on invalid date.
 	 */
-	public function onUserBeforeSave($user, $isnew, $data)
-	{
-		
+	public function onUserBeforeSave($user, $isnew, $data) {
+
 		// Check that the tos is checked if required ie only in registration from frontend.
-		$task       = JFactory::getApplication()->input->getCmd('task');
-		$option     = JFactory::getApplication()->input->getCmd('option');
-		
+		$task = JFactory::getApplication()->input->getCmd('task');
+		$option = JFactory::getApplication()->input->getCmd('option');
+
 		return true;
 	}
 
@@ -332,38 +288,32 @@ class PlgUserProfileAstronomerProfile extends JPlugin
 	 *
 	 * @return bool
 	 */
-	public function onUserAfterSave($data, $isNew, $result, $error)
-	{
+	public function onUserAfterSave($data, $isNew, $result, $error) {
 		$userId = ArrayHelper::getValue($data, 'id', 0, 'int');
 
-		if ($userId && $result && isset($data['profile']) && (count($data['profile'])))
-		{
-			try
-			{
+		if ($userId && $result && isset($data['profile']) && (count($data['profile']))) {
+			try {
 				// Sanitize the date
 				$data['profile']['dob'] = $this->date;
 
 				$db = JFactory::getDbo();
 				$query = $db->getQuery(true)
-					->delete($db->quoteName('#__user_astronomer_profiles'))
-					->where($db->quoteName('user_id') . ' = ' . (int) $userId)
-					->where($db->quoteName('profile_key') . ' LIKE ' . $db->quote('profile.%'));
+				->delete($db->quoteName('#__user_astronomer_profiles'))
+				->where($db->quoteName('user_id') . ' = ' . (int) $userId)
+				->where($db->quoteName('profile_key') . ' LIKE ' . $db->quote('profile.%'));
 				$db->setQuery($query);
 				$db->execute();
 
 				$tuples = array();
 				$order = 1;
 
-				foreach ($data['profile'] as $k => $v)
-				{
+				foreach ($data['profile'] as $k => $v) {
 					$tuples[] = '(' . $userId . ', ' . $db->quote('profile.' . $k) . ', ' . $db->quote(json_encode($v)) . ', ' . ($order++) . ')';
 				}
 
 				$db->setQuery('INSERT INTO #__user_astronomer_profiles VALUES ' . implode(', ', $tuples));
 				$db->execute();
-			}
-			catch (RuntimeException $e)
-			{
+			} catch (RuntimeException $e) {
 				$this->_subject->setError($e->getMessage());
 
 				return false;
@@ -384,29 +334,23 @@ class PlgUserProfileAstronomerProfile extends JPlugin
 	 *
 	 * @return  boolean
 	 */
-	public function onUserAfterDelete($user, $success, $msg)
-	{
-		if (!$success)
-		{
+	public function onUserAfterDelete($user, $success, $msg) {
+		if (!$success) {
 			return false;
 		}
 
 		$userId = ArrayHelper::getValue($user, 'id', 0, 'int');
 
-		if ($userId)
-		{
-			try
-			{
+		if ($userId) {
+			try {
 				$db = JFactory::getDbo();
 				$db->setQuery(
-					'DELETE FROM #__user_astronomer_profiles WHERE user_id = ' . $userId .
-						" AND profile_key LIKE 'profile.%'"
+				'DELETE FROM #__user_astronomer_profiles WHERE user_id = ' . $userId .
+				" AND profile_key LIKE 'profile.%'"
 				);
 
 				$db->execute();
-			}
-			catch (Exception $e)
-			{
+			} catch (Exception $e) {
 				$this->_subject->setError($e->getMessage());
 
 				return false;
@@ -415,4 +359,5 @@ class PlgUserProfileAstronomerProfile extends JPlugin
 
 		return true;
 	}
+
 }

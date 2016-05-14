@@ -7,7 +7,6 @@
  * @copyright  2016 Troy Hall
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
-
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die('Restricted access');
 
@@ -18,12 +17,10 @@ jimport('joomla.form.formfield');
  *
  * @since  1.6
  */
-class JFormFieldSubmit extends JFormField
-{
+class JFormFieldSubmit extends JFormField {
+
 	protected $type = 'submit';
-
 	protected $value;
-
 	protected $for;
 
 	/**
@@ -31,8 +28,7 @@ class JFormFieldSubmit extends JFormField
 	 *
 	 * @return string
 	 */
-	public function getInput()
-	{
+	public function getInput() {
 		$this->value = $this->getAttribute('value');
 
 		return '<button id="' . $this->id . '"'
@@ -43,4 +39,5 @@ class JFormFieldSubmit extends JFormField
 		. JText::_('JSEARCH_FILTER_SUBMIT')
 		. ' </button>';
 	}
+
 }

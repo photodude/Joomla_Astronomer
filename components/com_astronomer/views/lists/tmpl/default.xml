@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
 	<layout title="COM_ASTRONOMER_TITLE_LIST_VIEW_LISTS" option="View">
-        <message>
+		<message>
                         <![CDATA[COM_ASTRONOMER_TITLE_LIST_VIEW_LISTS_DESC]]>
-        </message>
+		</message>
 	</layout>
 </metadata>

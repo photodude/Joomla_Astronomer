@@ -16,10 +16,14 @@ $elements = ModAstronomerHelper::getList($params);
 		<?php foreach ($elements as $element) : ?>
 			<tr>
 				<th><?php echo ModAstronomerHelper::renderTranslatableHeader($params, $params->get('field')); ?></th>
-				<td><?php echo ModAstronomerHelper::renderElement(
-						$params->get('table'), $params->get('field'), $element->{$params->get('field')}
-					); ?></td>
+				<td><?php
+					echo ModAstronomerHelper::renderElement(
+					$params->get('table'), $params->get('field'), $element->{$params->get('field')}
+					);
+					?></td>
 			</tr>
 		<?php endforeach; ?>
 	</table>
-<?php endif;
+	<?php
+
+ endif;

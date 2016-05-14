@@ -21,31 +21,31 @@ $doc = JFactory::getDocument();
 $doc->addScript(JUri::base() . '/media/com_astronomer/js/form.js');
 
 /*
-if($this->item->state == 1){
-	$state_string = 'Publish';
-	$state_value = 1;
-} else {
-	$state_string = 'Unpublish';
-	$state_value = 0;
-}
-$canState = JFactory::getUser()->authorise('core.edit.state','com_astronomer');*/
+  if($this->item->state == 1){
+  $state_string = 'Publish';
+  $state_value = 1;
+  } else {
+  $state_string = 'Unpublish';
+  $state_value = 0;
+  }
+  $canState = JFactory::getUser()->authorise('core.edit.state','com_astronomer'); */
 ?>
 <script type="text/javascript">
 	if (jQuery === 'undefined') {
 		document.addEventListener("DOMContentLoaded", function (event) {
 			jQuery('#form-list').submit(function (event) {
-				
+
 			});
 
-			
+
 		});
 	} else {
 		jQuery(document).ready(function () {
 			jQuery('#form-list').submit(function (event) {
-				
+
 			});
 
-			
+
 		});
 	}
 </script>
@@ -60,7 +60,7 @@ $canState = JFactory::getUser()->authorise('core.edit.state','com_astronomer');*
 	<form id="form-list"
 		  action="<?php echo JRoute::_('index.php?option=com_astronomer&task=list.save'); ?>"
 		  method="post" class="form-validate form-horizontal" enctype="multipart/form-data">
-		
+
 		<div class="control-group">
 			<div class="controls">
 
@@ -72,7 +72,7 @@ $canState = JFactory::getUser()->authorise('core.edit.state','com_astronomer');*
 				<a class="btn"
 				   href="<?php echo JRoute::_('index.php?option=com_astronomer&task=listform.cancel'); ?>"
 				   title="<?php echo JText::_('JCANCEL'); ?>">
-					<?php echo JText::_('JCANCEL'); ?>
+					   <?php echo JText::_('JCANCEL'); ?>
 				</a>
 			</div>
 		</div>
@@ -80,6 +80,6 @@ $canState = JFactory::getUser()->authorise('core.edit.state','com_astronomer');*
 		<input type="hidden" name="option" value="com_astronomer"/>
 		<input type="hidden" name="task"
 			   value="listform.save"/>
-		<?php echo JHtml::_('form.token'); ?>
+			   <?php echo JHtml::_('form.token'); ?>
 	</form>
 </div>

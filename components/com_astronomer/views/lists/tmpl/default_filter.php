@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @version    CVS: 1.0.0
  * @package    Com_Astronomer
@@ -7,7 +6,6 @@
  * @copyright  2016 Troy Hall
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
-
 defined('JPATH_BASE') or die;
 
 $data = $displayData;
@@ -16,33 +14,28 @@ $data = $displayData;
 $data['options'] = !empty($data['options']) ? $data['options'] : array();
 
 // Check if any filter field has been filled
-$filters       = false;
-$filtered      = false;
+$filters = false;
+$filtered = false;
 $search_filter = false;
 
-if (isset($data['view']->filterForm))
-{
+if (isset($data['view']->filterForm)) {
 	$filters = $data['view']->filterForm->getGroup('filter');
 }
 
 // Check if there are filters set.
-if ($filters !== false)
-{
+if ($filters !== false) {
 	$filterFields = array_keys($filters);
-	$filled       = false;
+	$filled = false;
 
-	foreach ($filterFields as $filterField)
-	{
+	foreach ($filterFields as $filterField) {
 		$filterField = substr($filterField, 7);
-		$filter      = $data['view']->getState('filter.' . $filterField);
+		$filter = $data['view']->getState('filter.' . $filterField);
 
-		if (!empty($filter))
-		{
+		if (!empty($filter)) {
 			$filled = $filter;
 		}
 
-		if (!empty($filled))
-		{
+		if (!empty($filled)) {
 			$filtered = true;
 			break;
 		}
@@ -56,10 +49,10 @@ $options = $data['options'];
 
 // Set some basic options
 $customOptions = array(
-	'filtersHidden'       => isset($options['filtersHidden']) ? $options['filtersHidden'] : empty($data['view']->activeFilters) && !$filtered,
-	'defaultLimit'        => isset($options['defaultLimit']) ? $options['defaultLimit'] : JFactory::getApplication()->get('list_limit', 20),
+	'filtersHidden' => isset($options['filtersHidden']) ? $options['filtersHidden'] : empty($data['view']->activeFilters) && !$filtered,
+	'defaultLimit' => isset($options['defaultLimit']) ? $options['defaultLimit'] : JFactory::getApplication()->get('list_limit', 20),
 	'searchFieldSelector' => '#filter_search',
-	'orderFieldSelector'  => '#list_fullordering'
+	'orderFieldSelector' => '#list_fullordering'
 );
 
 $data['options'] = array_unique(array_merge($customOptions, $data['options']));
@@ -74,19 +67,19 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
 	<div class="clearfix">
 		<div class="js-stools-container-bar">
 			<label for="filter_search" class="element-invisible"
-				aria-invalid="false"><?php echo JText::_('COM_ASTRONOMER_SEARCH_FILTER_SUBMIT'); ?></label>
+				   aria-invalid="false"><?php echo JText::_('COM_ASTRONOMER_SEARCH_FILTER_SUBMIT'); ?></label>
 
 			<div class="btn-wrapper input-append">
 				<?php echo $search_filter->input; ?>
 				<button type="submit" class="btn hasTooltip" title=""
-					data-original-title="<?php echo JText::_('COM_ASTRONOMER_SEARCH_FILTER_SUBMIT'); ?>">
+						data-original-title="<?php echo JText::_('COM_ASTRONOMER_SEARCH_FILTER_SUBMIT'); ?>">
 					<i class="icon-search"></i>
 				</button>
 			</div>
 			<?php if ($filters): ?>
 				<div class="btn-wrapper hidden-phone">
 					<button type="button" class="btn hasTooltip js-stools-btn-filter" title=""
-						data-original-title="<?php echo JText::_('COM_ASTRONOMER_SEARCH_TOOLS_DESC'); ?>">
+							data-original-title="<?php echo JText::_('COM_ASTRONOMER_SEARCH_TOOLS_DESC'); ?>">
 						<?php echo JText::_('COM_ASTRONOMER_SEARCH_TOOLS'); ?> <i class="caret"></i>
 					</button>
 				</div>
@@ -94,9 +87,9 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
 
 			<div class="btn-wrapper">
 				<button type="button" class="btn hasTooltip js-stools-btn-clear" title=""
-					data-original-title="<?php echo JText::_('COM_ASTRONOMER_SEARCH_FILTER_CLEAR'); ?>"
-					onclick="jQuery(this).closest('form').find('input').val('');">
-					<?php echo JText::_('COM_ASTRONOMER_SEARCH_FILTER_CLEAR'); ?>
+						data-original-title="<?php echo JText::_('COM_ASTRONOMER_SEARCH_FILTER_CLEAR'); ?>"
+						onclick="jQuery(this).closest('form').find('input').val('');">
+							<?php echo JText::_('COM_ASTRONOMER_SEARCH_FILTER_CLEAR'); ?>
 				</button>
 			</div>
 		</div>

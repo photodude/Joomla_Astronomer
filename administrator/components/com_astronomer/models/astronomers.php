@@ -16,20 +16,18 @@ jimport('joomla.application.component.modellist');
  *
  * @since  1.6
  */
-class AstronomerModelAstronomers extends JModelList
-{
-/**
-	* Constructor.
-	*
-	* @param   array  $config  An optional associative array of configuration settings.
-	*
-	* @see        JController
-	* @since      1.6
-	*/
-	public function __construct($config = array())
-	{
-		if (empty($config['filter_fields']))
-		{
+class AstronomerModelAstronomers extends JModelList {
+
+	/**
+	 * Constructor.
+	 *
+	 * @param   array  $config  An optional associative array of configuration settings.
+	 *
+	 * @see        JController
+	 * @since      1.6
+	 */
+	public function __construct($config = array()) {
+		if (empty($config['filter_fields'])) {
 			$config['filter_fields'] = array(
 				'id', 'a.`id`',
 				'humandate', 'a.`humandate`',
@@ -61,8 +59,7 @@ class AstronomerModelAstronomers extends JModelList
 	 *
 	 * @throws Exception
 	 */
-	protected function populateState($ordering = null, $direction = null)
-	{
+	protected function populateState($ordering = null, $direction = null) {
 		// Initialise variables.
 		$app = JFactory::getApplication('administrator');
 
@@ -94,8 +91,7 @@ class AstronomerModelAstronomers extends JModelList
 	 *
 	 * @since    1.6
 	 */
-	protected function getStoreId($id = '')
-	{
+	protected function getStoreId($id = '') {
 		// Compile the store id.
 		$id .= ':' . $this->getState('filter.search');
 		$id .= ':' . $this->getState('filter.state');
@@ -110,17 +106,16 @@ class AstronomerModelAstronomers extends JModelList
 	 *
 	 * @since    1.6
 	 */
-	protected function getListQuery()
-	{
+	protected function getListQuery() {
 		// Create a new query object.
-		$db    = $this->getDbo();
+		$db = $this->getDbo();
 		$query = $db->getQuery(true);
 
 		// Select the required fields from the table.
 		$query->select(
-			$this->getState(
-				'list.select', 'DISTINCT a.*'
-			)
+		$this->getState(
+		'list.select', 'DISTINCT a.*'
+		)
 		);
 		$query->from('`#__joomla_astronomer` AS a');
 
@@ -135,37 +130,28 @@ class AstronomerModelAstronomers extends JModelList
 		// Filter by published state
 		$published = $this->getState('filter.state');
 
-		if (is_numeric($published))
-		{
+		if (is_numeric($published)) {
 			$query->where('a.state = ' . (int) $published);
-		}
-		elseif ($published === '')
-		{
+		} elseif ($published === '') {
 			$query->where('(a.state IN (0, 1))');
 		}
 
 		// Filter by search in title
 		$search = $this->getState('filter.search');
 
-		if (!empty($search))
-		{
-			if (stripos($search, 'id:') === 0)
-			{
+		if (!empty($search)) {
+			if (stripos($search, 'id:') === 0) {
 				$query->where('a.id = ' . (int) substr($search, 3));
-			}
-			else
-			{
+			} else {
 				$search = $db->Quote('%' . $db->escape($search, true) . '%');
-				
 			}
 		}
 
 		// Add the list ordering clause.
-		$orderCol  = $this->state->get('list.ordering');
+		$orderCol = $this->state->get('list.ordering');
 		$orderDirn = $this->state->get('list.direction');
 
-		if ($orderCol && $orderDirn)
-		{
+		if ($orderCol && $orderDirn) {
 			$query->order($db->escape($orderCol . ' ' . $orderDirn));
 		}
 
@@ -177,10 +163,10 @@ class AstronomerModelAstronomers extends JModelList
 	 *
 	 * @return mixed Array of data items on success, false on failure.
 	 */
-	public function getItems()
-	{
+	public function getItems() {
 		$items = parent::getItems();
 
 		return $items;
 	}
+
 }

@@ -26,4 +26,6 @@ $element = ModAstronomerHelper::getItem($params);
 			<?php endif; ?>
 		<?php endforeach; ?>
 	</div>
-<?php endif;
+	<?php
+
+ endif;

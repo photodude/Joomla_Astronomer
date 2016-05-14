@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @version    CVS: 1.0.0
  * @package    Com_Astronomer
@@ -6,13 +7,11 @@
  * @copyright  2016 Troy Hall
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
-
 // No direct access
 defined('_JEXEC') or die;
 
 // Access check.
-if (!JFactory::getUser()->authorise('core.manage', 'com_astronomer'))
-{
+if (!JFactory::getUser()->authorise('core.manage', 'com_astronomer')) {
 	throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
 }
 

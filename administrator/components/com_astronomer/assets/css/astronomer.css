@@ -1,16 +1,16 @@
 .icon-48-astronomers {
-      background-image: url(../images/l_astronomers.png);
-      padding-left:60px!important;
+	background-image: url(../images/l_astronomers.png);
+	padding-left:60px!important;
 }
 
 .icon-48-astronomer {
-      background-image: url(../images/l_astronomers.png);
-      padding-left:60px!important;
+	background-image: url(../images/l_astronomers.png);
+	padding-left:60px!important;
 }
 
 .color-box-astronomers { 
-      float: left;      width: 15px;      height: 15px;      margin-right: 5px;      border: 1px solid rgba(0, 0, 0, .2);
+	float: left;      width: 15px;      height: 15px;      margin-right: 5px;      border: 1px solid rgba(0, 0, 0, .2);
 
-.other-filters{
-    padding: 0 14px;
-}
+	.other-filters{
+		padding: 0 14px;
+	}

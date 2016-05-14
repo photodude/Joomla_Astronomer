@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @version    CVS: 1.0.0
  * @package    Com_Astronomer
@@ -6,7 +7,6 @@
  * @copyright  2016 Troy Hall
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
-
 // No direct access
 defined('_JEXEC') or die;
 
@@ -17,16 +17,16 @@ jimport('joomla.application.component.controllerform');
  *
  * @since  1.6
  */
-class AstronomerControllerAstronomer extends JControllerForm
-{
+class AstronomerControllerAstronomer extends JControllerForm {
+
 	/**
 	 * Constructor
 	 *
 	 * @throws Exception
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		$this->view_list = 'astronomers';
 		parent::__construct();
 	}
+
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @version    CVS: 1.0.0
  * @package    Com_Astronomer
@@ -6,7 +7,6 @@
  * @copyright  2016 Troy Hall
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
-
 defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
@@ -17,8 +17,8 @@ jimport('joomla.form.formfield');
  *
  * @since  1.6
  */
-class JFormFieldCustomField extends JFormField
-{
+class JFormFieldCustomField extends JFormField {
+
 	/**
 	 * The form field type.
 	 *
@@ -34,11 +34,11 @@ class JFormFieldCustomField extends JFormField
 	 *
 	 * @since    1.6
 	 */
-	protected function getInput()
-	{
+	protected function getInput() {
 		// Initialize variables.
 		$html = array();
 
 		return implode($html);
 	}
+
 }

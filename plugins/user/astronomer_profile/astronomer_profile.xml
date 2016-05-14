@@ -21,15 +21,15 @@
 		<fields name="params">
 			<fieldset name="basic" addfieldpath="/administrator/components/com_content/models/fields">
 				<field name="register-require-user"
-					type="spacer"
-					class="text"
-					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_NAME_REGISTER_REQUIRE_USER"
+					   type="spacer"
+					   class="text"
+					   label="PLG_USER_ASTRONOMER_PROFILE_FIELD_NAME_REGISTER_REQUIRE_USER"
 				/>
 
 				<field name="register-require_observername"
-					type="list"
-					description="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERNAME_DESC"
-					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERNAME_LABEL"
+					   type="list"
+					   description="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERNAME_DESC"
+					   label="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERNAME_LABEL"
 				>
 					<option value="2">JOPTION_REQUIRED</option>
 					<option value="1">JOPTION_OPTIONAL</option>
@@ -37,9 +37,9 @@
 				</field>
 
 				<field name="register-require_observeratory"
-					type="list"
-					description="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERATORY_DESC"
-					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERATORY_LABEL"
+					   type="list"
+					   description="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERATORY_DESC"
+					   label="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERATORY_LABEL"
 				>
 					<option value="2">JOPTION_REQUIRED</option>
 					<option value="1">JOPTION_OPTIONAL</option>
@@ -47,9 +47,9 @@
 				</field>
 
 				<field name="register-require_header"
-					type="list"
-					description="PLG_USER_ASTRONOMER_PROFILE_FIELD_HEADER_DESC"
-					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_HEADER_LABEL"
+					   type="list"
+					   description="PLG_USER_ASTRONOMER_PROFILE_FIELD_HEADER_DESC"
+					   label="PLG_USER_ASTRONOMER_PROFILE_FIELD_HEADER_LABEL"
 				>
 					<option value="2">JOPTION_REQUIRED</option>
 					<option value="1">JOPTION_OPTIONAL</option>
@@ -57,25 +57,25 @@
 				</field>
 
 				<field name="register-require_scope"
-					type="list"
-					description="PLG_USER_ASTRONOMER_PROFILE_FIELD_SCOPE_DESC"
-					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_SCOPE_LABEL"
+					   type="list"
+					   description="PLG_USER_ASTRONOMER_PROFILE_FIELD_SCOPE_DESC"
+					   label="PLG_USER_ASTRONOMER_PROFILE_FIELD_SCOPE_LABEL"
 				>
 					<option value="2">JOPTION_REQUIRED</option>
 					<option value="1">JOPTION_OPTIONAL</option>
 					<option value="0">JDISABLED</option>
 				</field>
 				<field name="spacer1" type="spacer"
-					hr="true"
+					   hr="true"
 				/>
 				<field name="profile-require-user" type="spacer" class="text"
-					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_ASTRONOMER_PROFILE_REQUIRE_USER"
+					   label="PLG_USER_ASTRONOMER_PROFILE_FIELD_ASTRONOMER_PROFILE_REQUIRE_USER"
 				/>
 
 				<field name="profile-require_observername" type="list"
 
-					description="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERNAME_DESC"
-					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERNAME_LABEL"
+					   description="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERNAME_DESC"
+					   label="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERNAME_LABEL"
 				>
 					<option value="2">JOPTION_REQUIRED</option>
 					<option value="1">JOPTION_OPTIONAL</option>
@@ -84,8 +84,8 @@
 
 				<field name="profile-require_observeratory" type="list"
 
-					description="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERATORY_DESC"
-					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERATORY_LABEL"
+					   description="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERATORY_DESC"
+					   label="PLG_USER_ASTRONOMER_PROFILE_FIELD_OBSERVERATORY_LABEL"
 				>
 					<option value="2">JOPTION_REQUIRED</option>
 					<option value="1">JOPTION_OPTIONAL</option>
@@ -94,8 +94,8 @@
 
 				<field name="profile-require_header" type="list"
 
-					description="PLG_USER_ASTRONOMER_PROFILE_FIELD_HEADER_DESC"
-					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_HEADER_LABEL"
+					   description="PLG_USER_ASTRONOMER_PROFILE_FIELD_HEADER_DESC"
+					   label="PLG_USER_ASTRONOMER_PROFILE_FIELD_HEADER_LABEL"
 				>
 					<option value="2">JOPTION_REQUIRED</option>
 					<option value="1">JOPTION_OPTIONAL</option>
@@ -104,8 +104,8 @@
 
 				<field name="profile-require_scope" type="list"
 
-					description="PLG_USER_ASTRONOMER_PROFILE_FIELD_SCOPE_DESC"
-					label="PLG_USER_ASTRONOMER_PROFILE_FIELD_SCOPE_LABEL"
+					   description="PLG_USER_ASTRONOMER_PROFILE_FIELD_SCOPE_DESC"
+					   label="PLG_USER_ASTRONOMER_PROFILE_FIELD_SCOPE_LABEL"
 				>
 					<option value="2">JOPTION_REQUIRED</option>
 					<option value="1">JOPTION_OPTIONAL</option>

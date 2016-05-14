@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @version    CVS: 1.0.0
  * @package    Com_Astronomer
@@ -6,7 +7,6 @@
  * @copyright  2016 Troy Hall
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
-
 // No direct access.
 defined('_JEXEC') or die;
 
@@ -17,8 +17,8 @@ jimport('joomla.application.component.modeladmin');
  *
  * @since  1.6
  */
-class AstronomerModelAstronomer extends JModelAdmin
-{
+class AstronomerModelAstronomer extends JModelAdmin {
+
 	/**
 	 * @var      string    The prefix to use with controller messages.
 	 * @since    1.6
@@ -48,8 +48,7 @@ class AstronomerModelAstronomer extends JModelAdmin
 	 *
 	 * @since    1.6
 	 */
-	public function getTable($type = 'Astronomer', $prefix = 'AstronomerTable', $config = array())
-	{
+	public function getTable($type = 'Astronomer', $prefix = 'AstronomerTable', $config = array()) {
 		return JTable::getInstance($type, $prefix, $config);
 	}
 
@@ -63,21 +62,18 @@ class AstronomerModelAstronomer extends JModelAdmin
 	 *
 	 * @since    1.6
 	 */
-	public function getForm($data = array(), $loadData = true)
-	{
+	public function getForm($data = array(), $loadData = true) {
 		// Initialise variables.
 		$app = JFactory::getApplication();
 
 		// Get the form.
 		$form = $this->loadForm(
-			'com_astronomer.astronomer', 'astronomer',
-			array('control' => 'jform',
-				'load_data' => $loadData
-			)
+		'com_astronomer.astronomer', 'astronomer', array('control' => 'jform',
+			'load_data' => $loadData
+		)
 		);
 
-		if (empty($form))
-		{
+		if (empty($form)) {
 			return false;
 		}
 
@@ -91,15 +87,12 @@ class AstronomerModelAstronomer extends JModelAdmin
 	 *
 	 * @since    1.6
 	 */
-	protected function loadFormData()
-	{
+	protected function loadFormData() {
 		// Check the session for previously entered form data.
 		$data = JFactory::getApplication()->getUserState('com_astronomer.edit.astronomer.data', array());
 
-		if (empty($data))
-		{
-			if ($this->item === null)
-			{
+		if (empty($data)) {
+			if ($this->item === null) {
 				$this->item = $this->getItem();
 			}
 
@@ -118,10 +111,8 @@ class AstronomerModelAstronomer extends JModelAdmin
 	 *
 	 * @since    1.6
 	 */
-	public function getItem($pk = null)
-	{
-		if ($item = parent::getItem($pk))
-		{
+	public function getItem($pk = null) {
+		if ($item = parent::getItem($pk)) {
 			// Do any procesing on fields here if needed
 		}
 
@@ -137,50 +128,42 @@ class AstronomerModelAstronomer extends JModelAdmin
 	 *
 	 * @throws  Exception
 	 */
-	public function duplicate(&$pks)
-	{
+	public function duplicate(&$pks) {
 		$user = JFactory::getUser();
 
 		// Access checks.
-		if (!$user->authorise('core.create', 'com_astronomer'))
-		{
+		if (!$user->authorise('core.create', 'com_astronomer')) {
 			throw new Exception(JText::_('JERROR_CORE_CREATE_NOT_PERMITTED'));
 		}
 
 		$dispatcher = JEventDispatcher::getInstance();
-		$context    = $this->option . '.' . $this->name;
+		$context = $this->option . '.' . $this->name;
 
 		// Include the plugins for the save events.
 		JPluginHelper::importPlugin($this->events_map['save']);
 
 		$table = $this->getTable();
 
-		foreach ($pks as $pk)
-		{
-			if ($table->load($pk, true))
-			{
+		foreach ($pks as $pk) {
+			if ($table->load($pk, true)) {
 				// Reset the id to create a new record.
 				$table->id = 0;
 
-				if (!$table->check())
-				{
+				if (!$table->check()) {
 					throw new Exception($table->getError());
 				}
-				
+
 
 				// Trigger the before save event.
 				$result = $dispatcher->trigger($this->event_before_save, array($context, &$table, true));
 
-				if (in_array(false, $result, true) || !$table->store())
-				{
+				if (in_array(false, $result, true) || !$table->store()) {
 					throw new Exception($table->getError());
 				}
 
 				// Trigger the after save event.
 				$dispatcher->trigger($this->event_after_save, array($context, &$table, true));
-			}
-			else
-			{
+			} else {
 				throw new Exception($table->getError());
 			}
 		}
@@ -200,20 +183,18 @@ class AstronomerModelAstronomer extends JModelAdmin
 	 *
 	 * @since    1.6
 	 */
-	protected function prepareTable($table)
-	{
+	protected function prepareTable($table) {
 		jimport('joomla.filter.output');
 
-		if (empty($table->id))
-		{
+		if (empty($table->id)) {
 			// Set ordering to the last item if not set
-			if (@$table->ordering === '')
-			{
+			if (@$table->ordering === '') {
 				$db = JFactory::getDbo();
 				$db->setQuery('SELECT MAX(ordering) FROM #__joomla_astronomer');
-				$max             = $db->loadResult();
+				$max = $db->loadResult();
 				$table->ordering = $max + 1;
 			}
 		}
 	}
+
 }

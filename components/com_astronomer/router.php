@@ -17,8 +17,8 @@ JLoader::registerPrefix('Astronomer', JPATH_SITE . '/components/com_astronomer/'
  *
  * @since  3.3
  */
-class AstronomerRouter extends JComponentRouterBase
-{
+class AstronomerRouter extends JComponentRouterBase {
+
 	/**
 	 * Build method for URLs
 	 * This method is meant to transform the query parameters into a more human
@@ -30,34 +30,27 @@ class AstronomerRouter extends JComponentRouterBase
 	 *
 	 * @since   3.3
 	 */
-	public function build(&$query)
-	{
+	public function build(&$query) {
 		$segments = array();
-		$view     = null;
+		$view = null;
 
-		if (isset($query['task']))
-		{
-			$taskParts  = explode('.', $query['task']);
+		if (isset($query['task'])) {
+			$taskParts = explode('.', $query['task']);
 			$segments[] = implode('/', $taskParts);
-			$view       = $taskParts[0];
+			$view = $taskParts[0];
 			unset($query['task']);
 		}
 
-		if (isset($query['view']))
-		{
+		if (isset($query['view'])) {
 			$segments[] = $query['view'];
-			$view       = $query['view'];
+			$view = $query['view'];
 			unset($query['view']);
 		}
 
-		if (isset($query['id']))
-		{
-			if ($view !== null)
-			{
+		if (isset($query['id'])) {
+			if ($view !== null) {
 				$segments[] = $query['id'];
-			}
-			else
-			{
+			} else {
 				$segments[] = $query['id'];
 			}
 
@@ -78,29 +71,25 @@ class AstronomerRouter extends JComponentRouterBase
 	 *
 	 * @since   3.3
 	 */
-	public function parse(&$segments)
-	{
+	public function parse(&$segments) {
 		$vars = array();
 
 		// View is always the first element of the array
 		$vars['view'] = array_shift($segments);
-		$model        = AstronomerHelpersAstronomer::getModel($vars['view']);
+		$model = AstronomerHelpersAstronomer::getModel($vars['view']);
 
-		while (!empty($segments))
-		{
+		while (!empty($segments)) {
 			$segment = array_pop($segments);
 
 			// If it's the ID, let's put on the request
-			if (is_numeric($segment))
-			{
+			if (is_numeric($segment)) {
 				$vars['id'] = $segment;
-			}
-			else
-			{
+			} else {
 				$vars['task'] = $vars['view'] . '.' . $segment;
 			}
 		}
 
 		return $vars;
 	}
+
 }

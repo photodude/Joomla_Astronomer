@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @version    CVS: 1.0.0
  * @package    Com_Astronomer
@@ -6,7 +7,6 @@
  * @copyright  2016 Troy Hall
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
-
 // No direct access.
 defined('_JEXEC') or die;
 
@@ -15,8 +15,8 @@ defined('_JEXEC') or die;
  *
  * @since  1.6
  */
-class AstronomerControllerLists extends AstronomerController
-{
+class AstronomerControllerLists extends AstronomerController {
+
 	/**
 	 * Proxy for getModel.
 	 *
@@ -28,10 +28,10 @@ class AstronomerControllerLists extends AstronomerController
 	 *
 	 * @since	1.6
 	 */
-	public function &getModel($name = 'Lists', $prefix = 'AstronomerModel', $config = array())
-	{
+	public function &getModel($name = 'Lists', $prefix = 'AstronomerModel', $config = array()) {
 		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
 
 		return $model;
 	}
+
 }
