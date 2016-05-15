@@ -722,3 +722,5 @@ overrides
 /administrator/language/en-GB/en-GB.plg_system_updatenotification.sys.ini
 plg_captcha_recaptcha
 plg_system_stats
+/administrator/language/en-GB/en-GB.plg_editors-xtd_module.ini
+/administrator/language/en-GB/en-GB.plg_editors-xtd_module.sys.ini
