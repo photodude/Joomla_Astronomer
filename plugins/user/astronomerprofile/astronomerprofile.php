@@ -57,12 +57,12 @@ class PlgUserAstronomerProfile extends JPlugin {
 		if (is_object($data)) {
 			$userId = isset($data->id) ? $data->id : 0;
 
-			if (!isset($data->profile) and $userId > 0) {
+			if (!isset($data->astronomerprofile) and $userId > 0) {
 				// Load the profile data from the database.
 				$db = JFactory::getDbo();
 				$db->setQuery(
 				'SELECT profile_key, profile_value FROM #__user_profiles' .
-				' WHERE user_id = ' . (int) $userId . " AND profile_key LIKE 'profile.%'" .
+				' WHERE user_id = ' . (int) $userId . " AND profile_key LIKE 'astronomerprofile.%'" .
 				' ORDER BY ordering'
 				);
 
@@ -75,14 +75,14 @@ class PlgUserAstronomerProfile extends JPlugin {
 				}
 
 				// Merge the profile data.
-				$data->profile = array();
+				$data->astronomerprofile = array();
 
 				foreach ($results as $v) {
-					$k = str_replace('profile.', '', $v[0]);
-					$data->profile[$k] = json_decode($v[1], true);
+					$k = str_replace('astronomerprofile.', '', $v[0]);
+					$data->astronomerprofile[$k] = json_decode($v[1], true);
 
-					if ($data->profile[$k] === null) {
-						$data->profile[$k] = $v[1];
+					if ($data->astronomerprofile[$k] === null) {
+						$data->astronomerprofile[$k] = $v[1];
 					}
 				}
 			}
@@ -141,7 +141,7 @@ class PlgUserAstronomerProfile extends JPlugin {
 			if ($name == 'com_users.user') {
 				// Remove the field if it is disabled in registration and profile
 				if ($this->params->get('register-require_' . $field, 1) == 0 && $this->params->get('profile-require_' . $field, 1) == 0) {
-					$form->removeField($field, 'profile');
+					$form->removeField($field, 'astronomerprofile');
 				}
 			}
 			// Case registration
@@ -150,7 +150,7 @@ class PlgUserAstronomerProfile extends JPlugin {
 				if ($this->params->get('register-require_' . $field, 1) > 0) {
 					$form->setFieldAttribute($field, 'required', ($this->params->get('register-require_' . $field) == 2) ? 'required' : '', 'profile');
 				} else {
-					$form->removeField($field, 'profile');
+					$form->removeField($field, 'astronomerprofile');
 				}
 			}
 			// Case profile in site or admin
@@ -159,7 +159,7 @@ class PlgUserAstronomerProfile extends JPlugin {
 				if ($this->params->get('profile-require_' . $field, 1) > 0) {
 					$form->setFieldAttribute($field, 'required', ($this->params->get('profile-require_' . $field) == 2) ? 'required' : '', 'profile');
 				} else {
-					$form->removeField($field, 'profile');
+					$form->removeField($field, 'astronomerprofile');
 				}
 			}
 		}
@@ -200,23 +200,22 @@ class PlgUserAstronomerProfile extends JPlugin {
 	 */
 	public function onUserAfterSave($data, $isNew, $result, $error) {
 		$userId = ArrayHelper::getValue($data, 'id', 0, 'int');
-
-		if ($userId && $result && isset($data['profile']) && (count($data['profile']))) {
+		if ($userId && $result && isset($data['astronomerprofile']) && (count($data['astronomerprofile']))) {
 			try {
 
 				$db = JFactory::getDbo();
 				$query = $db->getQuery(true)
 				->delete($db->quoteName('#__user_profiles'))
 				->where($db->quoteName('user_id') . ' = ' . (int) $userId)
-				->where($db->quoteName('profile_key') . ' LIKE ' . $db->quote('profile.%'));
+				->where($db->quoteName('profile_key') . ' LIKE ' . $db->quote('astronomerprofile.%'));
 				$db->setQuery($query);
 				$db->execute();
 
 				$tuples = array();
 				$order = 1;
 
-				foreach ($data['profile'] as $k => $v) {
-					$tuples[] = '(' . $userId . ', ' . $db->quote('profile.' . $k) . ', ' . $db->quote(json_encode($v)) . ', ' . ($order++) . ')';
+				foreach ($data['astronomerprofile'] as $k => $v) {
+					$tuples[] = '(' . $userId . ', ' . $db->quote('astronomerprofile.' . $k) . ', ' . $db->quote(json_encode($v)) . ', ' . ($order++) . ')';
 				}
 
 				$db->setQuery('INSERT INTO #__user_profiles VALUES ' . implode(', ', $tuples));
@@ -254,7 +253,7 @@ class PlgUserAstronomerProfile extends JPlugin {
 				$db = JFactory::getDbo();
 				$db->setQuery(
 				'DELETE FROM #__user_profiles WHERE user_id = ' . $userId .
-				" AND profile_key LIKE 'profile.%'"
+				" AND profile_key LIKE 'astronomerprofile.%'"
 				);
 
 				$db->execute();
