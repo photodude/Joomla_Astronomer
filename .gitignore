@@ -706,7 +706,7 @@ Desktop.ini
 /administrator/logs/
 /administrator/modules/
 /tests/
-/plugins/user/
 /.travis.yml
 /LICENSE
 /build.xml
+overrides
