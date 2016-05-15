@@ -29,7 +29,7 @@
 				type="textarea"
 				id="observerheader"
 				description="PLG_USER_ASTRONOMERPROFILE_FIELD_HEADER_DESC"
-				filter="string"
+				filter="raw"
 				label="PLG_USER_ASTRONOMERPROFILE_FIELD_HEADER_LABEL"
 
 			/>
