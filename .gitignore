@@ -710,3 +710,15 @@ Desktop.ini
 /LICENSE
 /build.xml
 overrides
+/administrator/language/en-GB/en-GB.plg_installer_packageinstaller.sys.ini
+/administrator/language/en-GB/en-GB.plg_installer_urlinstaller.ini
+/administrator/language/en-GB/en-GB.plg_installer_packageinstaller.ini
+/administrator/language/en-GB/en-GB.plg_installer_urlinstaller.sys.ini
+/administrator/language/en-GB/en-GB.plg_installer_folderinstaller.ini
+/administrator/language/en-GB/en-GB.plg_installer_folderinstaller.sys.ini
+/administrator/language/en-GB/en-GB.plg_system_stats.ini
+/administrator/language/en-GB/en-GB.plg_system_updatenotification.ini
+/administrator/language/en-GB/en-GB.plg_system_stats.sys.ini
+/administrator/language/en-GB/en-GB.plg_system_updatenotification.sys.ini
+plg_captcha_recaptcha
+plg_system_stats

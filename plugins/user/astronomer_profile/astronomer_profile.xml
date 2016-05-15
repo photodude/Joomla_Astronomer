@@ -69,7 +69,7 @@
 					   hr="true"
 				/>
 				<field name="profile-require-user" type="spacer" class="text"
-					   label="PLG_USER_ASTRONOMER_PROFILE_FIELD_ASTRONOMER_PROFILE_REQUIRE_USER"
+					   label="PLG_USER_ASTRONOMER_PROFILE_FIELD_PROFILE_REQUIRE_USER"
 				/>
 
 				<field name="profile-require_observername" type="list"
