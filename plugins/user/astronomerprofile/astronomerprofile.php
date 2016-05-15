@@ -19,14 +19,6 @@ use Joomla\Utilities\ArrayHelper;
 class PlgUserAstronomerProfile extends JPlugin {
 
 	/**
-	 * Date of birth.
-	 *
-	 * @var    string
-	 * @since  3.1
-	 */
-	private $date = '';
-
-	/**
 	 * Load the language file on instantiation.
 	 *
 	 * @var    boolean
@@ -44,7 +36,6 @@ class PlgUserAstronomerProfile extends JPlugin {
 	 */
 	public function __construct(& $subject, $config) {
 		parent::__construct($subject, $config);
-		JFormHelper::addFieldPath(__DIR__ . '/fields');
 	}
 
 	/**
@@ -70,7 +61,7 @@ class PlgUserAstronomerProfile extends JPlugin {
 				// Load the profile data from the database.
 				$db = JFactory::getDbo();
 				$db->setQuery(
-				'SELECT profile_key, profile_value FROM #__user_astronomerprofiles' .
+				'SELECT profile_key, profile_value FROM #__user_profiles' .
 				' WHERE user_id = ' . (int) $userId . " AND profile_key LIKE 'profile.%'" .
 				' ORDER BY ordering'
 				);
@@ -98,73 +89,6 @@ class PlgUserAstronomerProfile extends JPlugin {
 		}
 
 		return true;
-	}
-
-	/**
-	 * Returns an anchor tag generated from a given value
-	 *
-	 * @param   string  $value  url to use
-	 *
-	 * @return mixed|string
-	 */
-	public static function url($value) {
-		if (empty($value)) {
-			return JHtml::_('users.value', $value);
-		} else {
-			// Convert website url to utf8 for display
-			$value = JStringPunycode::urlToUTF8(htmlspecialchars($value));
-
-			if (substr($value, 0, 4) == "http") {
-				return '<a href="' . $value . '">' . $value . '</a>';
-			} else {
-				return '<a href="http://' . $value . '">' . $value . '</a>';
-			}
-		}
-	}
-
-	/**
-	 * Returns html markup showing a date picker
-	 *
-	 * @param   string  $value  valid date string
-	 *
-	 * @return  mixed
-	 */
-	public static function calendar($value) {
-		if (empty($value)) {
-			return JHtml::_('users.value', $value);
-		} else {
-			return JHtml::_('date', $value, null, null);
-		}
-	}
-
-	/**
-	 * Returns the date of birth formatted and calculated using server timezone.
-	 *
-	 * @param   string  $value  valid date string
-	 *
-	 * @return  mixed
-	 */
-	public static function dob($value) {
-		if (!$value) {
-			return '';
-		}
-
-		return JHtml::_('date', $value, JText::_('DATE_FORMAT_LC1'), false);
-	}
-
-	/**
-	 * Return the translated strings yes or no depending on the value
-	 *
-	 * @param   boolean  $value  input value
-	 *
-	 * @return string
-	 */
-	public static function tos($value) {
-		if ($value) {
-			return JText::_('JYES');
-		} else {
-			return JText::_('JNO');
-		}
 	}
 
 	/**
@@ -279,12 +203,10 @@ class PlgUserAstronomerProfile extends JPlugin {
 
 		if ($userId && $result && isset($data['profile']) && (count($data['profile']))) {
 			try {
-				// Sanitize the date
-				$data['profile']['dob'] = $this->date;
 
 				$db = JFactory::getDbo();
 				$query = $db->getQuery(true)
-				->delete($db->quoteName('#__user_astronomerprofiles'))
+				->delete($db->quoteName('#__user_profiles'))
 				->where($db->quoteName('user_id') . ' = ' . (int) $userId)
 				->where($db->quoteName('profile_key') . ' LIKE ' . $db->quote('profile.%'));
 				$db->setQuery($query);
@@ -297,7 +219,7 @@ class PlgUserAstronomerProfile extends JPlugin {
 					$tuples[] = '(' . $userId . ', ' . $db->quote('profile.' . $k) . ', ' . $db->quote(json_encode($v)) . ', ' . ($order++) . ')';
 				}
 
-				$db->setQuery('INSERT INTO #__user_astronomerprofiles VALUES ' . implode(', ', $tuples));
+				$db->setQuery('INSERT INTO #__user_profiles VALUES ' . implode(', ', $tuples));
 				$db->execute();
 			} catch (RuntimeException $e) {
 				$this->_subject->setError($e->getMessage());
@@ -331,7 +253,7 @@ class PlgUserAstronomerProfile extends JPlugin {
 			try {
 				$db = JFactory::getDbo();
 				$db->setQuery(
-				'DELETE FROM #__user_astronomerprofiles WHERE user_id = ' . $userId .
+				'DELETE FROM #__user_profiles WHERE user_id = ' . $userId .
 				" AND profile_key LIKE 'profile.%'"
 				);
 
