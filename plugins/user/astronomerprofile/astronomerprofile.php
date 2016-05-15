@@ -16,7 +16,7 @@ use Joomla\Utilities\ArrayHelper;
  *
  * @since  1.6
  */
-class PlgUserProfileAstronomerProfile extends JPlugin {
+class PlgUserAstronomerProfile extends JPlugin {
 
 	/**
 	 * Date of birth.
@@ -70,7 +70,7 @@ class PlgUserProfileAstronomerProfile extends JPlugin {
 				// Load the profile data from the database.
 				$db = JFactory::getDbo();
 				$db->setQuery(
-				'SELECT profile_key, profile_value FROM #__user_astronomer_profiles' .
+				'SELECT profile_key, profile_value FROM #__user_astronomerprofiles' .
 				' WHERE user_id = ' . (int) $userId . " AND profile_key LIKE 'profile.%'" .
 				' ORDER BY ordering'
 				);
@@ -200,30 +200,16 @@ class PlgUserProfileAstronomerProfile extends JPlugin {
 			'observeratory',
 			'header',
 			'scope',
-			'country',
-			'postal_code',
-			'phone',
-			'website',
-			'favoritebook',
-			'aboutme',
 		);
 
 		// Change fields description when displayed in front-end or back-end profile editing
 		$app = JFactory::getApplication();
 
 		if ($app->isSite() || $name == 'com_users.user' || $name == 'com_admin.profile') {
-			$form->setFieldAttribute('observername', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
-			$form->setFieldAttribute('observeratory', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
-			$form->setFieldAttribute('header', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
-			$form->setFieldAttribute('scope', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
-			$form->setFieldAttribute('country', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
-			$form->setFieldAttribute('postal_code', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
-			$form->setFieldAttribute('phone', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
-			$form->setFieldAttribute('website', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
-			$form->setFieldAttribute('favoritebook', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
-			$form->setFieldAttribute('aboutme', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
-			$form->setFieldAttribute('dob', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FILL_FIELD_DESC_SITE', 'profile');
-			$form->setFieldAttribute('tos', 'description', 'PLG_USER_ASTRONOMER_PROFILE_FIELD_TOS_DESC_SITE', 'profile');
+			$form->setFieldAttribute('observername', 'description', 'PLG_USER_ASTRONOMERPROFILE_FILL_FIELD_DESC_SITE', 'profile');
+			$form->setFieldAttribute('observeratory', 'description', 'PLG_USER_ASTRONOMERPROFILE_FILL_FIELD_DESC_SITE', 'profile');
+			$form->setFieldAttribute('header', 'description', 'PLG_USER_ASTRONOMERPROFILE_FILL_FIELD_DESC_SITE', 'profile');
+			$form->setFieldAttribute('scope', 'description', 'PLG_USER_ASTRONOMERPROFILE_FILL_FIELD_DESC_SITE', 'profile');
 		}
 
 		foreach ($fields as $field) {
@@ -298,7 +284,7 @@ class PlgUserProfileAstronomerProfile extends JPlugin {
 
 				$db = JFactory::getDbo();
 				$query = $db->getQuery(true)
-				->delete($db->quoteName('#__user_astronomer_profiles'))
+				->delete($db->quoteName('#__user_astronomerprofiles'))
 				->where($db->quoteName('user_id') . ' = ' . (int) $userId)
 				->where($db->quoteName('profile_key') . ' LIKE ' . $db->quote('profile.%'));
 				$db->setQuery($query);
@@ -311,7 +297,7 @@ class PlgUserProfileAstronomerProfile extends JPlugin {
 					$tuples[] = '(' . $userId . ', ' . $db->quote('profile.' . $k) . ', ' . $db->quote(json_encode($v)) . ', ' . ($order++) . ')';
 				}
 
-				$db->setQuery('INSERT INTO #__user_astronomer_profiles VALUES ' . implode(', ', $tuples));
+				$db->setQuery('INSERT INTO #__user_astronomerprofiles VALUES ' . implode(', ', $tuples));
 				$db->execute();
 			} catch (RuntimeException $e) {
 				$this->_subject->setError($e->getMessage());
@@ -345,7 +331,7 @@ class PlgUserProfileAstronomerProfile extends JPlugin {
 			try {
 				$db = JFactory::getDbo();
 				$db->setQuery(
-				'DELETE FROM #__user_astronomer_profiles WHERE user_id = ' . $userId .
+				'DELETE FROM #__user_astronomerprofiles WHERE user_id = ' . $userId .
 				" AND profile_key LIKE 'profile.%'"
 				);
 
