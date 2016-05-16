@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version    CVS: 1.0.0
+ * @version    CVS: 1.0.2
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -14,12 +14,12 @@ jimport('joomla.application.component.modelitem');
 jimport('joomla.event.dispatcher');
 
 use Joomla\Utilities\ArrayHelper;
-
 /**
  * Astronomer model.
  *
  * @since  1.6
  */
-class AstronomerModelList extends JModelItem {
-	
+class AstronomerModelList extends JModelItem
+{
+
 }

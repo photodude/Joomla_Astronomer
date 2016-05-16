@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version    CVS: 1.0.0
+ * @version    CVS: 1.0.2
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -15,8 +15,8 @@ defined('_JEXEC') or die;
  *
  * @since  1.6
  */
-class AstronomerHelpersAstronomer {
-
+class AstronomerHelpersAstronomer
+{
 	/**
 	 * Configure the Linkbar.
 	 *
@@ -24,13 +24,18 @@ class AstronomerHelpersAstronomer {
 	 *
 	 * @return void
 	 */
-	public static function addSubmenu($vName = '') {
+	public static function addSubmenu($vName = '')
+	{
 		JHtmlSidebar::addEntry(
-		JText::_('COM_ASTRONOMER_TITLE_ASTRONOMERS'), 'index.php?option=com_astronomer&view=astronomers', $vName == 'astronomers'
+			JText::_('COM_ASTRONOMER_TITLE_OBSRVATIONS'),
+			'index.php?option=com_astronomer&view=obsrvations',
+			$vName == 'obsrvations'
 		);
 
 		JHtmlSidebar::addEntry(
-		JText::_('COM_ASTRONOMER_TITLE_LISTS'), 'index.php?option=com_astronomer&view=lists', $vName == 'lists'
+			JText::_('COM_ASTRONOMER_TITLE_LISTS'),
+			'index.php?option=com_astronomer&view=lists',
+			$vName == 'lists'
 		);
 	}
 
@@ -41,8 +46,9 @@ class AstronomerHelpersAstronomer {
 	 *
 	 * @since    1.6
 	 */
-	public static function getActions() {
-		$user = JFactory::getUser();
+	public static function getActions()
+	{
+		$user   = JFactory::getUser();
 		$result = new JObject;
 
 		$assetName = 'com_astronomer';
@@ -51,15 +57,17 @@ class AstronomerHelpersAstronomer {
 			'core.admin', 'core.manage', 'core.create', 'core.edit', 'core.edit.own', 'core.edit.state', 'core.delete'
 		);
 
-		foreach ($actions as $action) {
+		foreach ($actions as $action)
+		{
 			$result->set($action, $user->authorise($action, $assetName));
 		}
 
 		return $result;
 	}
-
 }
 
-class AstronomerHelper extends AstronomerHelpersAstronomer {
-	
+
+class AstronomerHelper extends AstronomerHelpersAstronomer
+{
+
 }

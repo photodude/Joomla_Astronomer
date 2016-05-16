@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version    CVS: 1.0.0
+ * @version    CVS: 1.0.2
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -15,8 +15,8 @@ defined('_JEXEC') or die;
  *
  * @since  1.6
  */
-class AstronomerControllerListForm extends JControllerForm {
-
+class AstronomerControllerListForm extends JControllerForm
+{
 	/**
 	 * Method to check out an item for editing and redirect to the edit form.
 	 *
@@ -24,12 +24,13 @@ class AstronomerControllerListForm extends JControllerForm {
 	 *
 	 * @since    1.6
 	 */
-	public function edit() {
+	public function edit()
+	{
 		$app = JFactory::getApplication();
 
 		// Get the previous edit id (if any) and the current edit id.
 		$previousId = (int) $app->getUserState('com_astronomer.edit.list.id');
-		$editId = $app->input->getInt('id', 0);
+		$editId     = $app->input->getInt('id', 0);
 
 		// Set the user id for the user to edit in the session.
 		$app->setUserState('com_astronomer.edit.list.id', $editId);
@@ -38,12 +39,14 @@ class AstronomerControllerListForm extends JControllerForm {
 		$model = $this->getModel('ListForm', 'AstronomerModel');
 
 		// Check out the item
-		if ($editId) {
+		if ($editId)
+		{
 			$model->checkout($editId);
 		}
 
 		// Check in the previous user.
-		if ($previousId) {
+		if ($previousId)
+		{
 			$model->checkin($previousId);
 		}
 
@@ -59,12 +62,13 @@ class AstronomerControllerListForm extends JControllerForm {
 	 * @throws Exception
 	 * @since  1.6
 	 */
-	public function save() {
+	public function save()
+	{
 		// Check for request forgeries.
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Initialise variables.
-		$app = JFactory::getApplication();
+		$app   = JFactory::getApplication();
 		$model = $this->getModel('ListForm', 'AstronomerModel');
 
 		// Get the user data.
@@ -73,7 +77,8 @@ class AstronomerControllerListForm extends JControllerForm {
 		// Validate the posted data.
 		$form = $model->getForm();
 
-		if (!$form) {
+		if (!$form)
+		{
 			throw new Exception($model->getError(), 500);
 		}
 
@@ -81,15 +86,20 @@ class AstronomerControllerListForm extends JControllerForm {
 		$data = $model->validate($form, $data);
 
 		// Check for errors.
-		if ($data === false) {
+		if ($data === false)
+		{
 			// Get the validation messages.
 			$errors = $model->getErrors();
 
 			// Push up to three validation messages out to the user.
-			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++) {
-				if ($errors[$i] instanceof Exception) {
+			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++)
+			{
+				if ($errors[$i] instanceof Exception)
+				{
 					$app->enqueueMessage($errors[$i]->getMessage(), 'warning');
-				} else {
+				}
+				else
+				{
 					$app->enqueueMessage($errors[$i], 'warning');
 				}
 			}
@@ -109,7 +119,8 @@ class AstronomerControllerListForm extends JControllerForm {
 		$return = $model->save($data);
 
 		// Check for errors.
-		if ($return === false) {
+		if ($return === false)
+		{
 			// Save the data in the session.
 			$app->setUserState('com_astronomer.edit.list.data', $data);
 
@@ -120,7 +131,8 @@ class AstronomerControllerListForm extends JControllerForm {
 		}
 
 		// Check in the profile.
-		if ($return) {
+		if ($return)
+		{
 			$model->checkin($return);
 		}
 
@@ -131,7 +143,7 @@ class AstronomerControllerListForm extends JControllerForm {
 		$this->setMessage(JText::_('COM_ASTRONOMER_ITEM_SAVED_SUCCESSFULLY'));
 		$menu = JFactory::getApplication()->getMenu();
 		$item = $menu->getActive();
-		$url = (empty($item->link) ? 'index.php?option=com_astronomer&view=lists' : $item->link);
+		$url  = (empty($item->link) ? 'index.php?option=com_astronomer&view=lists' : $item->link);
 		$this->setRedirect(JRoute::_($url, false));
 
 		// Flush the data from the session.
@@ -145,7 +157,8 @@ class AstronomerControllerListForm extends JControllerForm {
 	 *
 	 * @throws Exception
 	 */
-	public function cancel() {
+	public function cancel()
+	{
 		$app = JFactory::getApplication();
 
 		// Get the current edit id.
@@ -155,13 +168,14 @@ class AstronomerControllerListForm extends JControllerForm {
 		$model = $this->getModel('ListForm', 'AstronomerModel');
 
 		// Check in the item
-		if ($editId) {
+		if ($editId)
+		{
 			$model->checkin($editId);
 		}
 
 		$menu = JFactory::getApplication()->getMenu();
 		$item = $menu->getActive();
-		$url = (empty($item->link) ? 'index.php?option=com_astronomer&view=lists' : $item->link);
+		$url  = (empty($item->link) ? 'index.php?option=com_astronomer&view=lists' : $item->link);
 		$this->setRedirect(JRoute::_($url, false));
 	}
 
@@ -172,25 +186,31 @@ class AstronomerControllerListForm extends JControllerForm {
 	 *
 	 * @throws Exception
 	 */
-	public function remove() {
+	public function remove()
+	{
 		// Initialise variables.
-		$app = JFactory::getApplication();
+		$app   = JFactory::getApplication();
 		$model = $this->getModel('ListForm', 'AstronomerModel');
 
 		// Get the user data.
-		$data = array();
+		$data       = array();
 		$data['id'] = $app->input->getInt('id');
 
 		// Check for errors.
-		if (empty($data['id'])) {
+		if (empty($data['id']))
+		{
 			// Get the validation messages.
 			$errors = $model->getErrors();
 
 			// Push up to three validation messages out to the user.
-			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++) {
-				if ($errors[$i] instanceof Exception) {
+			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++)
+			{
+				if ($errors[$i] instanceof Exception)
+				{
 					$app->enqueueMessage($errors[$i]->getMessage(), 'warning');
-				} else {
+				}
+				else
+				{
 					$app->enqueueMessage($errors[$i], 'warning');
 				}
 			}
@@ -207,7 +227,8 @@ class AstronomerControllerListForm extends JControllerForm {
 		$return = $model->delete($data);
 
 		// Check for errors.
-		if ($return === false) {
+		if ($return === false)
+		{
 			// Save the data in the session.
 			$app->setUserState('com_astronomer.edit.list.data', $data);
 
@@ -218,7 +239,8 @@ class AstronomerControllerListForm extends JControllerForm {
 		}
 
 		// Check in the profile.
-		if ($return) {
+		if ($return)
+		{
 			$model->checkin($return);
 		}
 
@@ -229,11 +251,10 @@ class AstronomerControllerListForm extends JControllerForm {
 		$this->setMessage(JText::_('COM_ASTRONOMER_ITEM_DELETED_SUCCESSFULLY'));
 		$menu = JFactory::getApplication()->getMenu();
 		$item = $menu->getActive();
-		$url = (empty($item->link) ? 'index.php?option=com_astronomer&view=lists' : $item->link);
+		$url  = (empty($item->link) ? 'index.php?option=com_astronomer&view=lists' : $item->link);
 		$this->setRedirect(JRoute::_($url, false));
 
 		// Flush the data from the session.
 		$app->setUserState('com_astronomer.edit.list.data', null);
 	}
-
 }

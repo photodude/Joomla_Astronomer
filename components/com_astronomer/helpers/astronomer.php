@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version    CVS: 1.0.0
+ * @version    CVS: 1.0.2
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -14,8 +14,8 @@ defined('_JEXEC') or die;
  *
  * @since  1.6
  */
-class AstronomerHelpersAstronomer {
-
+class AstronomerHelpersAstronomer
+{
 	/**
 	 * Get an instance of the named model
 	 *
@@ -23,16 +23,17 @@ class AstronomerHelpersAstronomer {
 	 *
 	 * @return null|object
 	 */
-	public static function getModel($name) {
+	public static function getModel($name)
+	{
 		$model = null;
 
 		// If the file exists, let's
-		if (file_exists(JPATH_SITE . '/components/com_astronomer/models/' . strtolower($name) . '.php')) {
+		if (file_exists(JPATH_SITE . '/components/com_astronomer/models/' . strtolower($name) . '.php'))
+		{
 			require_once JPATH_SITE . '/components/com_astronomer/models/' . strtolower($name) . '.php';
 			$model = JModelLegacy::getInstance($name, 'AstronomerModel');
 		}
 
 		return $model;
 	}
-
 }

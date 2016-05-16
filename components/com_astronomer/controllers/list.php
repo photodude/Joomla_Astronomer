@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version    CVS: 1.0.0
+ * @version    CVS: 1.0.2
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -15,8 +15,8 @@ defined('_JEXEC') or die;
  *
  * @since  1.6
  */
-class AstronomerControllerList extends JControllerLegacy {
-
+class AstronomerControllerList extends JControllerLegacy
+{
 	/**
 	 * Method to check out an item for editing and redirect to the edit form.
 	 *
@@ -24,12 +24,13 @@ class AstronomerControllerList extends JControllerLegacy {
 	 *
 	 * @since    1.6
 	 */
-	public function edit() {
+	public function edit()
+	{
 		$app = JFactory::getApplication();
 
 		// Get the previous edit id (if any) and the current edit id.
 		$previousId = (int) $app->getUserState('com_astronomer.edit.list.id');
-		$editId = $app->input->getInt('id', 0);
+		$editId     = $app->input->getInt('id', 0);
 
 		// Set the user id for the user to edit in the session.
 		$app->setUserState('com_astronomer.edit.list.id', $editId);
@@ -38,12 +39,14 @@ class AstronomerControllerList extends JControllerLegacy {
 		$model = $this->getModel('List', 'AstronomerModel');
 
 		// Check out the item
-		if ($editId) {
+		if ($editId)
+		{
 			$model->checkout($editId);
 		}
 
 		// Check in the previous user.
-		if ($previousId && $previousId !== $editId) {
+		if ($previousId && $previousId !== $editId)
+		{
 			$model->checkin($previousId);
 		}
 
@@ -59,25 +62,28 @@ class AstronomerControllerList extends JControllerLegacy {
 	 * @throws Exception
 	 * @since    1.6
 	 */
-	public function publish() {
+	public function publish()
+	{
 		// Initialise variables.
 		$app = JFactory::getApplication();
 
 		// Checking if the user can remove object
 		$user = JFactory::getUser();
 
-		if ($user->authorise('core.edit', 'com_astronomer') || $user->authorise('core.edit.state', 'com_astronomer')) {
+		if ($user->authorise('core.edit', 'com_astronomer') || $user->authorise('core.edit.state', 'com_astronomer'))
+		{
 			$model = $this->getModel('List', 'AstronomerModel');
 
 			// Get the user data.
-			$id = $app->input->getInt('id');
+			$id    = $app->input->getInt('id');
 			$state = $app->input->getInt('state');
 
 			// Attempt to save the data.
 			$return = $model->publish($id, $state);
 
 			// Check for errors.
-			if ($return === false) {
+			if ($return === false)
+			{
 				$this->setMessage(JText::sprintf('Save failed: %s', $model->getError()), 'warning');
 			}
 
@@ -92,13 +98,18 @@ class AstronomerControllerList extends JControllerLegacy {
 			$menu = JFactory::getApplication()->getMenu();
 			$item = $menu->getActive();
 
-			if (!$item) {
+			if (!$item)
+			{
 				// If there isn't any menu item active, redirect to list view
 				$this->setRedirect(JRoute::_('index.php?option=com_astronomer&view=lists', false));
-			} else {
+			}
+			else
+			{
 				$this->setRedirect(JRoute::_($item->link . $menuitemid, false));
 			}
-		} else {
+		}
+		else
+		{
 			throw new Exception(500);
 		}
 	}
@@ -110,14 +121,16 @@ class AstronomerControllerList extends JControllerLegacy {
 	 *
 	 * @throws Exception
 	 */
-	public function remove() {
+	public function remove()
+	{
 		// Initialise variables.
 		$app = JFactory::getApplication();
 
 		// Checking if the user can remove object
 		$user = JFactory::getUser();
 
-		if ($user->authorise('core.delete', 'com_astronomer')) {
+		if ($user->authorise('core.delete', 'com_astronomer'))
+		{
 			$model = $this->getModel('List', 'AstronomerModel');
 
 			// Get the user data.
@@ -127,11 +140,15 @@ class AstronomerControllerList extends JControllerLegacy {
 			$return = $model->delete($id);
 
 			// Check for errors.
-			if ($return === false) {
+			if ($return === false)
+			{
 				$this->setMessage(JText::sprintf('Delete failed', $model->getError()), 'warning');
-			} else {
+			}
+			else
+			{
 				// Check in the profile.
-				if ($return) {
+				if ($return)
+				{
 					$model->checkin($return);
 				}
 
@@ -148,9 +165,10 @@ class AstronomerControllerList extends JControllerLegacy {
 			$menu = JFactory::getApplication()->getMenu();
 			$item = $menu->getActive();
 			$this->setRedirect(JRoute::_($item->link, false));
-		} else {
+		}
+		else
+		{
 			throw new Exception(500);
 		}
 	}
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     CVS: 1.0.0
+ * @version     CVS: 1.0.2
  * @package     com_astronomer
  * @subpackage  mod_astronomer
  * @author      Troy Hall <troy@jowwow.net>
@@ -26,6 +26,4 @@ $element = ModAstronomerHelper::getItem($params);
 			<?php endif; ?>
 		<?php endforeach; ?>
 	</div>
-	<?php
-
- endif;
+<?php endif;

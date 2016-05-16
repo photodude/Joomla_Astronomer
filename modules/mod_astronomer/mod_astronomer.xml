@@ -1,105 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="3.0" method="upgrade" client="site">
-	<name>MOD_ASTRONOMER_NAME</name>
-	<creationDate>2016-05-13</creationDate>
-	<copyright>2016 Troy Hall</copyright>
-	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-	<author>Troy Hall</author>
-	<authorEmail>troy@jowwow.net</authorEmail>
-	<authorUrl>http://jowwow.net</authorUrl>
-	<version>CVS: 1.0.0</version>
-	<description>MOD_ASTRONOMER_DESCRIPTION</description>
+    <name>MOD_ASTRONOMER_NAME</name>
+    <creationDate>2016-05-16</creationDate>
+    <copyright>2016 Troy Hall</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <author>Troy Hall</author>
+    <authorEmail>troy@jowwow.net</authorEmail>
+    <authorUrl>http://jowwow.net</authorUrl>
+    <version>CVS: 1.0.2</version>
+    <description>MOD_ASTRONOMER_DESCRIPTION</description>
     
-	<files>
-		<filename module="mod_astronomer">mod_astronomer.php</filename>
-		<filename>helper.php</filename>
-		<filename>index.html</filename>
-		<folder>tmpl</folder>
-	</files>
-	<languages folder="../../languages/modules/mod_astronomer">
+    <files>
+        <filename module="mod_astronomer">mod_astronomer.php</filename>
+        <filename>helper.php</filename>
+        <filename>index.html</filename>
+        <folder>tmpl</folder>
+    </files>
+    <languages folder="../../languages/modules/mod_astronomer">
         
-		<language tag="en-GB">en-GB/en-GB.mod_astronomer.ini</language>
-		<language tag="en-GB">en-GB/en-GB.mod_astronomer.sys.ini</language>
-	</languages>
-	<config>
-		<fields name="params">
-			<fieldset 
-				name="content_type" 
-				label="MOD_ASTRONOMER_CONTENT_TYPE_TAB_LBL"
-				description="MOD_ASTRONOMER_CONTENT_TYPE_TAB_DESC">
-				<field
-					name="content_type" type="list"
-					label="MOD_ASTRONOMER_CONTENT_TYPE_LBL"
-					description="MOD_ASTRONOMER_CONTENT_TYPE_DESC">
-					<option value="blank">MOD_ASTRONOMER_CUSTOM_CONTENT</option>
-					<option value="list">MOD_ASTRONOMER_LIST</option>
-					<option value="item">MOD_ASTRONOMER_ITEM</option>
-				</field>
-			</fieldset>
-			<fieldset 
-				name="blank_content" 
-				label="MOD_ASTRONOMER_CUSTOM_CONTENT_TAB_LBL"
-				description="MOD_ASTRONOMER_CUSTOM_CONTENT_TAB_DESC">
-				<field 
-					name="html_content" type="editor" filter="safehtml"
-					label="MOD_ASTRONOMER_HTML_LBL"
-					description="MOD_ASTRONOMER_HTML_DESC" />
-			</fieldset>
-			<fieldset 
-				name="list_content" 
-				label="MOD_ASTRONOMER_LIST_CONTENT_TAB_LBL"
-				description="MOD_ASTRONOMER_LIST_CONTENT_TAB_DESC">
-				<field
-					name="table" type="list"
-					label="MOD_ASTRONOMER_TABLE_LBL"
-					description="MOD_ASTRONOMER_TABLE_DESC">
+			<language tag="en-GB">en-GB/en-GB.mod_astronomer.ini</language>
+			<language tag="en-GB">en-GB/en-GB.mod_astronomer.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset 
+                name="content_type" 
+                label="MOD_ASTRONOMER_CONTENT_TYPE_TAB_LBL"
+                description="MOD_ASTRONOMER_CONTENT_TYPE_TAB_DESC">
+                <field
+                    name="content_type" type="list"
+                    label="MOD_ASTRONOMER_CONTENT_TYPE_LBL"
+                    description="MOD_ASTRONOMER_CONTENT_TYPE_DESC">
+                    <option value="blank">MOD_ASTRONOMER_CUSTOM_CONTENT</option>
+                    <option value="list">MOD_ASTRONOMER_LIST</option>
+                    <option value="item">MOD_ASTRONOMER_ITEM</option>
+                </field>
+            </fieldset>
+            <fieldset 
+                name="blank_content" 
+                label="MOD_ASTRONOMER_CUSTOM_CONTENT_TAB_LBL"
+                description="MOD_ASTRONOMER_CUSTOM_CONTENT_TAB_DESC">
+                <field 
+                    name="html_content" type="editor" filter="safehtml"
+                    label="MOD_ASTRONOMER_HTML_LBL"
+                    description="MOD_ASTRONOMER_HTML_DESC" />
+            </fieldset>
+            <fieldset 
+                name="list_content" 
+                label="MOD_ASTRONOMER_LIST_CONTENT_TAB_LBL"
+                description="MOD_ASTRONOMER_LIST_CONTENT_TAB_DESC">
+                <field
+                    name="table" type="list"
+                    label="MOD_ASTRONOMER_TABLE_LBL"
+                    description="MOD_ASTRONOMER_TABLE_DESC">
                     
-					<option value="#__joomla_astronomer">#__joomla_astronomer</option>
-				</field>
-				<field 
-					name="field" type="groupedlist" default=""
-					label="MOD_ASTRONOMER_FIELD_LBL"
-					description="MOD_ASTRONOMER_FIELD_DESC">
+	<option value="#__joomla_astronomer">#__joomla_astronomer</option>
+                </field>
+                <field 
+                    name="field" type="groupedlist" default=""
+                    label="MOD_ASTRONOMER_FIELD_LBL"
+                    description="MOD_ASTRONOMER_FIELD_DESC">
                     
-					<group label="#__joomla_astronomer">
-						<option value="id">id</option>
-						<option value="humandate">humandate</option>
-						<option value="designation">designation</option>
-						<option value="year">year</option>
-						<option value="month">month</option>
-						<option value="day">day</option>
-						<option value="mag">mag</option>
-						<option value="observatory">observatory</option>
-						<option value="entry">entry</option>
-						<option value="created_by">created_by</option>
-					</group>
-				</field>
-				<field 
-					name="offset" type="text" default="0" filter="uint" class="input-small"
-					label="MOD_ASTRONOMER_OFFSET_LBL"
-					description="MOD_ASTRONOMER_OFFSET_DESC" />
-				<field 
-					name="limit" type="text" default="10" filter="uint" class="input-small"
-					label="MOD_ASTRONOMER_LIMIT_LBL"
-					description="MOD_ASTRONOMER_LIMIT_DESC" />
-			</fieldset>
-			<fieldset 
-				name="item_content" 
-				label="MOD_ASTRONOMER_ITEM_CONTENT_TAB"
-				description="MOD_ASTRONOMER_ITEM_CONTENT_TAB_DESC">
-				<field
-					name="item_table" type="list"
-					label="MOD_ASTRONOMER_TABLE_LBL"
-					description="MOD_ASTRONOMER_TABLE_DESC">
+	<group label="#__joomla_astronomer">
+		<option value="id">id</option>
+		<option value="humandate">humandate</option>
+		<option value="designation">designation</option>
+		<option value="year">year</option>
+		<option value="month">month</option>
+		<option value="day">day</option>
+		<option value="mag">mag</option>
+		<option value="observatory">observatory</option>
+		<option value="entry">entry</option>
+		<option value="created_by">created_by</option>
+	</group>
+                </field>
+                <field 
+                    name="offset" type="text" default="0" filter="uint" class="input-small"
+                    label="MOD_ASTRONOMER_OFFSET_LBL"
+                    description="MOD_ASTRONOMER_OFFSET_DESC" />
+                <field 
+                    name="limit" type="text" default="10" filter="uint" class="input-small"
+                    label="MOD_ASTRONOMER_LIMIT_LBL"
+                    description="MOD_ASTRONOMER_LIMIT_DESC" />
+            </fieldset>
+            <fieldset 
+                name="item_content" 
+                label="MOD_ASTRONOMER_ITEM_CONTENT_TAB"
+                description="MOD_ASTRONOMER_ITEM_CONTENT_TAB_DESC">
+                <field
+                    name="item_table" type="list"
+                    label="MOD_ASTRONOMER_TABLE_LBL"
+                    description="MOD_ASTRONOMER_TABLE_DESC">
                     
-					<option value="#__joomla_astronomer">#__joomla_astronomer</option>
-				</field>
-				<field 
-					name="item_id" type="text" filter="uint" class="input-small"
-					label="MOD_ASTRONOMER_ITEM_ID_LBL"
-					description="MOD_ASTRONOMER_ITEM_ID_DESC"
-				/>
-			</fieldset>
-		</fields>
-	</config>
+	<option value="#__joomla_astronomer">#__joomla_astronomer</option>
+                </field>
+                <field 
+                    name="item_id" type="text" filter="uint" class="input-small"
+                    label="MOD_ASTRONOMER_ITEM_ID_LBL"
+                    description="MOD_ASTRONOMER_ITEM_ID_DESC"
+                />
+            </fieldset>
+        </fields>
+    </config>
 </extension>

@@ -1,12 +1,12 @@
 <?php
-
 /**
- * @version    CVS: 1.0.0
+ * @version    CVS: 1.0.2
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
+
 defined('JPATH_BASE') or die;
 
 jimport('joomla.form.formfield');
@@ -16,8 +16,8 @@ jimport('joomla.form.formfield');
  *
  * @since  1.6
  */
-class JFormFieldFileMultiple extends JFormField {
-
+class JFormFieldFileMultiple extends JFormField
+{
 	/**
 	 * The form field type.
 	 *
@@ -33,11 +33,11 @@ class JFormFieldFileMultiple extends JFormField {
 	 *
 	 * @since    1.6
 	 */
-	protected function getInput() {
+	protected function getInput()
+	{
 		// Initialize variables.
 		$html = '<input type="file" name="' . $this->name . '[]" multiple >';
 
 		return $html;
 	}
-
 }

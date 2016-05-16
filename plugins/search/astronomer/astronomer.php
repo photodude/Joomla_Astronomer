@@ -18,8 +18,8 @@ require_once JPATH_SITE . '/components/com_astronomer/router.php';
  * @subpackage  Search.content
  * @since       1.6
  */
-class PlgSearchAstronomer extends JPlugin {
-
+class PlgSearchAstronomer extends JPlugin
+{
 	/**
 	 * Determine areas searchable by this plugin.
 	 *
@@ -27,7 +27,8 @@ class PlgSearchAstronomer extends JPlugin {
 	 *
 	 * @since   1.6
 	 */
-	public function onContentSearchAreas() {
+	public function onContentSearchAreas()
+	{
 		static $areas = array(
 			'astronomer' => 'Astronomer'
 		);
@@ -49,11 +50,14 @@ class PlgSearchAstronomer extends JPlugin {
 	 *
 	 * @since   1.6
 	 */
-	public function onContentSearch($text, $phrase = '', $ordering = '', $areas = null) {
+	public function onContentSearch($text, $phrase = '', $ordering = '', $areas = null)
+	{
 		$db = JFactory::getDbo();
 
-		if (is_array($areas)) {
-			if (!array_intersect($areas, array_keys($this->onContentSearchAreas()))) {
+		if (is_array($areas))
+		{
+			if (!array_intersect($areas, array_keys($this->onContentSearchAreas())))
+			{
 				return array();
 			}
 		}
@@ -62,15 +66,15 @@ class PlgSearchAstronomer extends JPlugin {
 
 		$text = trim($text);
 
-		if ($text == '') {
+		if ($text == '')
+		{
 			return array();
 		}
 
 		$rows = array();
 
-
+		
 
 		return $rows;
 	}
-
 }

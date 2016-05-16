@@ -1,12 +1,12 @@
 <?php
-
 /**
- * @version    CVS: 1.0.0
+ * @version    CVS: 1.0.2
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
+
 defined('JPATH_BASE') or die;
 
 jimport('joomla.form.formfield');
@@ -16,8 +16,8 @@ jimport('joomla.form.formfield');
  *
  * @since  1.6
  */
-class JFormFieldTimeupdated extends JFormField {
-
+class JFormFieldTimeupdated extends JFormField
+{
 	/**
 	 * The form field type.
 	 *
@@ -33,27 +33,31 @@ class JFormFieldTimeupdated extends JFormField {
 	 *
 	 * @since    1.6
 	 */
-	protected function getInput() {
+	protected function getInput()
+	{
 		// Initialize variables.
 		$html = array();
 
 		$old_time_updated = $this->value;
-		$hidden = (boolean) $this->element['hidden'];
+		$hidden           = (boolean) $this->element['hidden'];
 
-		if ($hidden == null || !$hidden) {
-			if (!strtotime($old_time_updated)) {
+		if ($hidden == null || !$hidden)
+		{
+			if (!strtotime($old_time_updated))
+			{
 				$html[] = '-';
-			} else {
-				$jdate = new JDate($old_time_updated);
+			}
+			else
+			{
+				$jdate       = new JDate($old_time_updated);
 				$pretty_date = $jdate->format(JText::_('DATE_FORMAT_LC2'));
-				$html[] = "<div>" . $pretty_date . "</div>";
+				$html[]      = "<div>" . $pretty_date . "</div>";
 			}
 		}
 
 		$time_updated = JFactory::getDate()->toSql();
-		$html[] = '<input type="hidden" name="' . $this->name . '" value="' . $time_updated . '" />';
+		$html[]       = '<input type="hidden" name="' . $this->name . '" value="' . $time_updated . '" />';
 
 		return implode($html);
 	}
-
 }

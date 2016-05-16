@@ -6,6 +6,7 @@
  * @copyright  2016 Troy Hall
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
+
 define('MODIFIED', 1);
 define('NOT_MODIFIED', 2);
 
@@ -18,8 +19,8 @@ defined('_JEXEC') or die;
  * @author   Component Creator <support@component-creator.com>
  * @since    0.1b
  */
-class com_astronomerInstallerScript {
-
+class com_astronomerInstallerScript
+{
 	/**
 	 * Method called before install/update the component. Note: This method won't be called during uninstall process.
 	 *
@@ -28,17 +29,20 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return boolean True if the process should continue, false otherwise
 	 */
-	public function preflight($type, $parent) {
+	public function preflight($type, $parent)
+	{
 		$jversion = new JVersion;
 
 		// Installing component manifest file version
 		$manifest = $parent->get("manifest");
-		$release = (string) $manifest['version'];
+		$release  = (string) $manifest['version'];
 
 		// Abort if the component wasn't build for the current Joomla version
-		if (!$jversion->isCompatible($release)) {
+		if (!$jversion->isCompatible($release))
+		{
 			JFactory::getApplication()->enqueueMessage(
-			JText::_('This component is not compatible with installed Joomla version'), 'error'
+				JText::_('This component is not compatible with installed Joomla version'),
+				'error'
 			);
 
 			return false;
@@ -56,7 +60,8 @@ class com_astronomerInstallerScript {
 	 *
 	 * @since 0.2b
 	 */
-	public function install($parent) {
+	public function install($parent)
+	{
 		$this->installDb($parent);
 		$this->installPlugins($parent);
 		$this->installModules($parent);
@@ -71,22 +76,30 @@ class com_astronomerInstallerScript {
 	 *
 	 * @since 0.2b
 	 */
-	private function installDb($parent) {
+	private function installDb($parent)
+	{
 		$installation_folder = $parent->getParent()->getPath('source');
 
 		$app = JFactory::getApplication();
 
-		if (function_exists('simplexml_load_file') && file_exists($installation_folder . '/installer/structure.xml')) {
+		if (function_exists('simplexml_load_file') && file_exists($installation_folder . '/installer/structure.xml'))
+		{
 			$component_data = simplexml_load_file($installation_folder . '/installer/structure.xml');
 
 			// Check if there are tables to import.
-			foreach ($component_data->children() as $table) {
+			foreach ($component_data->children() as $table)
+			{
 				$this->processTable($app, $table);
 			}
-		} else {
-			if (!function_exists('simplexml_load_file')) {
+		}
+		else
+		{
+			if (!function_exists('simplexml_load_file'))
+			{
 				$app->enqueueMessage(JText::_('This script needs \'simplexml_load_file\' to update the component'));
-			} else {
+			}
+			else
+			{
 				$app->enqueueMessage(JText::_('Structure file was not found.'));
 			}
 		}
@@ -102,33 +115,42 @@ class com_astronomerInstallerScript {
 	 *
 	 * @since 0.2b
 	 */
-	private function processTable($app, $table) {
+	private function processTable($app, $table)
+	{
 		$db = JFactory::getDbo();
 
 		$table_added = false;
 
-		if (isset($table['action'])) {
-			switch ($table['action']) {
+		if (isset($table['action']))
+		{
+			switch ($table['action'])
+			{
 				case 'add':
 
 					// Check if the table exists before create the statement
-					if (!$this->existsTable($table['table_name'])) {
+					if (!$this->existsTable($table['table_name']))
+					{
 						$create_statement = $this->generateCreateTableStatement($table);
 						$db->setQuery($create_statement);
 
-						try {
+						try
+						{
 							$db->execute();
 							$app->enqueueMessage(
-							JText::sprintf(
-							'Table `%s` has been successfully created', (string) $table['table_name']
-							)
+								JText::sprintf(
+									'Table `%s` has been successfully created',
+									(string) $table['table_name']
+								)
 							);
 							$table_added = true;
-						} catch (Exception $ex) {
+						} catch (Exception $ex)
+						{
 							$app->enqueueMessage(
-							JText::sprintf(
-							'There was an error creating the table `%s`. Error: %s', (string) $table['table_name'], $ex->getMessage()
-							), 'error'
+								JText::sprintf(
+									'There was an error creating the table `%s`. Error: %s',
+									(string) $table['table_name'],
+									$ex->getMessage()
+								), 'error'
 							);
 						}
 					}
@@ -136,38 +158,52 @@ class com_astronomerInstallerScript {
 				case 'change':
 
 					// Check if the table exists first to avoid errors.
-					if ($this->existsTable($table['old_name']) && !$this->existsTable($table['new_name'])) {
-						try {
+					if ($this->existsTable($table['old_name']) && !$this->existsTable($table['new_name']))
+					{
+						try
+						{
 							$db->renameTable($table['old_name'], $table['new_name']);
 							$app->enqueueMessage(
-							JText::sprintf(
-							'Table `%s` was successfully renamed to `%s`', $table['old_name'], $table['new_name']
-							)
+								JText::sprintf(
+									'Table `%s` was successfully renamed to `%s`',
+									$table['old_name'],
+									$table['new_name']
+								)
 							);
-						} catch (Exception $ex) {
+						} catch (Exception $ex)
+						{
 							$app->enqueueMessage(
-							JText::sprintf(
-							'There was an error renaming the table `%s`. Error: %s', $table['old_name'], $ex->getMessage()
-							), 'error'
+								JText::sprintf(
+									'There was an error renaming the table `%s`. Error: %s',
+									$table['old_name'],
+									$ex->getMessage()
+								), 'error'
 							);
 						}
-					} else {
-						if (!$this->existsTable($table['table_name'])) {
+					}
+					else
+					{
+						if (!$this->existsTable($table['table_name']))
+						{
 							// If the table does not exists, let's create it.
 							$create_statement = $this->generateCreateTableStatement($table);
 							$db->setQuery($create_statement);
 
-							try {
+							try
+							{
 								$db->execute();
 								$app->enqueueMessage(
-								JText::sprintf('Table `%s` has been successfully created', $table['table_name'])
+									JText::sprintf('Table `%s` has been successfully created', $table['table_name'])
 								);
 								$table_added = true;
-							} catch (Exception $ex) {
+							} catch (Exception $ex)
+							{
 								$app->enqueueMessage(
-								JText::sprintf(
-								'There was an error creating the table `%s`. Error: %s', $table['table_name'], $ex->getMessage()
-								), 'error'
+									JText::sprintf(
+										'There was an error creating the table `%s`. Error: %s',
+										$table['table_name'],
+										$ex->getMessage()
+									), 'error'
 								);
 							}
 						}
@@ -175,17 +211,20 @@ class com_astronomerInstallerScript {
 					break;
 				case 'remove':
 
-					try {
+					try
+					{
 						// We make sure that the table will be removed only if it exists specifying ifExists argument as true.
 						$db->dropTable((string) $table['table_name'], true);
 						$app->enqueueMessage(
-						JText::sprintf('Table `%s` was successfully deleted', $table['table_name'])
+							JText::sprintf('Table `%s` was successfully deleted', $table['table_name'])
 						);
-					} catch (Exception $ex) {
+					} catch (Exception $ex)
+					{
 						$app->enqueueMessage(
-						JText::sprintf(
-						'There was an error deleting Table `%s`. Error: %s', $table['table_name'], $ex->getMessage()
-						), 'error'
+							JText::sprintf(
+								'There was an error deleting Table `%s`. Error: %s',
+								$table['table_name'], $ex->getMessage()
+							), 'error'
 						);
 					}
 
@@ -194,8 +233,10 @@ class com_astronomerInstallerScript {
 		}
 
 		// If the table wasn't added before, let's process the fields of the table
-		if (!$table_added) {
-			if ($this->existsTable($table['table_name'])) {
+		if (!$table_added)
+		{
+			if ($this->existsTable($table['table_name']))
+			{
 				$this->executeFieldsUpdating($app, $table);
 			}
 		}
@@ -208,7 +249,8 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return boolean True if it exists, false if it does not.
 	 */
-	private function existsTable($table_name) {
+	private function existsTable($table_name)
+	{
 		$db = JFactory::getDbo();
 
 		$table_name = str_replace('#__', $db->getPrefix(), (string) $table_name);
@@ -223,38 +265,47 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return string 'CREATE TABLE' statement
 	 */
-	private function generateCreateTableStatement($table) {
+	private function generateCreateTableStatement($table)
+	{
 		$create_table_statement = '';
 
-		if (isset($table->field)) {
+		if (isset($table->field))
+		{
 			$fields = $table->children();
 
 			$fields_definitions = array();
-			$indexes = array();
+			$indexes            = array();
 
 			$db = JFactory::getDbo();
 
-			foreach ($fields as $field) {
+			foreach ($fields as $field)
+			{
 				$field_definition = $this->generateColumnDeclaration($field);
 
-				if ($field_definition !== false) {
+				if ($field_definition !== false)
+				{
 					$fields_definitions[] = $field_definition;
 				}
 
-				if ($field['index'] == 'index') {
+				if ($field['index'] == 'index')
+				{
 					$indexes[] = $field['field_name'];
 				}
 			}
 
-			foreach ($indexes as $index) {
+			foreach ($indexes as $index)
+			{
 				$fields_definitions[] = JText::sprintf(
-				'INDEX %s (%s ASC)', $db->quoteName((string) $index), $index
+					'INDEX %s (%s ASC)',
+					$db->quoteName((string) $index), $index
 				);
 			}
 
-			$fields_definitions[] = 'PRIMARY KEY (`id`)';
+			$fields_definitions[]   = 'PRIMARY KEY (`id`)';
 			$create_table_statement = JText::sprintf(
-			'CREATE TABLE IF NOT EXISTS %s (%s)', $table['table_name'], implode(',', $fields_definitions)
+				'CREATE TABLE IF NOT EXISTS %s (%s)',
+				$table['table_name'],
+				implode(',', $fields_definitions)
 			);
 		}
 
@@ -268,24 +319,28 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return string Column declaration
 	 */
-	private function generateColumnDeclaration($field) {
-		$db = JFactory::getDbo();
-		$col_name = $db->quoteName((string) $field['field_name']);
+	private function generateColumnDeclaration($field)
+	{
+		$db        = JFactory::getDbo();
+		$col_name  = $db->quoteName((string) $field['field_name']);
 		$data_type = $this->getFieldType($field);
 
-		if ($data_type !== false) {
+		if ($data_type !== false)
+		{
 			$default_value = (isset($field['default'])) ? 'DEFAULT ' . $field['default'] : '';
 
 			$other_data = '';
 
-			if (isset($field['is_autoincrement']) && $field['is_autoincrement'] == 1) {
+			if (isset($field['is_autoincrement']) && $field['is_autoincrement'] == 1)
+			{
 				$other_data .= ' AUTO_INCREMENT';
 			}
 
 			$comment_value = (isset($field['description'])) ? 'COMMENT ' . $db->quote((string) $field['description']) : '';
 
 			return JText::sprintf(
-			'%s %s NOT NULL %s %s %s', $col_name, $data_type, $default_value, $other_data, $comment_value
+				'%s %s NOT NULL %s %s %s', $col_name, $data_type,
+				$default_value, $other_data, $comment_value
 			);
 		}
 
@@ -299,10 +354,12 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return  mixed SQL string data type, false on failure.
 	 */
-	private function getFieldType($field) {
+	private function getFieldType($field)
+	{
 		$data_type = (string) $field['field_type'];
 
-		if (isset($field['field_length']) && ($this->allowsLengthField($data_type) || $data_type == 'ENUM')) {
+		if (isset($field['field_length']) && ($this->allowsLengthField($data_type) || $data_type == 'ENUM'))
+		{
 			$data_type .= '(' . (string) $field['field_length'] . ')';
 		}
 
@@ -316,7 +373,8 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return boolean True if it allows length values, false if it does not.
 	 */
-	private function allowsLengthField($field_type) {
+	private function allowsLengthField($field_type)
+	{
 		$allow_length = array(
 			'INT',
 			'VARCHAR',
@@ -343,9 +401,12 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return void
 	 */
-	private function executeFieldsUpdating($app, $table) {
-		if (isset($table->field)) {
-			foreach ($table->children() as $field) {
+	private function executeFieldsUpdating($app, $table)
+	{
+		if (isset($table->field))
+		{
+			foreach ($table->children() as $field)
+			{
 				$table_name = (string) $table['table_name'];
 
 				$this->processField($app, $table_name, $field);
@@ -362,79 +423,110 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return void
 	 */
-	private function processField($app, $table_name, $field) {
+	private function processField($app, $table_name, $field)
+	{
 		$db = JFactory::getDbo();
 
-		if (isset($field['action'])) {
-			switch ($field['action']) {
+		if (isset($field['action']))
+		{
+			switch ($field['action'])
+			{
 				case 'add':
 					$result = $this->addField($table_name, $field);
 
-					if ($result === MODIFIED) {
+					if ($result === MODIFIED)
+					{
 						$app->enqueueMessage(
-						JText::sprintf('Field `%s` has been successfully added', $field['field_name'])
+							JText::sprintf('Field `%s` has been successfully added', $field['field_name'])
 						);
-					} else {
-						if ($result !== NOT_MODIFIED) {
+					}
+					else
+					{
+						if ($result !== NOT_MODIFIED)
+						{
 							$app->enqueueMessage(
-							JText::sprintf(
-							'There was an error adding the field `%s`. Error: %s', $field['field_name'], $result
-							), 'error'
+								JText::sprintf(
+									'There was an error adding the field `%s`. Error: %s',
+									$field['field_name'], $result
+								), 'error'
 							);
 						}
 					}
 					break;
 				case 'change':
 
-					if (isset($field['old_name']) && isset($field['new_name'])) {
-						if ($this->existsField($table_name, $field['old_name'])) {
+					if (isset($field['old_name']) && isset($field['new_name']))
+					{
+						if ($this->existsField($table_name, $field['old_name']))
+						{
 							$renaming_statement = JText::sprintf(
-							'ALTER TABLE %s CHANGE %s %s %s', $table_name, $field['old_name'], $field['new_name'], $this->getFieldType($field)
+								'ALTER TABLE %s CHANGE %s %s %s',
+								$table_name, $db->quoteName($field['old_name']->__toString()),
+								$db->quoteName($field['new_name']->__toString()),
+								$this->getFieldType($field)
 							);
 							$db->setQuery($renaming_statement);
 
-							try {
+							try
+							{
 								$db->execute();
 								$app->enqueueMessage(
-								JText::sprintf('Field `%s` has been successfully modified', $field['old_name'])
+									JText::sprintf('Field `%s` has been successfully modified', $field['old_name'])
 								);
-							} catch (Exception $ex) {
+							} catch (Exception $ex)
+							{
 								$app->enqueueMessage(
-								JText::sprintf(
-								'There was an error modifying the field `%s`. Error: %s', $field['field_name'], $ex->getMessage()
-								), 'error'
+									JText::sprintf(
+										'There was an error modifying the field `%s`. Error: %s',
+										$field['field_name'],
+										$ex->getMessage()
+									), 'error'
 								);
 							}
-						} else {
+						}
+						else
+						{
 							$result = $this->addField($table_name, $field);
 
-							if ($result === MODIFIED) {
+							if ($result === MODIFIED)
+							{
 								$app->enqueueMessage(
-								JText::sprintf('Field `%s` has been successfully modified', $field['field_name'])
+									JText::sprintf('Field `%s` has been successfully modified', $field['field_name'])
 								);
-							} else {
-								if ($result !== NOT_MODIFIED) {
+							}
+							else
+							{
+								if ($result !== NOT_MODIFIED)
+								{
 									$app->enqueueMessage(
-									JText::sprintf(
-									'There was an error modifying the field `%s`. Error: %s', $field['field_name'], $result
-									), 'error'
+										JText::sprintf(
+											'There was an error modifying the field `%s`. Error: %s',
+											$field['field_name'], $result
+										), 'error'
 									);
 								}
 							}
 						}
-					} else {
+					}
+					else
+					{
 						$result = $this->addField($table_name, $field);
 
-						if ($result === MODIFIED) {
+						if ($result === MODIFIED)
+						{
 							$app->enqueueMessage(
-							JText::sprintf('Field `%s` has been successfully added', $field['field_name'])
+								JText::sprintf('Field `%s` has been successfully added', $field['field_name'])
 							);
-						} else {
-							if ($result !== NOT_MODIFIED) {
+						}
+						else
+						{
+							if ($result !== NOT_MODIFIED)
+							{
 								$app->enqueueMessage(
-								JText::sprintf(
-								'There was an error adding the field `%s`. Error: %s', $field['field_name'], $result
-								), 'error'
+									JText::sprintf(
+										'There was an error adding the field `%s`. Error: %s',
+										$field['field_name'], $result
+									), 'error'
 								);
 							}
 						}
@@ -444,41 +536,54 @@ class com_astronomerInstallerScript {
 				case 'remove':
 
 					// Check if the field exists first to prevent issue removing the field
-					if ($this->existsField($table_name, $field['field_name'])) {
+					if ($this->existsField($table_name, $field['field_name']))
+					{
 						$drop_statement = JText::sprintf(
-						'ALTER TABLE %s DROP COLUMN %s', $table_name, $field['field_name']
+							'ALTER TABLE %s DROP COLUMN %s',
+							$table_name, $field['field_name']
 						);
 						$db->setQuery($drop_statement);
 
-						try {
+						try
+						{
 							$db->execute();
 							$app->enqueueMessage(
-							JText::sprintf('Field `%s` has been successfully deleted', $field['field_name'])
+								JText::sprintf('Field `%s` has been successfully deleted', $field['field_name'])
 							);
-						} catch (Exception $ex) {
+						} catch (Exception $ex)
+						{
 							$app->enqueueMessage(
-							JText::sprintf(
-							'There was an error deleting the field `%s`. Error: %s', $field['field_name'], $ex->getMessage()
-							), 'error'
+								JText::sprintf(
+									'There was an error deleting the field `%s`. Error: %s',
+									$field['field_name'],
+									$ex->getMessage()
+								), 'error'
 							);
 						}
 					}
 
 					break;
 			}
-		} else {
+		}
+		else
+		{
 			$result = $this->addField($table_name, $field);
 
-			if ($result === MODIFIED) {
+			if ($result === MODIFIED)
+			{
 				$app->enqueueMessage(
-				JText::sprintf('Field `%s` has been successfully added', $field['field_name'])
+					JText::sprintf('Field `%s` has been successfully added', $field['field_name'])
 				);
-			} else {
-				if ($result !== NOT_MODIFIED) {
+			}
+			else
+			{
+				if ($result !== NOT_MODIFIED)
+				{
 					$app->enqueueMessage(
-					JText::sprintf(
-					'There was an error adding the field `%s`. Error: %s', $field['field_name'], $result
-					), 'error'
+						JText::sprintf(
+							'There was an error adding the field `%s`. Error: %s',
+							$field['field_name'], $result
+						), 'error'
 					);
 				}
 			}
@@ -493,30 +598,38 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return mixed Constant on success(self::$MODIFIED | self::$NOT_MODIFIED), error message if an error occurred
 	 */
-	private function addField($table_name, $field) {
+	private function addField($table_name, $field)
+	{
 		$db = JFactory::getDbo();
 
 		$query_generated = false;
 
 		// Check if the field exists first to prevent issues adding the field
-		if ($this->existsField($table_name, $field['field_name'])) {
-			if ($this->needsToUpdate($table_name, $field)) {
+		if ($this->existsField($table_name, $field['field_name']))
+		{
+			if ($this->needsToUpdate($table_name, $field))
+			{
 				$change_statement = $this->generateChangeFieldStatement($table_name, $field);
 				$db->setQuery($change_statement);
 				$query_generated = true;
 			}
-		} else {
+		}
+		else
+		{
 			$add_statement = $this->generateAddFieldStatement($table_name, $field);
 			$db->setQuery($add_statement);
 			$query_generated = true;
 		}
 
-		if ($query_generated) {
-			try {
+		if ($query_generated)
+		{
+			try
+			{
 				$db->execute();
 
 				return MODIFIED;
-			} catch (Exception $ex) {
+			} catch (Exception $ex)
+			{
 				return $ex->getMessage();
 			}
 		}
@@ -532,7 +645,8 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return boolean True if exists, false if it do
 	 */
-	private function existsField($table_name, $field_name) {
+	private function existsField($table_name, $field_name)
+	{
 		$db = JFactory::getDbo();
 
 		return in_array((string) $field_name, array_keys($db->getTableColumns($table_name)));
@@ -546,19 +660,23 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return boolean True if the field has to be updated, false otherwise
 	 */
-	private function needsToUpdate($table_name, $field) {
+	private function needsToUpdate($table_name, $field)
+	{
 		$db = JFactory::getDbo();
 
 		$query = JText::sprintf(
-		'SHOW FULL COLUMNS FROM `%s` WHERE Field LIKE %s', $table_name, $db->quote((string) $field['field_name'])
+			'SHOW FULL COLUMNS FROM `%s` WHERE Field LIKE %s', $table_name, $db->quote((string) $field['field_name'])
 		);
 		$db->setQuery($query);
 
 		$field_info = $db->loadObject();
 
-		if (strripos($field_info->Type, $this->getFieldType($field)) === false) {
+		if (strripos($field_info->Type, $this->getFieldType($field)) === false)
+		{
 			return true;
-		} else {
+		}
+		else
+		{
 			return false;
 		}
 	}
@@ -571,7 +689,8 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return string Change column statement
 	 */
-	private function generateChangeFieldStatement($table_name, $field) {
+	private function generateChangeFieldStatement($table_name, $field)
+	{
 		$column_declaration = $this->generateColumnDeclaration($field);
 
 		return JText::sprintf('ALTER TABLE %s MODIFY %s', $table_name, $column_declaration);
@@ -585,7 +704,8 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return string Add column statement
 	 */
-	private function generateAddFieldStatement($table_name, $field) {
+	private function generateAddFieldStatement($table_name, $field)
+	{
 		$column_declaration = $this->generateColumnDeclaration($field);
 
 		return JText::sprintf('ALTER TABLE %s ADD %s', $table_name, $column_declaration);
@@ -598,46 +718,56 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return void
 	 */
-	private function installPlugins($parent) {
+	private function installPlugins($parent)
+	{
 		$installation_folder = $parent->getParent()->getPath('source');
-		$app = JFactory::getApplication();
+		$app                 = JFactory::getApplication();
 
 		/* @var $plugins SimpleXMLElement */
 		$plugins = $parent->get("manifest")->plugins;
 
-		if (count($plugins->children())) {
-			$db = JFactory::getDbo();
+		if (count($plugins->children()))
+		{
+			$db    = JFactory::getDbo();
 			$query = $db->getQuery(true);
 
-			foreach ($plugins->children() as $plugin) {
-				$pluginName = (string) $plugin['plugin'];
+			foreach ($plugins->children() as $plugin)
+			{
+				$pluginName  = (string) $plugin['plugin'];
 				$pluginGroup = (string) $plugin['group'];
-				$path = $installation_folder . '/plugins/' . $pluginGroup;
-				$installer = new JInstaller;
+				$path        = $installation_folder . '/plugins/' . $pluginGroup;
+				$installer   = new JInstaller;
 
-				if (!$this->isAlreadyInstalled('plugin', $pluginName, $pluginGroup)) {
+				if (!$this->isAlreadyInstalled('plugin', $pluginName, $pluginGroup))
+				{
 					$result = $installer->install($path);
-				} else {
+				}
+				else
+				{
 					$result = $installer->update($path);
 				}
 
-				if ($result) {
+				if ($result)
+				{
 					$app->enqueueMessage('Plugin ' . $pluginName . ' was installed successfully');
-				} else {
-					$app->enqueueMessage('There was an issue installing the plugin ' . $pluginName, 'error');
+				}
+				else
+				{
+					$app->enqueueMessage('There was an issue installing the plugin ' . $pluginName,
+						'error');
 				}
 
 				$query
-				->clear()
-				->update('#__extensions')
-				->set('enabled = 1')
-				->where(
-				array(
-					'type LIKE ' . $db->quote('plugin'),
-					'element LIKE ' . $db->quote($pluginName),
-					'folder LIKE ' . $db->quote($pluginGroup)
-				)
-				);
+					->clear()
+					->update('#__extensions')
+					->set('enabled = 1')
+					->where(
+						array(
+							'type LIKE ' . $db->quote('plugin'),
+							'element LIKE ' . $db->quote($pluginName),
+							'folder LIKE ' . $db->quote($pluginGroup)
+						)
+					);
 				$db->setQuery($query);
 				$db->execute();
 			}
@@ -653,10 +783,12 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return boolean
 	 */
-	private function isAlreadyInstalled($type, $name, $folder = null) {
+	private function isAlreadyInstalled($type, $name, $folder = null)
+	{
 		$result = false;
 
-		switch ($type) {
+		switch ($type)
+		{
 			case 'plugin':
 				$result = file_exists(JPATH_PLUGINS . '/' . $folder . '/' . $name);
 				break;
@@ -675,29 +807,40 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return void
 	 */
-	private function installModules($parent) {
+	private function installModules($parent)
+	{
 		$installation_folder = $parent->getParent()->getPath('source');
-		$app = JFactory::getApplication();
+		$app                 = JFactory::getApplication();
 
-		if (!empty($parent->get("manifest")->modules)) {
+		if (!empty($parent->get("manifest")->modules))
+		{
 			$modules = $parent->get("manifest")->modules;
 
-			if (count($modules->children())) {
-				foreach ($modules->children() as $module) {
+			if (count($modules->children()))
+			{
+				foreach ($modules->children() as $module)
+				{
 					$moduleName = (string) $module['module'];
-					$path = $installation_folder . '/modules/' . $moduleName;
-					$installer = new JInstaller;
+					$path       = $installation_folder . '/modules/' . $moduleName;
+					$installer  = new JInstaller;
 
-					if (!$this->isAlreadyInstalled('module', $moduleName)) {
+					if (!$this->isAlreadyInstalled('module', $moduleName))
+					{
 						$result = $installer->install($path);
-					} else {
+					}
+					else
+					{
 						$result = $installer->update($path);
 					}
 
-					if ($result) {
+					if ($result)
+					{
 						$app->enqueueMessage('Module ' . $moduleName . ' was installed successfully');
-					} else {
-						$app->enqueueMessage('There was an issue installing the module ' . $moduleName, 'error');
+					}
+					else
+					{
+						$app->enqueueMessage('There was an issue installing the module ' . $moduleName,
+							'error');
 					}
 				}
 			}
@@ -711,7 +854,8 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return void
 	 */
-	public function update($parent) {
+	public function update($parent)
+	{
 		$this->installDb($parent);
 		$this->installPlugins($parent);
 		$this->installModules($parent);
@@ -724,7 +868,8 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return void
 	 */
-	public function uninstall($parent) {
+	public function uninstall($parent)
+	{
 		$this->uninstallPlugins($parent);
 		$this->uninstallModules($parent);
 	}
@@ -736,39 +881,47 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return void
 	 */
-	private function uninstallPlugins($parent) {
-		$app = JFactory::getApplication();
+	private function uninstallPlugins($parent)
+	{
+		$app     = JFactory::getApplication();
 		$plugins = $parent->get("manifest")->plugins;
 
-		if (count($plugins->children())) {
-			$db = JFactory::getDbo();
+		if (count($plugins->children()))
+		{
+			$db    = JFactory::getDbo();
 			$query = $db->getQuery(true);
 
-			foreach ($plugins->children() as $plugin) {
-				$pluginName = (string) $plugin['plugin'];
+			foreach ($plugins->children() as $plugin)
+			{
+				$pluginName  = (string) $plugin['plugin'];
 				$pluginGroup = (string) $plugin['group'];
 				$query
-				->clear()
-				->select('extension_id')
-				->from('#__extensions')
-				->where(
-				array(
-					'type LIKE ' . $db->quote('plugin'),
-					'element LIKE ' . $db->quote($pluginName),
-					'folder LIKE ' . $db->quote($pluginGroup)
-				)
-				);
+					->clear()
+					->select('extension_id')
+					->from('#__extensions')
+					->where(
+						array(
+							'type LIKE ' . $db->quote('plugin'),
+							'element LIKE ' . $db->quote($pluginName),
+							'folder LIKE ' . $db->quote($pluginGroup)
+						)
+					);
 				$db->setQuery($query);
 				$extension = $db->loadResult();
 
-				if (!empty($extension)) {
+				if (!empty($extension))
+				{
 					$installer = new JInstaller;
-					$result = $installer->uninstall('plugin', $extension);
+					$result    = $installer->uninstall('plugin', $extension);
 
-					if ($result) {
+					if ($result)
+					{
 						$app->enqueueMessage('Plugin ' . $pluginName . ' was uninstalled successfully');
-					} else {
-						$app->enqueueMessage('There was an issue uninstalling the plugin ' . $pluginName, 'error');
+					}
+					else
+					{
+						$app->enqueueMessage('There was an issue uninstalling the plugin ' . $pluginName,
+							'error');
 					}
 				}
 			}
@@ -782,44 +935,52 @@ class com_astronomerInstallerScript {
 	 *
 	 * @return void
 	 */
-	private function uninstallModules($parent) {
+	private function uninstallModules($parent)
+	{
 		$app = JFactory::getApplication();
 
-		if (!empty($parent->get("manifest")->modules)) {
+		if (!empty($parent->get("manifest")->modules))
+		{
 			$modules = $parent->get("manifest")->modules;
 
-			if (count($modules->children())) {
-				$db = JFactory::getDbo();
+			if (count($modules->children()))
+			{
+				$db    = JFactory::getDbo();
 				$query = $db->getQuery(true);
 
-				foreach ($modules->children() as $plugin) {
+				foreach ($modules->children() as $plugin)
+				{
 					$moduleName = (string) $plugin['module'];
 					$query
-					->clear()
-					->select('extension_id')
-					->from('#__extensions')
-					->where(
-					array(
-						'type LIKE ' . $db->quote('module'),
-						'element LIKE ' . $db->quote($moduleName)
-					)
-					);
+						->clear()
+						->select('extension_id')
+						->from('#__extensions')
+						->where(
+							array(
+								'type LIKE ' . $db->quote('module'),
+								'element LIKE ' . $db->quote($moduleName)
+							)
+						);
 					$db->setQuery($query);
 					$extension = $db->loadResult();
 
-					if (!empty($extension)) {
+					if (!empty($extension))
+					{
 						$installer = new JInstaller;
-						$result = $installer->uninstall('module', $extension);
+						$result    = $installer->uninstall('module', $extension);
 
-						if ($result) {
+						if ($result)
+						{
 							$app->enqueueMessage('Module ' . $moduleName . ' was uninstalled successfully');
-						} else {
-							$app->enqueueMessage('There was an issue uninstalling the module ' . $moduleName, 'error');
+						}
+						else
+						{
+							$app->enqueueMessage('There was an issue uninstalling the module ' . $moduleName,
+								'error');
 						}
 					}
 				}
 			}
 		}
 	}
-
 }

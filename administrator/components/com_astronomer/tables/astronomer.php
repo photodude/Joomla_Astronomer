@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version    CVS: 1.0.0
+ * @version    CVS: 1.0.1
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -11,20 +11,21 @@
 defined('_JEXEC') or die;
 
 use Joomla\Utilities\ArrayHelper;
-
 /**
  * astronomer Table class
  *
  * @since  1.6
  */
-class AstronomerTableastronomer extends JTable {
-
+class AstronomerTableastronomer extends JTable
+{
+	
 	/**
 	 * Constructor
 	 *
 	 * @param   JDatabase  &$db  A database connector object
 	 */
-	public function __construct(&$db) {
+	public function __construct(&$db)
+	{
 		JObserverMapper::addObserverClassToClass('JTableObserverContenthistory', 'AstronomerTableastronomer', array('typeAlias' => 'com_astronomer.astronomer'));
 		parent::__construct('#__joomla_astronomer', 'id', $db);
 	}
@@ -40,34 +41,41 @@ class AstronomerTableastronomer extends JTable {
 	 * @see     JTable:bind
 	 * @since   1.5
 	 */
-	public function bind($array, $ignore = '') {
+	public function bind($array, $ignore = '')
+	{
 		$input = JFactory::getApplication()->input;
 		$task = $input->getString('task', '');
 
-		if ($array['id'] == 0) {
+		if ($array['id'] == 0)
+		{
 			$array['created_by'] = JFactory::getUser()->id;
 		}
 
-		if (isset($array['params']) && is_array($array['params'])) {
+		if (isset($array['params']) && is_array($array['params']))
+		{
 			$registry = new JRegistry;
 			$registry->loadArray($array['params']);
 			$array['params'] = (string) $registry;
 		}
 
-		if (isset($array['metadata']) && is_array($array['metadata'])) {
+		if (isset($array['metadata']) && is_array($array['metadata']))
+		{
 			$registry = new JRegistry;
 			$registry->loadArray($array['metadata']);
 			$array['metadata'] = (string) $registry;
 		}
 
-		if (!JFactory::getUser()->authorise('core.admin', 'com_astronomer.astronomer.' . $array['id'])) {
-			$actions = JAccess::getActionsFromFile(
-			JPATH_ADMINISTRATOR . '/components/com_astronomer/access.xml', "/access/section[@name='astronomer']/"
+		if (!JFactory::getUser()->authorise('core.admin', 'com_astronomer.astronomer.' . $array['id']))
+		{
+			$actions         = JAccess::getActionsFromFile(
+				JPATH_ADMINISTRATOR . '/components/com_astronomer/access.xml',
+				"/access/section[@name='astronomer']/"
 			);
 			$default_actions = JAccess::getAssetRules('com_astronomer.astronomer.' . $array['id'])->getData();
-			$array_jaccess = array();
+			$array_jaccess   = array();
 
-			foreach ($actions as $action) {
+			foreach ($actions as $action)
+			{
 				$array_jaccess[$action->name] = $default_actions[$action->name];
 			}
 
@@ -75,7 +83,8 @@ class AstronomerTableastronomer extends JTable {
 		}
 
 		// Bind the rules for ACL where supported.
-		if (isset($array['rules']) && is_array($array['rules'])) {
+		if (isset($array['rules']) && is_array($array['rules']))
+		{
 			$this->setRules($array['rules']);
 		}
 
@@ -89,13 +98,16 @@ class AstronomerTableastronomer extends JTable {
 	 *
 	 * @return  array
 	 */
-	private function JAccessRulestoArray($jaccessrules) {
+	private function JAccessRulestoArray($jaccessrules)
+	{
 		$rules = array();
 
-		foreach ($jaccessrules as $action => $jaccess) {
+		foreach ($jaccessrules as $action => $jaccess)
+		{
 			$actions = array();
 
-			foreach ($jaccess->getData() as $group => $allow) {
+			foreach ($jaccess->getData() as $group => $allow)
+			{
 				$actions[$group] = ((bool) $allow);
 			}
 
@@ -110,13 +122,15 @@ class AstronomerTableastronomer extends JTable {
 	 *
 	 * @return bool
 	 */
-	public function check() {
+	public function check()
+	{
 		// If there is an ordering column and this is a new row then get the next ordering value
-		if (property_exists($this, 'ordering') && $this->id == 0) {
+		if (property_exists($this, 'ordering') && $this->id == 0)
+		{
 			$this->ordering = self::getNextOrder();
 		}
-
-
+		
+		
 
 		return parent::check();
 	}
@@ -137,22 +151,26 @@ class AstronomerTableastronomer extends JTable {
 	 *
 	 * @throws Exception
 	 */
-	public function publish($pks = null, $state = 1, $userId = 0) {
+	public function publish($pks = null, $state = 1, $userId = 0)
+	{
 		// Initialise variables.
 		$k = $this->_tbl_key;
 
 		// Sanitize input.
 		ArrayHelper::toInteger($pks);
 		$userId = (int) $userId;
-		$state = (int) $state;
+		$state  = (int) $state;
 
 		// If there are no primary keys set check to see if the instance key is set.
-		if (empty($pks)) {
-			if ($this->$k) {
+		if (empty($pks))
+		{
+			if ($this->$k)
+			{
 				$pks = array($this->$k);
 			}
 			// Nothing to set publishing state on, return false.
-			else {
+			else
+			{
 				throw new Exception(500, JText::_('JLIB_DATABASE_ERROR_NO_ROWS_SELECTED'));
 			}
 		}
@@ -161,31 +179,37 @@ class AstronomerTableastronomer extends JTable {
 		$where = $k . '=' . implode(' OR ' . $k . '=', $pks);
 
 		// Determine if there is checkin support for the table.
-		if (!property_exists($this, 'checked_out') || !property_exists($this, 'checked_out_time')) {
+		if (!property_exists($this, 'checked_out') || !property_exists($this, 'checked_out_time'))
+		{
 			$checkin = '';
-		} else {
+		}
+		else
+		{
 			$checkin = ' AND (checked_out = 0 OR checked_out = ' . (int) $userId . ')';
 		}
 
 		// Update the publishing state for rows with the given primary keys.
 		$this->_db->setQuery(
-		'UPDATE `' . $this->_tbl . '`' .
-		' SET `state` = ' . (int) $state .
-		' WHERE (' . $where . ')' .
-		$checkin
+			'UPDATE `' . $this->_tbl . '`' .
+			' SET `state` = ' . (int) $state .
+			' WHERE (' . $where . ')' .
+			$checkin
 		);
 		$this->_db->execute();
 
 		// If checkin is supported and all rows were adjusted, check them in.
-		if ($checkin && (count($pks) == $this->_db->getAffectedRows())) {
+		if ($checkin && (count($pks) == $this->_db->getAffectedRows()))
+		{
 			// Checkin each row.
-			foreach ($pks as $pk) {
+			foreach ($pks as $pk)
+			{
 				$this->checkin($pk);
 			}
 		}
 
 		// If the JTable instance value is in the list of primary keys that were set, set the instance.
-		if (in_array($this->$k, $pks)) {
+		if (in_array($this->$k, $pks))
+		{
 			$this->state = $state;
 		}
 
@@ -199,7 +223,8 @@ class AstronomerTableastronomer extends JTable {
 	 *
 	 * @see JTable::_getAssetName
 	 */
-	protected function _getAssetName() {
+	protected function _getAssetName()
+	{
 		$k = $this->_tbl_key;
 
 		return 'com_astronomer.astronomer.' . (int) $this->$k;
@@ -215,7 +240,8 @@ class AstronomerTableastronomer extends JTable {
 	 *
 	 * @return mixed The id on success, false on failure.
 	 */
-	protected function _getAssetParentId(JTable $table = null, $id = null) {
+	protected function _getAssetParentId(JTable $table = null, $id = null)
+	{
 		// We will retrieve the parent-asset from the Asset-table
 		$assetParent = JTable::getInstance('Asset');
 
@@ -226,7 +252,8 @@ class AstronomerTableastronomer extends JTable {
 		$assetParent->loadByName('com_astronomer');
 
 		// Return the found asset-parent-id
-		if ($assetParent->id) {
+		if ($assetParent->id)
+		{
 			$assetParentId = $assetParent->id;
 		}
 
@@ -240,11 +267,11 @@ class AstronomerTableastronomer extends JTable {
 	 *
 	 * @return bool
 	 */
-	public function delete($pk = null) {
+	public function delete($pk = null)
+	{
 		$this->load($pk);
 		$result = parent::delete($pk);
-
+		
 		return $result;
 	}
-
 }

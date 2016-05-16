@@ -1,6 +1,6 @@
 <?php
 /**
- * @version    CVS: 1.0.0
+ * @version    CVS: 1.0.2
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -21,31 +21,35 @@ $doc = JFactory::getDocument();
 $doc->addScript(JUri::base() . '/media/com_astronomer/js/form.js');
 
 /*
-  if($this->item->state == 1){
-  $state_string = 'Publish';
-  $state_value = 1;
-  } else {
-  $state_string = 'Unpublish';
-  $state_value = 0;
-  }
-  $canState = JFactory::getUser()->authorise('core.edit.state','com_astronomer'); */
+if($this->item->state == 1){
+	$state_string = 'Publish';
+	$state_value = 1;
+} else {
+	$state_string = 'Unpublish';
+	$state_value = 0;
+}
+if($this->item->id) {
+	$canState = JFactory::getUser()->authorise('core.edit.state','com_astronomer.entry');
+} else {
+	$canState = JFactory::getUser()->authorise('core.edit.state','com_astronomer.entry.'.$this->item->id);
+}*/
 ?>
 <script type="text/javascript">
 	if (jQuery === 'undefined') {
 		document.addEventListener("DOMContentLoaded", function (event) {
 			jQuery('#form-list').submit(function (event) {
-
+				
 			});
 
-
+			
 		});
 	} else {
 		jQuery(document).ready(function () {
 			jQuery('#form-list').submit(function (event) {
-
+				
 			});
 
-
+			
 		});
 	}
 </script>
@@ -60,7 +64,7 @@ $doc->addScript(JUri::base() . '/media/com_astronomer/js/form.js');
 	<form id="form-list"
 		  action="<?php echo JRoute::_('index.php?option=com_astronomer&task=list.save'); ?>"
 		  method="post" class="form-validate form-horizontal" enctype="multipart/form-data">
-
+		
 		<div class="control-group">
 			<div class="controls">
 
@@ -72,7 +76,7 @@ $doc->addScript(JUri::base() . '/media/com_astronomer/js/form.js');
 				<a class="btn"
 				   href="<?php echo JRoute::_('index.php?option=com_astronomer&task=listform.cancel'); ?>"
 				   title="<?php echo JText::_('JCANCEL'); ?>">
-					   <?php echo JText::_('JCANCEL'); ?>
+					<?php echo JText::_('JCANCEL'); ?>
 				</a>
 			</div>
 		</div>
@@ -80,6 +84,6 @@ $doc->addScript(JUri::base() . '/media/com_astronomer/js/form.js');
 		<input type="hidden" name="option" value="com_astronomer"/>
 		<input type="hidden" name="task"
 			   value="listform.save"/>
-			   <?php echo JHtml::_('form.token'); ?>
+		<?php echo JHtml::_('form.token'); ?>
 	</form>
 </div>

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version    CVS: 1.0.0
+ * @version    CVS: 1.0.2
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -17,8 +17,8 @@ jimport('joomla.application.component.controller');
  *
  * @since  1.6
  */
-class AstronomerController extends JControllerLegacy {
-
+class AstronomerController extends JControllerLegacy
+{
 	/**
 	 * Method to display a view.
 	 *
@@ -29,13 +29,13 @@ class AstronomerController extends JControllerLegacy {
 	 *
 	 * @since    1.5
 	 */
-	public function display($cachable = false, $urlparams = false) {
-		$view = JFactory::getApplication()->input->getCmd('view', 'astronomers');
+	public function display($cachable = false, $urlparams = false)
+	{
+		$view = JFactory::getApplication()->input->getCmd('view', 'obsrvations');
 		JFactory::getApplication()->input->set('view', $view);
 
 		parent::display($cachable, $urlparams);
 
 		return $this;
 	}
-
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version     CVS: 1.0.0
+ * @version     CVS: 1.0.2
  * @package     com_astronomer
  * @subpackage  mod_astronomer
  * @author      Troy Hall <troy@jowwow.net>
@@ -17,8 +17,8 @@ defined('_JEXEC') or die;
  * @subpackage  mod_astronomer
  * @since       1.6
  */
-class ModAstronomerHelper {
-
+class ModAstronomerHelper
+{
 	/**
 	 * Retrieve component items
 	 *
@@ -26,15 +26,16 @@ class ModAstronomerHelper {
 	 *
 	 * @return array Array with all the elements
 	 */
-	public static function getList(&$params) {
-		$db = JFactory::getDbo();
+	public static function getList(&$params)
+	{
+		$db    = JFactory::getDbo();
 		$query = $db->getQuery(true);
 
 		/* @var $params Joomla\Registry\Registry */
 		$query
-		->select('*')
-		->from($params->get('table'))
-		->where('state = 1');
+			->select('*')
+			->from($params->get('table'))
+			->where('state = 1');
 
 		$db->setQuery($query, $params->get('offset'), $params->get('limit'));
 		$rows = $db->loadObjectList();
@@ -49,15 +50,16 @@ class ModAstronomerHelper {
 	 *
 	 * @return mixed stdClass object if the item was found, null otherwise
 	 */
-	public static function getItem(&$params) {
-		$db = JFactory::getDbo();
+	public static function getItem(&$params)
+	{
+		$db    = JFactory::getDbo();
 		$query = $db->getQuery(true);
 
 		/* @var $params Joomla\Registry\Registry */
 		$query
-		->select('*')
-		->from($params->get('item_table'))
-		->where('id = ' . intval($params->get('item_id')));
+			->select('*')
+			->from($params->get('item_table'))
+			->where('id = ' . intval($params->get('item_id')));
 
 		$db->setQuery($query);
 		$element = $db->loadObject();
@@ -74,46 +76,48 @@ class ModAstronomerHelper {
 	 *
 	 * @return string
 	 */
-	public static function renderElement($table_name, $field_name, $field_value) {
+	public static function renderElement($table_name, $field_name, $field_value)
+	{
 		$result = '';
-
-		switch ($table_name) {
-
-			case '#__joomla_astronomer':
-				switch ($field_name) {
-					case 'id':
-						$result = $field_value;
-						break;
-					case 'humandate':
-						$result = $field_value;
-						break;
-					case 'designation':
-						$result = $field_value;
-						break;
-					case 'year':
-						$result = $field_value;
-						break;
-					case 'month':
-						$result = $field_value;
-						break;
-					case 'day':
-						$result = $field_value;
-						break;
-					case 'mag':
-						$result = $field_value;
-						break;
-					case 'observatory':
-						$result = $field_value;
-						break;
-					case 'entry':
-						$result = $field_value;
-						break;
-					case 'created_by':
-						$user = JFactory::getUser($field_value);
-						$result = $user->name;
-						break;
-				}
-				break;
+		
+		switch ($table_name)
+		{
+			
+		case '#__joomla_astronomer':
+		switch($field_name){
+		case 'id':
+		$result = $field_value;
+		break;
+		case 'humandate':
+		$result = $field_value;
+		break;
+		case 'designation':
+		$result = $field_value;
+		break;
+		case 'year':
+		$result = $field_value;
+		break;
+		case 'month':
+		$result = $field_value;
+		break;
+		case 'day':
+		$result = $field_value;
+		break;
+		case 'mag':
+		$result = $field_value;
+		break;
+		case 'observatory':
+		$result = $field_value;
+		break;
+		case 'entry':
+		$result = $field_value;
+		break;
+		case 'created_by':
+		$user = JFactory::getUser($field_value);
+		$result = $user->name;
+		break;
+		}
+		break;
 		}
 
 		return $result;
@@ -127,9 +131,10 @@ class ModAstronomerHelper {
 	 *
 	 * @return string Translatable name.
 	 */
-	public static function renderTranslatableHeader(&$params, $field) {
+	public static function renderTranslatableHeader(&$params, $field)
+	{
 		return JText::_(
-		'MOD_ASTRONOMER_HEADER_FIELD_' . str_replace('#__', '', strtoupper($params->get('table'))) . '_' . strtoupper($field)
+			'MOD_ASTRONOMER_HEADER_FIELD_' . str_replace('#__', '', strtoupper($params->get('table'))) . '_' . strtoupper($field)
 		);
 	}
 
@@ -140,10 +145,12 @@ class ModAstronomerHelper {
 	 *
 	 * @return boolean True if it should appear, false otherwise
 	 */
-	public static function shouldAppear($field) {
+	public static function shouldAppear($field)
+	{
 		$noHeaderFields = array('checked_out_time', 'checked_out', 'ordering', 'state');
 
 		return !in_array($field, $noHeaderFields);
 	}
 
+	
 }
