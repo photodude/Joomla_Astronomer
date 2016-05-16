@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version     CVS: 1.0.2
+ * @version     CVS: 1.0.4
  * @package     com_astronomer
  * @subpackage  mod_astronomer
  * @author      Troy Hall <troy@jowwow.net>
@@ -83,7 +83,7 @@ class ModAstronomerHelper
 		switch ($table_name)
 		{
 			
-		case '#__joomla_astronomer':
+		case '#__astronomer_astrometry':
 		switch($field_name){
 		case 'id':
 		$result = $field_value;

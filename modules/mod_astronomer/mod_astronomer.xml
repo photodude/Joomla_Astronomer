@@ -7,7 +7,7 @@
     <author>Troy Hall</author>
     <authorEmail>troy@jowwow.net</authorEmail>
     <authorUrl>http://jowwow.net</authorUrl>
-    <version>CVS: 1.0.2</version>
+    <version>CVS: 1.0.4</version>
     <description>MOD_ASTRONOMER_DESCRIPTION</description>
     
     <files>
@@ -54,14 +54,14 @@
                     label="MOD_ASTRONOMER_TABLE_LBL"
                     description="MOD_ASTRONOMER_TABLE_DESC">
                     
-	<option value="#__joomla_astronomer">#__joomla_astronomer</option>
+	<option value="#__astronomer_astrometry">#__astronomer_astrometry</option>
                 </field>
                 <field 
                     name="field" type="groupedlist" default=""
                     label="MOD_ASTRONOMER_FIELD_LBL"
                     description="MOD_ASTRONOMER_FIELD_DESC">
                     
-	<group label="#__joomla_astronomer">
+	<group label="#__astronomer_astrometry">
 		<option value="id">id</option>
 		<option value="humandate">humandate</option>
 		<option value="designation">designation</option>
@@ -92,7 +92,7 @@
                     label="MOD_ASTRONOMER_TABLE_LBL"
                     description="MOD_ASTRONOMER_TABLE_DESC">
                     
-	<option value="#__joomla_astronomer">#__joomla_astronomer</option>
+	<option value="#__astronomer_astrometry">#__astronomer_astrometry</option>
                 </field>
                 <field 
                     name="item_id" type="text" filter="uint" class="input-small"

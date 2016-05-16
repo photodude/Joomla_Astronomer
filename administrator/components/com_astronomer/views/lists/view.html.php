@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version    CVS: 1.0.2
+ * @version    CVS: 1.0.4
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -144,17 +144,17 @@ class AstronomerViewLists extends JViewLegacy
 	{
 		return array(
 			'a.`id`' => JText::_('JGRID_HEADING_ID'),
-			'a.`humandate`' => JText::_('COM_ASTRONOMER_OBSRVATIONS_HUMANDATE'),
-			'a.`designation`' => JText::_('COM_ASTRONOMER_OBSRVATIONS_DESIGNATION'),
-			'a.`year`' => JText::_('COM_ASTRONOMER_OBSRVATIONS_YEAR'),
-			'a.`month`' => JText::_('COM_ASTRONOMER_OBSRVATIONS_MONTH'),
-			'a.`day`' => JText::_('COM_ASTRONOMER_OBSRVATIONS_DAY'),
-			'a.`mag`' => JText::_('COM_ASTRONOMER_OBSRVATIONS_MAG'),
-			'a.`observatory`' => JText::_('COM_ASTRONOMER_OBSRVATIONS_OBSERVATORY'),
-			'a.`entry`' => JText::_('COM_ASTRONOMER_OBSRVATIONS_ENTRY'),
+			'a.`humandate`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_HUMANDATE'),
+			'a.`designation`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_DESIGNATION'),
+			'a.`year`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_YEAR'),
+			'a.`month`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_MONTH'),
+			'a.`day`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_DAY'),
+			'a.`mag`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_MAG'),
+			'a.`observatory`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_OBSERVATORY'),
+			'a.`entry`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_ENTRY'),
 			'a.`ordering`' => JText::_('JGRID_HEADING_ORDERING'),
 			'a.`state`' => JText::_('JSTATUS'),
-			'a.`created_by`' => JText::_('COM_ASTRONOMER_OBSRVATIONS_CREATED_BY'),
+			'a.`created_by`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_CREATED_BY'),
 		);
 	}
 }

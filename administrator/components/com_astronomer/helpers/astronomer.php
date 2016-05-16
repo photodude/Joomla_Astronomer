@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version    CVS: 1.0.2
+ * @version    CVS: 1.0.4
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -27,9 +27,9 @@ class AstronomerHelpersAstronomer
 	public static function addSubmenu($vName = '')
 	{
 		JHtmlSidebar::addEntry(
-			JText::_('COM_ASTRONOMER_TITLE_OBSRVATIONS'),
-			'index.php?option=com_astronomer&view=obsrvations',
-			$vName == 'obsrvations'
+			JText::_('COM_ASTRONOMER_TITLE_OBSERVATIONS'),
+			'index.php?option=com_astronomer&view=observations',
+			$vName == 'observations'
 		);
 
 		JHtmlSidebar::addEntry(

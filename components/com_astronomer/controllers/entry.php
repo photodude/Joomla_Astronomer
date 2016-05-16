@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version    CVS: 1.0.2
+ * @version    CVS: 1.0.4
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -101,7 +101,7 @@ class AstronomerControllerEntry extends JControllerLegacy
 			if (!$item)
 			{
 				// If there isn't any menu item active, redirect to list view
-				$this->setRedirect(JRoute::_('index.php?option=com_astronomer&view=obsrvations', false));
+				$this->setRedirect(JRoute::_('index.php?option=com_astronomer&view=observations', false));
 			}
 			else
 			{

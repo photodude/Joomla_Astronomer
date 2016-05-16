@@ -1,6 +1,6 @@
 <?php
 /**
- * @version    CVS: 1.0.2
+ * @version    CVS: 1.0.4
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -210,7 +210,7 @@ class AstronomerModelEntry extends JModelAdmin
 			if (@$table->ordering === '')
 			{
 				$db = JFactory::getDbo();
-				$db->setQuery('SELECT MAX(ordering) FROM #__joomla_astronomer');
+				$db->setQuery('SELECT MAX(ordering) FROM #__astronomer_astrometry');
 				$max             = $db->loadResult();
 				$table->ordering = $max + 1;
 			}

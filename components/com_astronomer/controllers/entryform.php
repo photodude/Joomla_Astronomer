@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version    CVS: 1.0.2
+ * @version    CVS: 1.0.4
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -143,7 +143,7 @@ class AstronomerControllerEntryForm extends JControllerForm
 		$this->setMessage(JText::_('COM_ASTRONOMER_ITEM_SAVED_SUCCESSFULLY'));
 		$menu = JFactory::getApplication()->getMenu();
 		$item = $menu->getActive();
-		$url  = (empty($item->link) ? 'index.php?option=com_astronomer&view=obsrvations' : $item->link);
+		$url  = (empty($item->link) ? 'index.php?option=com_astronomer&view=observations' : $item->link);
 		$this->setRedirect(JRoute::_($url, false));
 
 		// Flush the data from the session.
@@ -175,7 +175,7 @@ class AstronomerControllerEntryForm extends JControllerForm
 
 		$menu = JFactory::getApplication()->getMenu();
 		$item = $menu->getActive();
-		$url  = (empty($item->link) ? 'index.php?option=com_astronomer&view=obsrvations' : $item->link);
+		$url  = (empty($item->link) ? 'index.php?option=com_astronomer&view=observations' : $item->link);
 		$this->setRedirect(JRoute::_($url, false));
 	}
 
@@ -251,7 +251,7 @@ class AstronomerControllerEntryForm extends JControllerForm
 		$this->setMessage(JText::_('COM_ASTRONOMER_ITEM_DELETED_SUCCESSFULLY'));
 		$menu = JFactory::getApplication()->getMenu();
 		$item = $menu->getActive();
-		$url  = (empty($item->link) ? 'index.php?option=com_astronomer&view=obsrvations' : $item->link);
+		$url  = (empty($item->link) ? 'index.php?option=com_astronomer&view=observations' : $item->link);
 		$this->setRedirect(JRoute::_($url, false));
 
 		// Flush the data from the session.

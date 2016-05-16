@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version    CVS: 1.0.2
+ * @version    CVS: 1.0.4
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -18,7 +18,30 @@ use Joomla\Utilities\ArrayHelper;
  */
 class AstronomerTableentry extends JTable
 {
-	
+	/**
+	 * Check if a field is unique
+	 *
+	 * @param   string  $field  Name of the field
+	 *
+	 * @return bool True if unique
+	 */
+	private function isUnique ($field)
+	{
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		$query
+			->select($db->quoteName($field))
+			->from($db->quoteName($this->_tbl))
+			->where($db->quoteName($field) . ' = ' . $db->quote($this->$field))
+			->where($db->quoteName('id') . ' <> ' . (int) $this->{$this->_tbl_key});
+
+		$db->setQuery($query);
+		$db->execute();
+
+		return ($db->getNumRows() == 0) ? true : false;
+	}
+
 	/**
 	 * Constructor
 	 *
@@ -27,7 +50,7 @@ class AstronomerTableentry extends JTable
 	public function __construct(&$db)
 	{
 		JObserverMapper::addObserverClassToClass('JTableObserverContenthistory', 'AstronomerTableentry', array('typeAlias' => 'com_astronomer.entry'));
-		parent::__construct('#__joomla_astronomer', 'id', $db);
+		parent::__construct('#__astronomer_astrometry', 'id', $db);
 	}
 
 	/**
@@ -130,6 +153,11 @@ class AstronomerTableentry extends JTable
 			$this->ordering = self::getNextOrder();
 		}
 		
+		// Check if entry is unique
+		if (!$this->isUnique('entry'))
+		{
+			throw new Exception('Your <b>entry</b> item "<b>' . $this->entry . '</b>" already exists');
+		}
 		
 
 		return parent::check();

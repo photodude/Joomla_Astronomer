@@ -92,6 +92,7 @@
 			label="COM_ASTRONOMER_FORM_LBL_ENTRY_ENTRY"
 			description="COM_ASTRONOMER_FORM_DESC_ENTRY_ENTRY" 
 			hint="COM_ASTRONOMER_FORM_LBL_ENTRY_ENTRY"
+			required="true" 
 			filter="safehtml"
 		/> 
 

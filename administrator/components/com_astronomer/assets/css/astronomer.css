@@ -1,14 +1,14 @@
-.icon-48-obsrvations {
-      background-image: url(../images/l_obsrvations.png);
+.icon-48-observations {
+      background-image: url(../images/l_observations.png);
       padding-left:60px!important;
 }
 
 .icon-48-entry {
-      background-image: url(../images/l_obsrvations.png);
+      background-image: url(../images/l_observations.png);
       padding-left:60px!important;
 }
 
-.color-box-obsrvations { 
+.color-box-observations { 
       float: left;      width: 15px;      height: 15px;      margin-right: 5px;      border: 1px solid rgba(0, 0, 0, .2);}
 
 
