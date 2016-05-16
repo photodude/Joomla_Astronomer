@@ -1,4 +1,4 @@
-# Joomla Astronomer User Profile plugin ![Logo](https://github.com/N6REJ/Joomla_Astronomer/blob/master/media/com_astronomer/images/joomla_astronomer_logo_200x200.png)
+# Joomla Astronomer User Profile plugin ![Logo](https://cloud.githubusercontent.com/assets/1850089/15307103/a30ff9a6-1b95-11e6-9c8d-6fff4074e06c.png)
 Part of a group of extensions in the Joomla Astronomer package.
 
 <img src="https://cloud.githubusercontent.com/assets/1850089/15277852/6e30391a-1ad4-11e6-9cdd-a7f29c30adf6.JPG"></img>
