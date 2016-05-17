@@ -23,9 +23,9 @@ ASO provides a lot of important data back to major centers like Harvard and Mino
 them be strong once again.
 
 #1 - Astrometry section information
-The astrometry function will need to consist of 3 parts.
-1) the entry form which takes only string characters.  It should look similar to this.. <img src="https://cloud.githubusercontent.com/assets/1850089/15264556/e524b5f6-1939-11e6-8cc6-d525cff37497.JPG" width="23%"></img>
-2) The search form which needs only date , observatory or designation to search on.  Can be any or all of these.  It should look like this.. <img src="https://cloud.githubusercontent.com/assets/1850089/15264497/37d8c400-1939-11e6-8467-72c7d1bee0b7.JPG" width="23%"></img>
+The astrometry function will need to consist of 3 parts.<br>
+1) the entry form which takes only string characters.  It should look similar to this.. <img src="https://cloud.githubusercontent.com/assets/1850089/15264556/e524b5f6-1939-11e6-8cc6-d525cff37497.JPG" width="23%"></img><br>
+2) The search form which needs only date , observatory or designation to search on.  Can be any or all of these.  It should look like this.. <img src="https://cloud.githubusercontent.com/assets/1850089/15264497/37d8c400-1939-11e6-8467-72c7d1bee0b7.JPG" width="23%"></img><br>
 3) A search output view where the user is able to copy the search return AS PURE ASCII!  a header and footer string is required but their needs to be a button or some other method to give the user the search output.
 
 I've created a conversion system to take ASO's old data and turn it into a useable csv to preserve their 12yrs of observations.
