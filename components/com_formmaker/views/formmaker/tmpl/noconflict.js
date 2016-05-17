@@ -1,0 +1,1 @@
+var wdformjQuery = $.noConflict(true);

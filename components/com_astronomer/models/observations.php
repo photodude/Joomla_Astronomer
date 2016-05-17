@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version    CVS: 1.0.4
+ * @version    CVS: 1.0.5
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -32,14 +32,7 @@ class AstronomerModelObservations extends JModelList
 		{
 			$config['filter_fields'] = array(
 				'id', 'a.id',
-				'humandate', 'a.humandate',
-				'designation', 'a.designation',
-				'year', 'a.year',
-				'month', 'a.month',
-				'day', 'a.day',
-				'mag', 'a.mag',
-				'observatory', 'a.observatory',
-				'entry', 'a.entry',
+				'observations', 'a.observations',
 				'ordering', 'a.ordering',
 				'state', 'a.state',
 				'created_by', 'a.created_by',
@@ -237,7 +230,7 @@ if (empty($list['direction']))
 			else
 			{
 				$search = $db->Quote('%' . $db->escape($search, true) . '%');
-				$query->where('( a.entry LIKE ' . $search . ' )');
+				$query->where('( a.observations LIKE ' . $search . ' )');
 			}
 		}
 		

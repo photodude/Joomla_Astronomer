@@ -1,6 +1,6 @@
 <?php
 /**
- * @version    CVS: 1.0.4
+ * @version    CVS: 1.0.5
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -92,14 +92,14 @@ class AstronomerModelListForm extends JModelForm
 				
 				if ($id)
 				{
-					$canEdit = $user->authorise('core.edit', 'com_astronomer. entry.' . $id) || $user->authorise('core.create', 'com_astronomer. entry.' . $id);
+					$canEdit = $user->authorise('core.edit', 'com_astronomer. submit.' . $id) || $user->authorise('core.create', 'com_astronomer. submit.' . $id);
 				}
 				else
 				{
 					$canEdit = $user->authorise('core.edit', 'com_astronomer') || $user->authorise('core.create', 'com_astronomer');
 				}
 
-				if (!$canEdit && $user->authorise('core.edit.own', 'com_astronomer.entry.' . $id))
+				if (!$canEdit && $user->authorise('core.edit.own', 'com_astronomer.submit.' . $id))
 				{
 					$canEdit = $user->id == $table->created_by;
 				}
@@ -295,7 +295,7 @@ class AstronomerModelListForm extends JModelForm
 		if ($id)
 		{
 			// Check the user can edit this item
-			$authorised = $user->authorise('core.edit', 'com_astronomer.entry.' . $id) || $authorised = $user->authorise('core.edit.own', 'com_astronomer.entry.' . $id);
+			$authorised = $user->authorise('core.edit', 'com_astronomer.submit.' . $id) || $authorised = $user->authorise('core.edit.own', 'com_astronomer.submit.' . $id);
 		}
 		else
 		{
@@ -333,7 +333,7 @@ class AstronomerModelListForm extends JModelForm
 	{
 		$id = (!empty($data['id'])) ? $data['id'] : (int) $this->getState('list.id');
 
-		if (JFactory::getUser()->authorise('core.delete', 'com_astronomer.entry.' . $id) !== true)
+		if (JFactory::getUser()->authorise('core.delete', 'com_astronomer.submit.' . $id) !== true)
 		{
 			throw new Exception(403, JText::_('JERROR_ALERTNOAUTHOR'));
 		}

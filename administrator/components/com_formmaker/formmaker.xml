@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<extension type="component" version="3.0" method="upgrade">
+
+		<name>COM_FORMMAKER</name> 
+		<author>Web Dorado</author>
+		<creationDate>September 2011</creationDate>
+		<copyright>Copyright (C) 2015 Web-Dorado.com All rights reserved.</copyright>
+		<authorEmail>info@web-dorado.com</authorEmail>
+		<authorUrl>http://web-dorado.com/</authorUrl>
+		<license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+		<version>3.6.4</version>
+
+        <description>
+		Form Maker is a modern and advanced tool for creating Joomla! forms easily and fast.
+	</description>
+	<scriptfile>script.formmaker.php</scriptfile>
+
+	<install>
+    		<sql>
+     			 <file charset="utf8" driver="mysql">install.mysql.sql</file>
+    		</sql>
+ 	</install>
+
+ 	<uninstall>
+    		<sql>
+				<file charset="utf8" driver="mysql">uninstall.mysql.sql</file>
+
+			</sql>
+	</uninstall>
+
+	<files>
+		<folder>models</folder>
+		<folder>views</folder>
+		<folder>uploads</folder>
+		<folder>images</folder>
+		<filename>controller.php</filename>
+		<filename>recaptchalib.php</filename>
+		<filename>formmaker.php</filename>
+		<filename>index.html</filename>
+	</files>
+
+	<languages>
+        <language tag="en-GB">en-GB.com_formmaker.ini</language>
+    </languages> 
+	
+	<administration>
+
+		<menu link="option=com_formmaker" img="components/com_formmaker/images/FormMakerLogo-16.png">COM_FORMMAKER_MENU</menu>
+			   <submenu>
+                        <menu task="forms" img="components/com_formmaker/images/FormMakerLogo-16.png">COM_FORMS_MENU</menu>
+                        <menu task="submits" img="components/com_formmaker/images/FormMakerLogo-16.png">COM_SUBMISSIONS_MENU</menu>
+                        <menu task="themes" img="components/com_formmaker/images/FormMakerLogo-16.png">COM_THEMES_MENU</menu>
+				<menu task="blocked_ips" img="components/com_formmaker/images/FormMakerLogo-16.png">COM_BLOCKED_IPS_MENU</menu>
+				<menu task="extensions" img="components/com_formmaker/images/FormMakerLogo-16.png">COM_EXTENSIONS_MENU</menu>
+						<menu task="featured_plugins" img="components/com_formmaker/images/FormMakerLogo-16.png">COM_FEATURED_PLUGINS_MENU</menu>
+			  </submenu>	       
+			   
+		<files folder="admin">
+		    <folder>tables</folder>
+		    <folder>elements</folder>
+		    <folder>helper</folder>
+		    <folder>models</folder>
+		    <folder>views</folder>
+		    <folder>images</folder>
+		    <folder>js</folder>
+		    <folder>css</folder>
+			<filename>admin.formmaker.html.php</filename>
+			<filename>formmaker.php</filename>
+			<filename>toolbar.formmaker.html.php</filename>
+			<filename>install.mysql.sql</filename>
+			<filename>update.mysql.sql</filename>
+			<filename>uninstall.mysql.sql</filename>
+			<filename>controller.php</filename>
+			<filename>index.html</filename>
+			<filename>FormMakerLogo.css</filename>
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+	    </files>
+		<languages folder="admin">
+		<language tag="en-GB">en-GB.com_formmaker.sys.ini</language>
+		<language tag="en-GB">en-GB.com_formmaker.ini</language>
+        </languages>
+
+ 	</administration>
+
+</extension>

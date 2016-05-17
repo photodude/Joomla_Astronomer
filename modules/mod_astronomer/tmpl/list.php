@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     CVS: 1.0.4
+ * @version     CVS: 1.0.5
  * @package     com_astronomer
  * @subpackage  mod_astronomer
  * @author      Troy Hall <troy@jowwow.net>

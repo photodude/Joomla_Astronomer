@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<extension type="module" version="3.0" client="site" method="upgrade">
+
+  <name>Form Maker Module</name>
+  <author>Web-Dorado</author>
+  <creationDate>January 2011</creationDate>
+  <copyright>Copyright (C) 2015 Web-Dorado.com All rights reserved.</copyright> 
+  <license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+  <authorEmail>info@web-dorado.com</authorEmail>
+  <authorUrl>http://www.web-dorado.com/</authorUrl>
+    <version>3.6.4</version>
+  <description>		Form Maker is a modern and advanced tool for creating Joomla! forms easily and fast.</description>
+
+  <files>
+    	<filename module="mod_formmaker">mod_formmaker.php</filename>
+    	<filename module="mod_formmaker">helper.php</filename>
+		<filename module="mod_formmaker">index.html</filename>
+  </files>
+  
+<config>
+ <fields name="params">
+  	<fieldset name="basic" label="Module Parameters">
+     	<field name="id" type="modal_contacts" label="Select a Form" required="true" addfieldpath="/administrator/components/com_formmaker/models/forms"/>
+		<field  name="moduleclass_sfx" type="text" label="Module Class Suffix" description="A suffix to be applied to the css class of the module (table.moduletable), this allows individual module styling" />			
+
+	</fieldset>
+ </fields>
+</config>
+
+</extension>
+

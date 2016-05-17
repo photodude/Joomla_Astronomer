@@ -1,6 +1,6 @@
 <?php
 /**
- * @version    CVS: 1.0.4
+ * @version    CVS: 1.0.5
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -65,7 +65,7 @@ class AstronomerControllerObservations extends JControllerAdmin
 	 *
 	 * @since    1.6
 	 */
-	public function getModel($name = 'entry', $prefix = 'AstronomerModel', $config = array())
+	public function getModel($name = 'submit', $prefix = 'AstronomerModel', $config = array())
 	{
 		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
 

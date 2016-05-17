@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version     CVS: 1.0.4
+ * @version     CVS: 1.0.5
  * @package     com_astronomer
  * @subpackage  mod_astronomer
  * @author      Troy Hall <troy@jowwow.net>
@@ -88,28 +88,7 @@ class ModAstronomerHelper
 		case 'id':
 		$result = $field_value;
 		break;
-		case 'humandate':
-		$result = $field_value;
-		break;
-		case 'designation':
-		$result = $field_value;
-		break;
-		case 'year':
-		$result = $field_value;
-		break;
-		case 'month':
-		$result = $field_value;
-		break;
-		case 'day':
-		$result = $field_value;
-		break;
-		case 'mag':
-		$result = $field_value;
-		break;
-		case 'observatory':
-		$result = $field_value;
-		break;
-		case 'entry':
+		case 'observations':
 		$result = $field_value;
 		break;
 		case 'created_by':

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version    CVS: 1.0.4
+ * @version    CVS: 1.0.5
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -29,9 +29,9 @@ if($this->item->state == 1){
 	$state_value = 0;
 }
 if($this->item->id) {
-	$canState = JFactory::getUser()->authorise('core.edit.state','com_astronomer.entry');
+	$canState = JFactory::getUser()->authorise('core.edit.state','com_astronomer.submit');
 } else {
-	$canState = JFactory::getUser()->authorise('core.edit.state','com_astronomer.entry.'.$this->item->id);
+	$canState = JFactory::getUser()->authorise('core.edit.state','com_astronomer.submit.'.$this->item->id);
 }*/
 ?>
 <script type="text/javascript">

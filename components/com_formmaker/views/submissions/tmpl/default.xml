@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<metadata>
+
+	<layout title="Submissions">
+
+		<message></message>
+
+	</layout>
+
+	<fields name="request">
+
+		<fieldset name="request" addfieldpath="/administrator/components/com_formmaker/models/submissions"	>
+			<field name="note" type="note" label="&lt;div style=&quot;width:500px;&quot;&gt;&lt;span style=&quot;font-weight:bold;font-size:14px;color:red;padding-right:4px;margin:0;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot;font-weight:normal;font-size:13px;color:#000;&quot;&gt;Please indicate the user levels that can have access to the Submissions page in Form Options, otherwise the created menu item will not be accessible for any user.&lt;/span&gt;&lt;/div&gt;"/>
+			<field name="id" type="modal_contacts" label="Select a Form" required="true"/>
+			<field name="checked_ids" type="hidden" label="" />
+			<field name="dates_range" type="hidden" label="" />
+			<field name="stats_fields" type="hidden" label="" />
+			<field name="params" type="hidden" label="" />
+
+		</fieldset>
+
+	</fields>
+
+</metadata>

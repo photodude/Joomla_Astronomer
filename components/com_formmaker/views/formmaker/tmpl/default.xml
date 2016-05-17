@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Form">
+		<message></message>
+	</layout>
+	<fields name="request">
+		<fieldset name="request" addfieldpath="/administrator/components/com_formmaker/models/forms"	>
+			<field name="id" type="modal_contacts" label="Select a Form" required="true"/>
+		</fieldset>
+	</fields>
+</metadata>

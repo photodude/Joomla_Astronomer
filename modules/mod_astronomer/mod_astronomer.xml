@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="3.0" method="upgrade" client="site">
     <name>MOD_ASTRONOMER_NAME</name>
-    <creationDate>2016-05-16</creationDate>
+    <creationDate>2016-05-17</creationDate>
     <copyright>2016 Troy Hall</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <author>Troy Hall</author>
     <authorEmail>troy@jowwow.net</authorEmail>
     <authorUrl>http://jowwow.net</authorUrl>
-    <version>CVS: 1.0.4</version>
+    <version>CVS: 1.0.5</version>
     <description>MOD_ASTRONOMER_DESCRIPTION</description>
     
     <files>
@@ -63,14 +63,7 @@
                     
 	<group label="#__astronomer_astrometry">
 		<option value="id">id</option>
-		<option value="humandate">humandate</option>
-		<option value="designation">designation</option>
-		<option value="year">year</option>
-		<option value="month">month</option>
-		<option value="day">day</option>
-		<option value="mag">mag</option>
-		<option value="observatory">observatory</option>
-		<option value="entry">entry</option>
+		<option value="observations">observations</option>
 		<option value="created_by">created_by</option>
 	</group>
                 </field>

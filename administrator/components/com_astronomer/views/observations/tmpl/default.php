@@ -1,6 +1,6 @@
 <?php
 /**
- * @version    CVS: 1.0.4
+ * @version    CVS: 1.0.5
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -30,7 +30,7 @@ $saveOrder = $listOrder == 'a.`ordering`';
 if ($saveOrder)
 {
 	$saveOrderingUrl = 'index.php?option=com_astronomer&task=observations.saveOrderAjax&tmpl=component';
-	JHtml::_('sortablelist.sortable', 'entryList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
+	JHtml::_('sortablelist.sortable', 'submitList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
 }
 
 $sortFields = $this->getSortFields();
@@ -159,7 +159,7 @@ if (!empty($this->extra_sidebar))
 				</div>
 			</div>
 			<div class="clearfix"></div>
-			<table class="table table-striped" id="entryList">
+			<table class="table table-striped" id="submitList">
 				<thead>
 				<tr>
 					<?php if (isset($this->items[0]->ordering)): ?>
@@ -181,28 +181,7 @@ if (!empty($this->extra_sidebar))
 				<?php echo JHtml::_('grid.sort',  'COM_ASTRONOMER_OBSERVATIONS_ID', 'a.`id`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_ASTRONOMER_OBSERVATIONS_HUMANDATE', 'a.`humandate`', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_ASTRONOMER_OBSERVATIONS_DESIGNATION', 'a.`designation`', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_ASTRONOMER_OBSERVATIONS_YEAR', 'a.`year`', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_ASTRONOMER_OBSERVATIONS_MONTH', 'a.`month`', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_ASTRONOMER_OBSERVATIONS_DAY', 'a.`day`', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_ASTRONOMER_OBSERVATIONS_MAG', 'a.`mag`', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_ASTRONOMER_OBSERVATIONS_OBSERVATORY', 'a.`observatory`', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_ASTRONOMER_OBSERVATIONS_ENTRY', 'a.`entry`', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_ASTRONOMER_OBSERVATIONS_OBSERVATIONS', 'a.`observations`', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_ASTRONOMER_OBSERVATIONS_CREATED_BY', 'a.`created_by`', $listDirn, $listOrder); ?>
@@ -264,37 +243,16 @@ if (!empty($this->extra_sidebar))
 
 					<?php echo $item->id; ?>
 				</td>				<td>
-
-					<?php echo $item->humandate; ?>
-				</td>				<td>
 				<?php if (isset($item->checked_out) && $item->checked_out && ($canEdit || $canChange)) : ?>
 					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'observations.', $canCheckin); ?>
 				<?php endif; ?>
 				<?php if ($canEdit) : ?>
-					<a href="<?php echo JRoute::_('index.php?option=com_astronomer&task=entry.edit&id='.(int) $item->id); ?>">
-					<?php echo $this->escape($item->designation); ?></a>
+					<a href="<?php echo JRoute::_('index.php?option=com_astronomer&task=submit.edit&id='.(int) $item->id); ?>">
+					<?php echo $this->escape($item->observations); ?></a>
 				<?php else : ?>
-					<?php echo $this->escape($item->designation); ?>
+					<?php echo $this->escape($item->observations); ?>
 				<?php endif; ?>
 
-				</td>				<td>
-
-					<?php echo $item->year; ?>
-				</td>				<td>
-
-					<?php echo $item->month; ?>
-				</td>				<td>
-
-					<?php echo $item->day; ?>
-				</td>				<td>
-
-					<?php echo $item->mag; ?>
-				</td>				<td>
-
-					<?php echo $item->observatory; ?>
-				</td>				<td>
-
-					<?php echo $item->entry; ?>
 				</td>				<td>
 
 					<?php echo $item->created_by; ?>

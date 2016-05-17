@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version    CVS: 1.0.4
+ * @version    CVS: 1.0.5
  * @package    Com_Astronomer
  * @author     Troy Hall <troy@jowwow.net>
  * @copyright  2016 Troy Hall
@@ -69,19 +69,19 @@ class AstronomerViewObservations extends JViewLegacy
 		JToolBarHelper::title(JText::_('COM_ASTRONOMER_TITLE_OBSERVATIONS'), 'observations.png');
 
 		// Check if the form exists before showing the add/edit buttons
-		$formPath = JPATH_COMPONENT_ADMINISTRATOR . '/views/entry';
+		$formPath = JPATH_COMPONENT_ADMINISTRATOR . '/views/submit';
 
 		if (file_exists($formPath))
 		{
 			if ($canDo->get('core.create'))
 			{
-				JToolBarHelper::addNew('entry.add', 'JTOOLBAR_NEW');
+				JToolBarHelper::addNew('submit.add', 'JTOOLBAR_NEW');
 				JToolbarHelper::custom('observations.duplicate', 'copy.png', 'copy_f2.png', 'JTOOLBAR_DUPLICATE', true);
 			}
 
 			if ($canDo->get('core.edit') && isset($this->items[0]))
 			{
-				JToolBarHelper::editList('entry.edit', 'JTOOLBAR_EDIT');
+				JToolBarHelper::editList('submit.edit', 'JTOOLBAR_EDIT');
 			}
 		}
 
@@ -155,14 +155,7 @@ class AstronomerViewObservations extends JViewLegacy
 	{
 		return array(
 			'a.`id`' => JText::_('JGRID_HEADING_ID'),
-			'a.`humandate`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_HUMANDATE'),
-			'a.`designation`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_DESIGNATION'),
-			'a.`year`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_YEAR'),
-			'a.`month`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_MONTH'),
-			'a.`day`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_DAY'),
-			'a.`mag`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_MAG'),
-			'a.`observatory`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_OBSERVATORY'),
-			'a.`entry`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_ENTRY'),
+			'a.`observations`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_OBSERVATIONS'),
 			'a.`ordering`' => JText::_('JGRID_HEADING_ORDERING'),
 			'a.`state`' => JText::_('JSTATUS'),
 			'a.`created_by`' => JText::_('COM_ASTRONOMER_OBSERVATIONS_CREATED_BY'),
