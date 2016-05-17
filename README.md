@@ -31,7 +31,7 @@ The astrometry function will need to consist of 3 parts.<br>
 I've created a conversion system to take ASO's old data and turn it into a useable csv to preserve their 12yrs of observations.
 part of this conversion includes some validation checks that will need to be performed after they've hit submit ( or via ajax ) but BEFORE its put into the DB.  
 A optional( for now ) validation curl check consisting of () as shown HERE will be performed on the submssions.
-![MPC Astrometry Data Exchange Standard](http://minorplanetcenter.net/iau/info/IAU2015_ADES.pdf) explains in detail what needs to be where and why. ![MPC Format For Optical Astrometric Observations Of Comets, Minor Planets and Natural Satellites](http://www.minorplanetcenter.net/iau/info/OpticalObs.html) contains a more concise breakdown view.
+[MPC Astrometry Data Exchange Standard](http://minorplanetcenter.net/iau/info/IAU2015_ADES.pdf) explains in detail what needs to be where and why. [MPC Format For Optical Astrometric Observations Of Comets, Minor Planets and Natural Satellites](http://www.minorplanetcenter.net/iau/info/OpticalObs.html) contains a more concise breakdown view.
 Section 4.3 of the MPC ASDES as given above, describes in detail what the header must be and is required for the automated processing functions and should be included in the search output.  This data is currently held as one of 4 user fields by the plugin.
 
 #2 - Comets section information...
