@@ -34,8 +34,9 @@ A optional( for now ) validation curl check consisting of () as shown HERE will 
 [MPC Astrometry Data Exchange Standard](http://minorplanetcenter.net/iau/info/IAU2015_ADES.pdf) explains in detail what needs to be where and why. [MPC Format For Optical Astrometric Observations Of Comets, Minor Planets and Natural Satellites](http://www.minorplanetcenter.net/iau/info/OpticalObs.html) contains a more concise breakdown view.
 Section 4.3 of the MPC ASDES as given above, describes in detail what the header must be and is required for the automated processing functions and should be included in the search output.  This data is currently held as one of 4 user fields by the plugin.
 
-#2 - Comets section information...
+#2 - Comets section information... <img src="https://cloud.githubusercontent.com/assets/1850089/15342751/71e86a5c-1c5d-11e6-883b-0a9f127b5f67.png" width="23%" /><br>
 The comets branch will be "comets" it will contain the conversion system for the comets data.
+and forms, list views.  ( See image gallery )
 
 ### Files...
 the file "comets-seen.csv" is the original csv from which we are starting.  It has several problems.
