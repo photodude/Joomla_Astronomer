@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Connection view" option="Display Connection">
+		<help key = "Display Connection" />
+		<message>
+			Display Connection
+		</message>
+	</layout>
+
+	<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params">
+		<!-- Basic options. -->
+		<fieldset name="basic" label="COM_MENUS_BASIC_FIELDSET_LABEL">
+			<field name="ccname" type="text" description="Enter your Connection's name" label="Connection's Name"></field>
+		</fieldset>
+	</fields>
+</metadata>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.1" type="plugin" group="search">
     <name>plg_search_astronomer</name>
-    <author>Troy Hall</author>
+    <author>Troy "Bear" Hall</author>
     <creationDate>2016-05-17</creationDate>
-    <copyright>2016 Troy Hall</copyright>
+    <copyright>2016 Troy Hall &amp; Arkansas Sky Observatory</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-    <authorEmail>troy@jowwow.net</authorEmail>
-    <authorUrl>http://jowwow.net</authorUrl>
-    <version>CVS: 1.0.5</version>
+    <authorEmail>webmaster@arksky.org</authorEmail>
+    <authorUrl>http://arksky.org</authorUrl>
+    <version>CVS: 1.0.6</version>
     <description>PLG_SEARCH_COM_ASTRONOMER_XML_DESCRIPTION</description>
     <files>
         <filename plugin="astronomer">astronomer.php</filename>

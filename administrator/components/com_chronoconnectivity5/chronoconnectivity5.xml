@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="1.6.0" method="upgrade">
+	<name>ChronoConnectivity5</name>
+	<creationDate>28.July.2015</creationDate>
+	<author>Chronoman</author>
+	<copyright>ChronoEngine.com 2006 - 2015</copyright>
+	<authorEmail>webmaster@chronoengine.com</authorEmail>
+	<authorUrl>www.chronoengine.com</authorUrl>
+	<version>5.0.3</version>
+	<license>GPLv2</license>
+	<description>The ChronoConnectivity allows Joomla users to manage data easily.</description>
+
+	<scriptfile>install.chronoconnectivity5.php</scriptfile>
+	<uninstallfile>uninstall.chronoconnectivity5.php</uninstallfile>
+	<files>
+		<filename>chronoconnectivity5.php</filename>
+		<filename>index.html</filename>
+		<folder>views</folder>
+		<folder>chronoconnectivity</folder>
+	</files>
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">chronoconnectivity/sql/initial.chronoconnectivity.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<sql>
+			<file driver="mysql" charset="utf8">chronoconnectivity/sql/uninstall.chronoconnectivity.sql</file>
+		</sql>
+	</uninstall>	
+	<administration>		
+		<menu img="components/com_chronoconnectivity5/CCON.png" link="com_chronoconnectivity5" view="main">COM_CHRONOCONNECTIVITY5</menu>
+		<submenu>
+			<menu>COM_CHRONOCONNECTIVITY5</menu>
+			<menu act="validateinstall">COM_CHRONOCONNECTIVITY5_VALIDATE</menu>
+		</submenu>
+		<files folder="admin">
+			<filename>chronoconnectivity5.php</filename>
+			<filename>CCON.png</filename>
+			<filename>index.html</filename>
+			<folder>chronoconnectivity</folder>
+			<folder>language</folder>
+		</files>
+		<languages folder="admin">
+			<language tag="en-GB">language/en-GB.com_chronoconnectivity5.sys.ini</language>
+			<language tag="en-GB">language/en-GB.com_chronoconnectivity5.menu.ini</language>
+			<language tag="en-GB">language/en-GB.com_chronoconnectivity5.ini</language>
+		</languages>
+	</administration>
+	<updateservers>
+		<server type="extension" priority="1" name="ChronoConnectivity v5 update server">http://www.chronoengine.com/chrono_joomla_updates/chronoconnectivity5.xml</server>
+	</updateservers>
+</extension>

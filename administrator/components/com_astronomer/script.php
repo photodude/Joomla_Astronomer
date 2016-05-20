@@ -2,8 +2,8 @@
 
 /**
  * @package    Com_Astronomer
- * @author     Troy Hall <troy@jowwow.net>
- * @copyright  2016 Troy Hall
+ * @author     Troy "Bear" Hall <webmaster@arksky.org>
+ * @copyright  2016 Troy Hall & Arkansas Sky Observatory
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 

@@ -2,12 +2,12 @@
 <extension type="module" version="3.0" method="upgrade" client="site">
     <name>MOD_ASTRONOMER_NAME</name>
     <creationDate>2016-05-17</creationDate>
-    <copyright>2016 Troy Hall</copyright>
+    <copyright>2016 Troy Hall &amp; Arkansas Sky Observatory</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-    <author>Troy Hall</author>
-    <authorEmail>troy@jowwow.net</authorEmail>
-    <authorUrl>http://jowwow.net</authorUrl>
-    <version>CVS: 1.0.5</version>
+    <author>Troy "Bear" Hall</author>
+    <authorEmail>webmaster@arksky.org</authorEmail>
+    <authorUrl>http://arksky.org</authorUrl>
+    <version>CVS: 1.0.6</version>
     <description>MOD_ASTRONOMER_DESCRIPTION</description>
     
     <files>

@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @version    CVS: 1.0.5
+ * @version    CVS: 1.0.6
  * @package    Com_Astronomer
- * @author     Troy Hall <troy@jowwow.net>
- * @copyright  2016 Troy Hall
+ * @author     Troy "Bear" Hall <webmaster@arksky.org>
+ * @copyright  2016 Troy Hall & Arkansas Sky Observatory
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 // No direct access
@@ -32,11 +32,6 @@ class AstronomerHelpersAstronomer
 			$vName == 'observations'
 		);
 
-		JHtmlSidebar::addEntry(
-			JText::_('COM_ASTRONOMER_TITLE_LISTS'),
-			'index.php?option=com_astronomer&view=lists',
-			$vName == 'lists'
-		);
 	}
 
 	/**
