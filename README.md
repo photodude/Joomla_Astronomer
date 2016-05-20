@@ -23,11 +23,20 @@ ASO provides a lot of important data back to major centers like Harvard and Mino
 them be strong once again.
 
 #1 - Astrometry section information
-I've created a conversion system to take ASO's old data and turn it into a useable csv to preserve their 12yrs of observations.
-This will be in the astrometry branch.
+The astrometry function will need to consist of 3 parts.<br>
+1) the entry form which takes only string characters.  It should look similar to this.. <img src="https://cloud.githubusercontent.com/assets/1850089/15264556/e524b5f6-1939-11e6-8cc6-d525cff37497.JPG" width="23%"></img><br>
+2) The search form which needs only date , observatory or designation to search on.  Can be any or all of these.  It should look like this.. <img src="https://cloud.githubusercontent.com/assets/1850089/15264497/37d8c400-1939-11e6-8467-72c7d1bee0b7.JPG" width="23%"></img><br>
+3) A search output view where the user is able to copy the search return AS PURE ASCII!  a header and footer string is required but their needs to be a button or some other method to give the user the search output.
 
-#2 - Comets section information...
+I've created a conversion system to take ASO's old data and turn it into a useable csv to preserve their 12yrs of observations.
+part of this conversion includes some validation checks that will need to be performed after they've hit submit ( or via ajax ) but BEFORE its put into the DB.  
+A optional( for now ) validation curl check consisting of () as shown HERE will be performed on the submssions.
+[MPC Astrometry Data Exchange Standard](http://minorplanetcenter.net/iau/info/IAU2015_ADES.pdf) explains in detail what needs to be where and why. [MPC Format For Optical Astrometric Observations Of Comets, Minor Planets and Natural Satellites](http://www.minorplanetcenter.net/iau/info/OpticalObs.html) contains a more concise breakdown view.
+Section 4.3 of the MPC ASDES as given above, describes in detail what the header must be and is required for the automated processing functions and should be included in the search output.  This data is currently held as one of 4 user fields by the plugin.
+
+#2 - Comets section information... <img src="https://cloud.githubusercontent.com/assets/1850089/15342751/71e86a5c-1c5d-11e6-883b-0a9f127b5f67.png" width="23%" /><br>
 The comets branch will be "comets" it will contain the conversion system for the comets data.
+and forms, list views.  ( See image gallery )
 
 ### Files...
 the file "comets-seen.csv" is the original csv from which we are starting.  It has several problems.
